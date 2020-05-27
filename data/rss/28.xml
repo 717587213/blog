@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+<channel>
+<title>jquery</title>
+<link>http://localhost/a/PSzuopin/jquery/</link>
+<description>前端技术 / jquery</description>
+<language>zh-cn</language>
+<generator><![CDATA[Copyright &amp;copy; 2002-2017 DEDECMS. 织梦科技 版权所有 &lt;a href=http://www.dedecms.com target='_blank'&gt;Power by DedeCms&lt;/a&gt;]]></generator>
+<webmaster>desdev@vip.qq.com</webmaster>
+<item>
+    <title><![CDATA[细说jquery ui和jqgrid的ASP.NET实现]]></title>
+    <link>http://localhost/a/PSzuopin/jquery/35.html</link>
+    <description><![CDATA[前言 数据显示的方式可以通过很多控件来实现，例如服务端的原生GridView，第三方控件ComponentArt、Telerik等，客户端的flexgrid, extgrid, easyui, jqgrid等等。在这里我要讲解的是jqgrid，它也是我]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>jquery</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[jQuery选择器大全(48个代码片段+21幅图演示)]]></title>
+    <link>http://localhost/a/PSzuopin/jquery/34.html</link>
+    <description><![CDATA[选择器是jQuery最基础的东西，本文中列举的选择器基本上囊括了所有的jQuery选择器，也许各位通过这篇文章能够加深对jQuery选择器的理解，它们本身用法就非常简单，我更希望的是它能]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>jquery</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+
+</channel>
+</rss>

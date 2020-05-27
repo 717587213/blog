@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="{dede:field name='keywords'/}" />
+    <meta name="description" content="{dede:field name='description'  function='html2text(@me)'/}">
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/animate.css">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/magnific-popup.css">
+	<!-- Salvattore -->
+	<link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/salvattore.css">
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/style_tupian.css">
+    <link href='{dede:global.cfg_templets_skin/}/css/header.css' rel='stylesheet'/>
+	<!-- Modernizr JS -->
+	<script src="{dede:global.cfg_templets_skin/}/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+	   <!--页头-->
+{dede:include filename="head.htm"/}
+  	
+	<div id="fh5co-main">
+		<div class="container">
+
+			<div class="row">
+
+        <div id="fh5co-board" data-columns>
+			{dede:productimagelist}
+        	<div class="item">
+        		<div class="animate-box">
+	        		<a href="[field:imgsrc/]" class="image-popup fh5co-board-img" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, eos?"><img src="[field:imgsrc/]" alt="Free HTML5 Bootstrap template"></a>
+        		</div>
+        		<div class="fh5co-desc">[field:text/]</div>
+        	</div>
+        	{/dede:productimagelist}
+        </div>
+        </div>
+       </div>
+	</div>
+
+
+	<!-- jQuery -->
+	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+	<!-- Waypoints -->
+	<script src="{dede:global.cfg_templets_skin/}/js/jquery.waypoints.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="{dede:global.cfg_templets_skin/}/js/jquery.magnific-popup.min.js"></script>
+	<!-- Salvattore -->
+	<script src="{dede:global.cfg_templets_skin/}/js/salvattore.min.js"></script>
+	<!-- Main JS -->
+	<script src="{dede:global.cfg_templets_skin/}/js/main.js"></script>
+
+	
+
+	<!--footer-->
+{dede:include filename="footer.htm"/}
+	</body>
+</html>

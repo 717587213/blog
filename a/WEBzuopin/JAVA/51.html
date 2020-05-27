@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="php,面向对象">
+  <meta name="Description" content="1，final关键字定义的方法，不能被重写 由于final修饰了show方法，子类中重写show方法会报错 ? php class MyClass { final function show(){ echo hello world . PHP_EOL ; } } class MyTest extends MyClass { function sh">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>php面向对象精要(3)_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/WEBzuopin/JAVA/52.html">浅谈PHP异常处理</a></li>
+<li><span>2</span><a href="/a/WEBzuopin/JAVA/50.html">php面向对象精要</a></li>
+<li><span>3</span><a href="/a/WEBzuopin/JAVA/49.html">php面向对象精要</a></li>
+<li><span>4</span><a href="/a/WEBzuopin/4.html">111111</a></li>
+<li><span>5</span><a href="/a/WEBzuopin/JAVA/42.html">PHP导入Excel数据</a></li>
+<li><span>6</span><a href="/a/WEBzuopin/JAVA/41.html">10例糟糕的PHP代码</a></li>
+<li><span>7</span><a href="/a/WEBzuopin/JAVA/51.html">php面向对象精要</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>php面向对象精要(3)</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 16:32</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=51&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/WEBzuopin/'>vue</a> > <a href='/a/WEBzuopin/JAVA/'>PHP</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'php面向对象精要(3)',
+	litpic:'/uploads/allimg/180222/1-1P2221632350-L.jpg',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'php面向对象精要(3)',
+	litpic:'/uploads/allimg/180222/1-1P2221632350-L.jpg',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	1，final关键字定义的方法，不能被重写</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	由于final修饰了show方法，子类中重写show方法会报错</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+&lt;?<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">php
+
+    </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> MyClass {
+        </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> show(){
+            </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">echo</span> &quot;hello world&quot; . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+        }
+    }
+
+    </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span> MyTest <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">extends</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> MyClass {
+        </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> show(){
+            </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">echo</span> <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">__CLASS__</span> . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+        }
+    }
+    
+</span>?&gt;</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	&nbsp;2，final定义的class不能被继承</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+&lt;?<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">php
+
+    </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> MyClass {
+        </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> show(){
+            </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">echo</span> &quot;hello world&quot; . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+        }
+    }
+
+    </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span> MyTest <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">extends</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> MyClass {
+    }
+    
+</span>?&gt;</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	3，__toString方法</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	如果定义了__toString方法，打印一个对象时，将调用__toString</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> Person {
+    </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">private</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$name</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+    </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span> __construct( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$name</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ){
+        </span><span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$this</span>-&gt;name = <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$name</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+    }
+    </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> __toString(){
+        </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">return</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$this</span>-&gt;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">name;
+    }
+}
+
+</span><span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$p</span> = <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">new</span> Person( &quot;ghostwu&quot;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> );
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">var_dump</span>( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$p</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> );
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">echo</span> <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">print</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$p</span> . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span>;</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	4， 异常处理( try, catch, throw )</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	&gt;异常处理类都应该继承自系统自带的Exception</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	&gt;异常抛出时( throw 异常对象 )，会一个个查找catch后面的异常处理，如果匹配到，就执行，后面的catch就算能匹配，也不会执行</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	Exception类摘要：</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">Exception</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); line-height: 1.5 !important;">/*</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); line-height: 1.5 !important;"> 属性 </span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); line-height: 1.5 !important;">*/</span>
+<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">protected</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">string</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$message</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">protected</span> int <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$code</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">protected</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">string</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$file</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">protected</span> int <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$line</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); line-height: 1.5 !important;">/*</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); line-height: 1.5 !important;"> 方法 </span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); line-height: 1.5 !important;">*/</span>
+<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span> __construct ([ <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">string</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$message</span> = &quot;&quot; [, int <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$code</span> = 0 [, Throwable <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$previous</span> = <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">NULL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ]]] )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">string</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> getMessage ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> Throwable getPrevious ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> int getCode ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">string</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> getFile ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> int getLine ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">array</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> getTrace ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">string</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> getTraceAsString ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">public</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">string</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> __toString ( void )
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">final</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">private</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> void __clone ( void )
+}</span></pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	&nbsp;</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 1</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span> NullHandleException <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">extends</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">Exception</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> { 
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 2</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span> __construct( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$message</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 3</span>         parent::__construct( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$message</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> );
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 4</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 5</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 6</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 7</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span> printObj( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$obj</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 8</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">if</span>( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$obj</span> == <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">NULL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;"> 9</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">throw</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">new</span> NullHandleException( &quot;printObj接收到一个null对象&quot;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> );
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">10</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">    }    
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">11</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">print</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$obj</span> . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">12</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">13</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">14</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> Person {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">15</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">private</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$name</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">16</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span> __construct( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$name</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">17</span>         <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$this</span>-&gt;name = <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$name</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">18</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">19</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> __toString() {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">20</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">return</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$this</span>-&gt;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">name;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">21</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">22</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">23</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">24</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">try</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">25</span>     printObj( <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">new</span> Person( &quot;ghostwu&quot;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ) );
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">26</span>     printObj( <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">null</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> );
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">27</span>     printObj( <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">new</span> Person( &quot;zhangsan&quot;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ) );
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">28</span> }<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">catch</span>( NullHandleException <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$exception</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">29</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">print</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$exception</span>-&gt;getMessage() . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">30</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">print</span> &quot;in file:&quot; . <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$exception</span>-&gt;getFile() . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">31</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">print</span> &quot;in line:&quot; . <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$exception</span>-&gt;getLine() . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">32</span> }<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">catch</span>( <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">Exception</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$exception</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">33</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">echo</span> &quot;这个异常分支不会被执行&quot; . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">34</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">print</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$exception</span>-&gt;getMessage() . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">35</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">36</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">37</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">echo</span> &quot;try...catch处理完毕&quot; . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span>;</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px; line-height: 1.5 !important;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); text-decoration: underline; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/16325T616-0.gif" style="margin: 0px; padding: 0px; max-width: 660px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	输出结果：</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+ghostwu@ubuntu:~/php_study/php5/03$ php -f exception_usage.<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">php 
+ghostwu
+printObj接收到一个null对象
+in </span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">file</span>:/home/ghostwu/php_study/php5/03/exception_usage.<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">php
+in line</span>:10
+<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">try</span>...catch处理完毕</pre>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	没有输出&quot;zhangsan&quot;, 因为printObj( null );抛出了异常，因此&quot;zhangsan&quot;被忽略</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	&nbsp;5，__autoload自动加载文件</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	在项目开发中，经常需要在一个文件中包含多个通用的库文件，这个时候会产生一大堆的require或者include,而使用__autoload函数可以简化函数的加载过程</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	1，MyClass.php</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">1</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">class</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> MyClass {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">2</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> printHelloWorld(){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">3</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">echo</span> &quot;Hello World&quot; . <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); line-height: 1.5 !important;">PHP_EOL</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">4</span> <span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); line-height: 1.5 !important;">5</span> }</pre>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	2，common.inc</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">function</span> __autoload( <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$className</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> ) {
+        </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">require_once</span>( &quot;./{<span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$className</span>}.php&quot;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> );
+    }</span></pre>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: tahoma, arial, sans-serif; line-height: 1.5 !important;">
+	3，main.php</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">require_once</span> &quot;common.inc&quot;<span style="margin: 0px; padding: 0px; line-height: 1.5 !important;">;
+    
+    </span><span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$obj</span> = <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); line-height: 1.5 !important;">new</span><span style="margin: 0px; padding: 0px; line-height: 1.5 !important;"> MyClass();    
+    </span><span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); line-height: 1.5 !important;">$obj</span>-&gt;printHelloWorld();</pre>
+</div>
+<br />
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：<a href='/a/WEBzuopin/JAVA/50.html'>php面向对象精要(2)</a> </li>
+                <li>下一篇：<a href='/a/WEBzuopin/JAVA/52.html'>浅谈PHP异常处理</a> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

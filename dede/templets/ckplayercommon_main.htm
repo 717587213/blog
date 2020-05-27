@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>ckplayer配置方案管理</title>
+<link href="css/base.css" rel="stylesheet" type='text/css'>
+<script language='javascript'>
+function Sel(stype)
+{
+	  for(var i=0;i < document.getElementsByName('aids').length;i++)
+	  {
+		  if(stype=='all') document.getElementsByName('aids')[i].checked=true;
+		  else document.getElementsByName('aids')[i].checked=false;
+	  }
+}
+function checkSubmit()
+{
+	var str = '';
+	for(var i=0;i < document.getElementsByName('aids').length;i++)
+	{
+		  if(document.getElementsByName('aids')[i].checked){
+		  	if(str=='') str += document.getElementsByName('aids')[i].value;
+		  	else str += ',' + document.getElementsByName('aids')[i].value;
+		  }
+	}
+	if(str=='')
+	{
+		alert('你没选择任何内容！');
+		return false;
+	}
+	else
+	{
+		location="ckplayercommon_edit.php?aids="+str+"&dopost=delall";
+	}
+}
+</script>
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="28" background="images/tbg.gif" colspan="9" style="padding-left:10px;">
+  <div style="float:left">
+  	<b>ckplayer配置方案管理</b>
+  </div>
+  <div style="float:right;padding-right:6px;">
+		[<a href="ckplayercommon_add.php"><u>添加配置方案</u></a>]
+  </div>
+  </td>
+</tr>
+<tr>
+   <td height="30" align="center" bgcolor="#F9FCEF"  colspan="9"> 
+   <form action="ckplayercommon_main.php" name="form1" method="get">
+	  <table border="0" cellspacing="0" cellpadding="3">
+      <tr>
+          <td>关键字：</td>
+          <td><input name="keyword" type="text" id="keyword" size="12" style="width:250px" value="<?php echo $keyword; ?>" /></td>
+          
+          <td>
+           <input name="imageField" class="np" type="image" src="images/button_search.gif" width="60" height="22" border="0" />
+          </td>
+        </tr>
+      </table>
+	  </form>
+    </td>
+</tr>
+<form name='form1' method='post' action='ckplayercommon_edit.php' onSubmit='return checkSubmit();'>
+<input type='hidden' name='dopost' value='delall'/>
+<input type='hidden' name='allid' value=''/>
+<tr align="center" bgcolor="#FBFCE2" height="26">
+          <td width="5%">选择</td>
+          <td width="5%">id</td>
+          <td width="15%">方案名称</td>
+          <td width="10%">皮肤文件名</td>
+          <td width="15%">播放结束后的动作</td>
+          <td width="10%">PC端播放器尺寸(宽*高)</td>
+          <td width="10%">手机端播放器尺寸(宽*高)</td>
+          <td width="15%">最后修改时间</td>
+          <td width="15%">管理</td>
+</tr>
+        {dede:datalist}
+        <tr align="center" bgcolor="#FFFFFF" height="26" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';">
+          <td><input type='checkbox' value='{dede:field.id/}' class='np' {dede:field.id function="GetSelect(@me)"/} /></td>
+          <td>{dede:field.id/}</td>
+          <td>{dede:field.stylename/}</td>
+          <td>{dede:field.skin/}</td>
+          <td>{dede:field.endmotion function="GetMotion(@me)"/}</td>
+          <td>{dede:field.dwidth/}px * {dede:field.dheight/}px</td>
+          <td>{dede:field.mwidth/}{dede:field.wunit function="GetUnit(@me)"/} * {dede:field.mheight/}{dede:field.hunit function="GetUnit(@me)"/}</td>
+          <td>{dede:field.savetime function="MyDate('Y-m-d H:i:s',@me)"/}</td>
+          <td>
+          <a href='ckplayercommon_edit.php?id={dede:field.id/}&dopost=gettag'>[获取代码]</a>
+          <a href='ckplayercommon_edit.php?id={dede:field.id/}&dopost=getedit'>[编辑]</a>
+		  <a href='ckplayercommon_edit.php?id={dede:field.id/}&dopost=delete'>[删除]</a>
+          </td>
+        </tr>
+        
+		{/dede:datalist}
+    </form>
+     <tr bgcolor="#ffffff" height="28">
+      <td colspan="9">
+      	　
+        <a href='#' onclick='Sel("all")' class='np coolbg'>[全选]</a>
+      	<a href='#' onclick='Sel("none")' class='np coolbg'>[取消]</a>
+      	<a href='#' onclick='checkSubmit()' class='np coolbg'>批量删除</a>
+        <a href='ckplayercommon_add.php' class='np coolbg'>添加方案</a>
+
+      </td>
+     </tr>
+     <tr align="center" bgcolor="#F9FCEF" height="28">
+      <td colspan="9">
+      	{dede:pagelist listsize=6/}
+      </td>
+     </tr>
+     <tr bgcolor="#ffffff" height="28">
+      <td colspan="9">
+       <font color="#FF0000"> 您当前使用的是免费版，不具备视频地址隐藏功能，如需要视频地址隐藏功能请购买收费版，收费版价格为50元/域名，购买请联系QQ：991778797 或者微信：81018504。</font>
+
+      </td>
+     </tr>
+   </table>
+  </td>
+</tr>
+</table>
+</body>
+</html>

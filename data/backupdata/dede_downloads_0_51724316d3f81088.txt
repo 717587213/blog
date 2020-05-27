@@ -1,0 +1,1 @@
+INSERT INTO `dede_downloads` VALUES('c8287d5dfb239690d89b278d531afc34','1','1');

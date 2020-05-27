@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="Vue.js,Vue,vue-router,router">
+  <meta name="Description" content="概述 vue-router是Vue.js官方的路由插件，它和vue.js是深度集成的，适合用于构建单页面应用。vue的单页面应用是基于路由和组件的，路由用于设定访问路径，并将路径和组件映射起来。传">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>Vue.js——vue-router 60分钟快速入门_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/PSzuopin/vue/30.html">Vue.js——60分钟组</a></li>
+<li><span>2</span><a href="/a/PSzuopin/vue/29.html">Vue.js——基于$.a</a></li>
+<li><span>3</span><a href="/a/PSzuopin/vue/32.html">Vue.js——60分钟组</a></li>
+<li><span>4</span><a href="/a/PSzuopin/vue/28.html">Vue.js——vue-resou</a></li>
+<li><span>5</span><a href="/a/PSzuopin/vue/27.html">Vue.js——使用$.a</a></li>
+<li><span>6</span><a href="/a/PSzuopin/vue/24.html">Vue.js——vue-route</a></li>
+<li><span>7</span><a href="/a/PSzuopin/2.html">纸杯设计</a></li>
+<li><span>8</span><a href="/a/PSzuopin/vue/26.html">Vue.js——60分钟b</a></li>
+<li><span>9</span><a href="/a/PSzuopin/jquery/35.html">细说jquery ui和jqg</a></li>
+<li><span>10</span><a href="/a/PSzuopin/javascript/45.html">学习Javascript闭包（</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>Vue.js——vue-router 60分钟快速入门</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 10:56</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=24&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/PSzuopin/'>JavaScript</a> > <a href='/a/PSzuopin/vue/'>vue</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'Vue.js——vue-router 60分钟快速入门',
+	litpic:'/uploads/allimg/180222/1-1P222105G70-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'Vue.js——vue-router 60分钟快速入门',
+	litpic:'/uploads/allimg/180222/1-1P222105G70-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	概述</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	vue-router是Vue.js官方的路由插件，它和vue.js是深度集成的，适合用于构建单页面应用。vue的单页面应用是基于路由和组件的，路由用于设定访问路径，并将路径和组件映射起来。传统的页面应用，是用一些超链接来实现页面切换和跳转的。在vue-router单页面应用中，则是路径之间的切换，也就是组件的切换。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文将以示例的形式来介绍vue-router的各个特性，一共包含6个示例，每个示例都有乞丐版，前5个示例有皇帝版。<br style="margin: 0px; padding: 0px;" />
+	乞丐版是将所有代码混杂在一起的HTML页面，皇帝版是基于vue-webpack-simple模板构建的。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	乞丐版可以让你快速地了解到vue-router的一些特性和API；皇帝版则基于.vue组件和单独的路由配置，更适用于实际的应用。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文的Demo和源代码已放到GitHub，如果您觉得内容不错，请点个赞，或在GitHub上加个星星！</p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_01.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">第一个单页面应用</a>&nbsp;<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_02.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">嵌套路由示例</a>&nbsp;<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_03.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">具名路径示例</a>&nbsp;<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_04.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">路由对象示例</a>&nbsp;<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_05.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">让链接处于选中状态示例</a>&nbsp;<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_06.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">钩子函数示例</a>&nbsp;<a class="btn-demo" href="https://github.com/keepfool/vue-tutorials" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">GitHub Source</a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在GitHub上，乞丐版和皇帝版的目录结构如下：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+├─06.Router		// vue-router示例目录	
+│   ├─basic		// 乞丐版示例
+│   ├──basic_01.html	// 第一个单页面应用
+│   ├──basic_02.html	// 嵌套路由示例
+│   ├──basic_03.html	// 具名路径示例
+│   ├──basic_04.html	// 路由对象实例
+│   ├──basic_05.html	// 让链接处于选中状态示例
+│   ├──basic_06.html	// 钩子函数示例
+│   ├─demo01		// 皇帝版，和basic_01.html对应
+│   ├─demo02		// 皇帝版，和basic_02.html对应
+│   ├─demo03		// 皇帝版，和basic_03.html对应
+│   ├─demo04		// 皇帝版，和basic_04.html对应
+│   ├─demo05		// 皇帝版，和basic_05.html对应</pre>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	第一个单页面应用(01)</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	现在我们以一个简单的单页面应用开启vue-router之旅，这个单页面应用有两个路径：<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/about</code>，与这两个路径对应的是两个组件Home和About。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065505341-239606947.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="351" src="/uploads/allimg/180222/105QHM4-0.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="526" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	1. 创建组件</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	首先引入vue.js和vue-router.js：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+&lt;script src=<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;<span class="xml" style="margin: 0px; padding: 0px;"><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue-router.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span></span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	然后创建两个组件构造器Home和About：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> Home = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;div&gt;&lt;h1&gt;Home&lt;/h1&gt;&lt;p&gt;{{msg}}&lt;/p&gt;&lt;/div&gt;&#39;</span>,
+    data: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> {
+            msg: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Hello, vue router!&#39;</span>
+        }
+    }
+})
+
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> About = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;div&gt;&lt;h1&gt;About&lt;/h1&gt;&lt;p&gt;This is the tutorial about vue-router.&lt;/p&gt;&lt;/div&gt;&#39;</span>
+})</pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	2. 创建Router</h2>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> router = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> VueRouter()</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	调用构造器VueRouter，创建一个路由器实例router。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	3. 映射路由</h2>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+router.map({
+    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/home&#39;</span>: { component: Home },
+    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/about&#39;</span>: { component: About }
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	调用router的map方法映射路由，每条路由以key-value的形式存在，key是路径，value是组件。<br style="margin: 0px; padding: 0px;" />
+	例如：<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&#39;/home&#39;</code>是一条路由的key，它表示路径；<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">{component: Home}</code>则表示该条路由映射的组件。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	4. 使用v-link指令</h2>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+&lt;div <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">class</span>=<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;list-group&quot;</span>&gt;
+    <span class="xml" style="margin: 0px; padding: 0px;"><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;list-group-item&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home&#39;}&quot;</span>&gt;</span>Home<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;list-group-item&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/about&#39;}&quot;</span>&gt;</span>About<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在a元素上使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>指令跳转到指定路径。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	5. 使用&lt;router-view&gt;标签</h2>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在页面上使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;router-view&gt;&lt;/router-view&gt;</code>标签，它用于渲染匹配的组件。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	6. 启动路由</h2>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> App = Vue.extend({})
+router.start(App, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>)
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	路由器的运行需要一个根组件，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">router.start(App, &#39;#app&#39;)&nbsp;</code>表示router会创建一个App实例，并且挂载到#app元素。<br style="margin: 0px; padding: 0px;" />
+	<strong style="margin: 0px; padding: 0px;">注意：</strong>使用vue-router的应用，不需要显式地创建Vue实例，而是调用start方法将根组件挂载到某个元素。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065507591-615807711.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="36" height="399" src="/uploads/allimg/180222/105QJ527-1.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 800px; display: inline;" title="36" width="691" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_01.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	当你从GitHub上获取到最新的源代码后，如果想运行皇帝版，以demo01为例，在Git Bash下执行以下命令：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+npm run demo01-dev</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721071509529-2128582915.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="466" src="/uploads/allimg/180222/105QJ033-2.png" style="margin: 0px; padding: 0px; border: 0px; max-width: 800px; background-image: none; display: inline;" title="image" width="661" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	然后在浏览器中访问地址<a href="http://127.0.0.1:8080/" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;">http://127.0.0.1:8080</a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如果要编译和发布，请在Git Bash下执行以下命令：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+npm run demo01-build</pre>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	编写单页面的步骤</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	上面的6个步骤，可以说是创建一个单页面应用的基本步骤：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065509466-1679223492.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="442" src="/uploads/allimg/180222/105QL156-3.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="632" /></a></p>
+<h3 style="margin: 5px 0px 5px 5px; padding: 10px 20px; font-size: 1.3em; font-weight: normal; line-height: 1.5; color: rgb(30, 144, 255); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	JavaScript</h3>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">创建组件</span>：创建单页面应用需要渲染的组件</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">创建路由</span>：创建VueRouter实例</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">映射路由</span>：调用VueRouter实例的map方法</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">启动路由</span>：调用VueRouter实例的start方法</li>
+</ol>
+<h3 style="margin: 5px 0px 5px 5px; padding: 10px 20px; font-size: 1.3em; font-weight: normal; line-height: 1.5; color: rgb(30, 144, 255); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	HTML</h3>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		使用<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">v-link</span>指令</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		使用<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">&lt;router-view&gt;</span>标签</li>
+</ol>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	router.redirect</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	应用在首次运行时右侧是一片空白，应用通常都会有一个首页，例如：Home页。<br style="margin: 0px; padding: 0px;" />
+	使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">router.redirect</code>方法将根路径重定向到/home路径：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+router.redirect({
+    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/&#39;</span>: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/home&#39;</span>
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">router.redirect</code>方法用于为路由器定义全局的重定向规则，全局的重定向会在匹配当前路径之前执行。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	执行过程</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	当用户点击<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>指令元素时，我们可以大致猜想一下这中间发生了什么事情：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		vue-router首先会去查找<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>指令的路由映射</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		然后根据路由映射找到匹配的组件</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		最后将组件渲染到<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;router-view&gt;</code>标签</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065510607-907267034.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="617" src="/uploads/allimg/180222/105QJ414-4.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="768" /></a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	嵌套路由(02)</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	嵌套路由是个常见的需求，假设用户能够通过路径<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/news</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/message</code>访问一些内容，一个路径映射一个组件，访问这两个路径也会分别渲染两个组件。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065511544-2069972245.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="460" src="/uploads/allimg/180222/105QH3Z-5.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="457" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	实现嵌套路由有两个要点：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		在组件内部使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;router-view&gt;</code>标签</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		在路由器对象中给组件定义子路由</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	现在我们就动手实现这个需求。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	组件模板：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;home&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>Home<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>{{msg}}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;nav nav-tabs&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/news&#39;}&quot;</span>&gt;</span>News<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/message&#39;}&quot;</span>&gt;</span>Messages<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;news&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>News 01<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>News 02<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>News 03<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;message&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>Message 01<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>Message 02<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>Message 03<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	组件构造器：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> Home = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#home&#39;</span>,
+    data: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> {
+            msg: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Hello, vue router!&#39;</span>
+        }
+    }
+})
+
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> News = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#news&#39;</span>
+})
+
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> Message = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#message&#39;</span>
+})</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	路由映射：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+router.map({
+    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/home&#39;</span>: {
+        component: Home,
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 定义子路由</span>
+        subRoutes: {
+            <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/news&#39;</span>: {
+                component: News
+            },
+            <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/message&#39;</span>: {
+                component: Message
+            }
+        }
+    },
+    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/about&#39;</span>: {
+        component: About
+    }
+})</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home</code>路由下定义了一个subRoutes选项，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/news</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/message</code>是两条子路由，它们分别表示路径<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/news</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/message</code>，这两条路由分别映射组件News和Message。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	该示例运行如下：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065512669-687511157.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="37" height="457" src="/uploads/allimg/180222/105QIA9-6.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 800px; display: inline;" title="37" width="753" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_02.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">注意：</strong>这里有一个概念要区分一下，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/news</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/message</code>是<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home</code>路由的子路由，与之对应的News和Message组件并不是Home的子组件。</p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	具名路径(03)</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在有些情况下，给一条路径加上一个名字能够让我们更方便地进行路径的跳转，尤其是在路径较长的时候。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我们再追加一个组件NewsDetail，该组件在访问/home/news/detail路径时被渲染，组件模板：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;newsDetail&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        News Detail - {{$route.params.id}} ......
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	组件构造器：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+var NewsDetail = Vue.extend({
+    template: &#39;#newsDetail&#39;
+})
+</pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	具名路由映射</h2>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+router.map({
+    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/home&#39;</span>: {
+        component: Home,
+        subRoutes: {
+            <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/news&#39;</span>: {
+                name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;news&#39;</span>,
+                component: News,
+                subRoutes: {
+                    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;detail/:id&#39;</span>: {
+                        name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;detail&#39;</span>,
+                        component: NewsDetail
+                    }
+                }
+            },
+            <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/message&#39;</span>: {
+                component: Message
+            }
+        }
+    },
+    <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/about&#39;</span>: {
+        component: About
+    }
+})
+</pre>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">注意：</strong>我们在定义<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/homes/news/</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">home/news/detail/:id</code>路由时，给该路由指定了<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">name</code>属性。<br style="margin: 0px; padding: 0px;" />
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/:id</code>是路由参数，例如：如果要查看id = &#39;01&#39;的News详情，那么访问路径是/home/news/detail/01。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Home组件和News组件模板：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;home&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>Home<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>{{msg}}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;nav nav-tabs&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ name: &#39;news&#39;}&quot;</span>&gt;</span>News<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/message&#39;}&quot;</span>&gt;</span>Messages<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;news&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ name: &#39;detail&#39;, params: {id: &#39;01&#39;} }&quot;</span>&gt;</span>News 01<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/news/detail/02&#39;}&quot;</span>&gt;</span>News 02<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/news/detail/03&#39;}&quot;</span>&gt;</span>News 03<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">router-view</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;a v-link=&quot;{ name: &#39;news&#39;}&quot;&gt;News&lt;/a&gt;</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;a v-link=&quot;{ name: &#39;detail&#39;, params: {id: &#39;01&#39;} }&quot;&gt;News 01&lt;/a&gt;</code>这两行HTML代码，使用了用了具名路径。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	该示例运行如下：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065513826-231436996.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="504" src="/uploads/allimg/180222/105QK3M-7.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="752" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_03.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-link指令</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	用了这么久的v-link指令，是该介绍一下它了。</p>
+<blockquote style="margin: 1em 40.75px; padding: 0px; background: none rgb(240, 240, 227); border-width: 2px 2px 2px 5px; border-style: solid; border-color: rgb(239, 239, 239) rgb(239, 239, 239) rgb(239, 239, 239) rgb(0, 83, 159); border-image: initial; min-height: 35px; line-height: 1.45; color: rgb(0, 0, 0); font-size: 16px; position: relative; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+		<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>&nbsp;是一个用来让用户在 vue-router 应用的不同路径间跳转的指令。该指令接受一个 JavaScript 表达式，并会在用户点击元素时用该表达式的值去调用&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">router.go</code>。</p>
+</blockquote>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	具体来讲，v-link有三种用法：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!-- 字面量路径 --&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&#39;home&#39;&quot;</span>&gt;</span>Home<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!-- 效果同上 --&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;home&#39; }&quot;</span>&gt;</span>Home<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!-- 具名路径 --&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ name: &#39;detail&#39;, params: {id: &#39;01&#39;} }&quot;</span>&gt;</span>Home<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>&nbsp;会自动设置&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;a&gt;</code>&nbsp;的&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">href</code>&nbsp;属性，你无需使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">href</code>来处理浏览器的调整，原因如下：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+			它在 HTML5 history 模式和 hash 模式下的工作方式相同，所以如果你决定改变模式，或者 IE9 浏览器退化为 hash 模式时，都不需要做任何改变。</p>
+	</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+			在 HTML5 history 模式下，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>&nbsp;会监听点击事件，防止浏览器尝试重新加载页面。</p>
+	</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+			在 HTML5 history 模式下使用&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">root</code>&nbsp;选项时，不需要在&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>&nbsp;的 URL 中包含 root 路径。</p>
+	</li>
+</ul>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	路由对象(04)</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在使用了 vue-router 的应用中，路由对象会被注入每个组件中，赋值为&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">this.$route</code>&nbsp;，并且当路由切换时，路由对象会被更新。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	路由对象暴露了以下属性：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">$route.path</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		字符串，等于当前路由对象的路径，会被解析为绝对路径，如&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&quot;/home/news&quot;</code>&nbsp;。</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">$route.params</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		对象，包含路由中的动态片段和全匹配片段的键值对</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">$route.query</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		对象，包含路由中查询参数的键值对。例如，对于&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/news/detail/01?favorite=yes</code>&nbsp;，会得到&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">$route.query.favorite == &#39;yes&#39;</code>&nbsp;。</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">$route.router</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		路由规则所属的路由器（以及其所属的组件）。</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">$route.matched</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		数组，包含当前匹配的路径中所包含的所有片段所对应的配置参数对象。</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">$route.name</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		当前路径的名字，如果没有使用具名路径，则名字为空。</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在页面上添加以下代码，可以显示这些路由对象的属性：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>当前路径：{{$route.path}}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>当前参数：{{$route.params | json}}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>路由名称：{{$route.name}}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>路由查询参数：{{$route.query | json}}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>路由匹配项：{{$route.matched | json}}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">$route.path, $route.params, $route.name, $route.query</code>这几个属性很容易理解，看示例就能知道它们代表的含义。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065514826-792354472.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="39" height="578" src="/uploads/allimg/180222/105QKV3-8.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 800px; display: inline;" title="39" width="753" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	（由于$route.matched内容较长，所以没有将其显示在画面上）</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这里我要稍微说一下<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">$router.matched</code>属性，它是一个包含性的匹配，它会将嵌套它的父路由都匹配出来。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	例如，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/news/detail/:id</code>这条路径，它包含3条匹配的路由：</p>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		/home/news/detail/:id</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		/home/news</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		/home</li>
+</ol>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	另外，带有&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>&nbsp;指令的元素，如果&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>&nbsp;对应的 URL 匹配当前的路径，该元素会被添加特定的class，该class的默认名称为<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link-active</code>。例如，当我们访问<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/news/detail/03</code>这个URL时，根据匹配规则，会有3个链接被添加<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link-active</code>。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065516872-273259273.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="583" src="/uploads/allimg/180222/105QL363-9.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="682" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_04.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	让链接处于活跃状态(05)</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	以上画面存在两个问题：</p>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		当用户点击Home链接或About链接后，链接没有显示为选中</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		当用户点击News或Message链接后，链接没有显示为选中</li>
+</ol>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	设置activeClass</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	第1个问题，可以通过设定<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>指令的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">activeClass</code>解决。</p>
+<pre class="cs hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+&lt;a class=<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;list-group-item&quot;</span> v-link=<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home&#39;, activeClass: &#39;active&#39;}&quot;</span>&gt;Home&lt;/a&gt;
+&lt;a class=<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;list-group-item&quot;</span> v-link=<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/about&#39;, activeClass: &#39;active&#39;}&quot;</span>&gt;About&lt;/a&gt;</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065517841-1680312207.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="369" src="/uploads/allimg/180222/105QM355-10.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="764" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	设定了<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link</code>指令的activeClass属性后，默认的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-link-active</code>被新的class取代。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065518716-104060093.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="351" src="/uploads/allimg/180222/105QHa0-11.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="572" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	第2个问题，为v-link指令设定activeClass是不起作用的，因为我们使用的是bootstrap的样式，需要设置a标签的父元素&lt;li&gt;才能让链接看起来处于选中状态，就像下面的代码所展现的：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;nav nav-tabs&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;active&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/news&#39;}&quot;</span>&gt;</span>News<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/message&#39;}&quot;</span>&gt;</span>Messages<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如何实现这个效果呢？你可能会想到，为Home组件的data选项追加一个currentPath属性，然后使用以下方式绑定class。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;nav nav-tabs&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;currentPath == &#39;/home/news&#39; ? &#39;active&#39;: &#39;&#39;&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/news&#39;}&quot;</span>&gt;</span>News<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;currentPath == &#39;/home/message&#39; ? &#39;active&#39;: &#39;&#39;&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-link</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ path: &#39;/home/message&#39;}&quot;</span>&gt;</span>Messages<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	现在又出现了另一个问题，在什么情况下给currentPath赋值呢？</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	用户点击v-link的元素时，是路由的切换。<br style="margin: 0px; padding: 0px;" />
+	每个组件都有一个route选项，route选项有一系列钩子函数，在切换路由时会执行这些钩子函数。<br style="margin: 0px; padding: 0px;" />
+	其中一个钩子函数是data钩子函数，它用于加载和设置组件的数据。</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> Home = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#home&#39;</span>,
+    data: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> {
+            msg: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Hello, vue router!&#39;</span>,
+            currentPath: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&#39;</span>
+        }
+    },
+    route: {
+        data: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(transition)</span>{</span>
+            transition.next({
+                currentPath: transition.to.path
+            })
+        }
+    }
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	该示例运行效果如下：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065519669-735239613.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="456" src="/uploads/allimg/180222/105QJ016-12.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="760" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_05.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	钩子函数(06)</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	路由的切换过程，本质上是执行一系列路由钩子函数，钩子函数总体上分为两大类：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		全局的钩子函数</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		组件的钩子函数</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	全局的钩子函数定义在全局的路由对象中，组件的钩子函数则定义在组件的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">route</code>选项中。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	全局钩子函数</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	全局钩子函数有2个：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">beforeEach</code>：在路由切换开始时调用</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">afterEach</code>：在每次路由切换<strong style="margin: 0px; padding: 0px;">成功进入激活阶段</strong>时被调用</li>
+</ul>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	组件的钩子函数</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	组件的钩子函数一共6个：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		data：可以设置组件的data</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		activate：激活组件</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		deactivate：禁用组件</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		canActivate：组件是否可以被激活</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		canDeactivate：组件是否可以被禁用</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		canReuse：组件是否可以被重用</li>
+</ul>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	切换对象</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	每个切换钩子函数都会接受一个&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">transition</code>&nbsp;对象作为参数。这个切换对象包含以下函数和方法：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">transition.to</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		表示将要切换到的路径的<a href="http://router.vuejs.org/zh-cn/route.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;">路由对象</a>。</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">transition.from</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		代表当前路径的路由对象。</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">transition.next()</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		调用此函数处理切换过程的下一步。</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">transition.abort([reason])</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		调用此函数来终止或者拒绝此次切换。</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		<strong style="margin: 0px; padding: 0px;">transition.redirect(path)</strong>&nbsp;<br style="margin: 0px; padding: 0px;" />
+		取消当前切换并重定向到另一个路由。</li>
+</ul>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	钩子函数的执行顺序</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	全局钩子函数和组件钩子函数加起来一共8个，为了熟练vue router的使用，有必要了解这些钩子函数的执行顺序。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为了直观地了解这些钩子函数的执行顺序，在画面上追加一个Vue实例：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> well = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+    el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;.well&#39;</span>,
+    data: {
+        msg: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&#39;</span>,
+        color: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#ff0000&#39;</span>
+    },
+    methods: {
+        setColor: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span>{</span>
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.color = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#&#39;</span> + <span class="hljs-built_in" style="margin: 0px; padding: 0px; color: rgb(0, 134, 179);">parseInt</span>(<span class="hljs-built_in" style="margin: 0px; padding: 0px; color: rgb(0, 134, 179);">Math</span>.random()*<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">256</span>).toString(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">16</span>)
+                        + <span class="hljs-built_in" style="margin: 0px; padding: 0px; color: rgb(0, 134, 179);">parseInt</span>(<span class="hljs-built_in" style="margin: 0px; padding: 0px; color: rgb(0, 134, 179);">Math</span>.random()*<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">256</span>).toString(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">16</span>)
+                        + <span class="hljs-built_in" style="margin: 0px; padding: 0px; color: rgb(0, 134, 179);">parseInt</span>(<span class="hljs-built_in" style="margin: 0px; padding: 0px; color: rgb(0, 134, 179);">Math</span>.random()*<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">256</span>).toString(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">16</span>)
+        },
+        setColoredMessage: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(msg)</span>{</span>
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.msg +=  <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;p style=&quot;color: &#39;</span> + <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.color + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&quot;&gt;&#39;</span> + msg + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;/p&gt;&#39;</span>
+        },
+        setTitle: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(title)</span>{</span>
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.msg =  <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;h2 style=&quot;color: #333&quot;&gt;&#39;</span> + title + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;/h2&gt;&#39;</span>
+        }
+    }
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	well实例的HTML：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;well&quot;</span>&gt;</span>
+    {{{ msg }}}
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	然后，添加一个RouteHelper函数，用于记录各个钩子函数的执行日志：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> <span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">RouteHelper</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(name)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> route = {
+        canReuse: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(transition)</span> {</span>
+            well.setColoredMessage(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;执行组件&#39;</span> + name + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;的钩子函数:canReuse&#39;</span>)
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span>
+        },
+        canActivate: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(transition)</span> {</span>
+            well.setColoredMessage(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;执行组件&#39;</span> + name + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;的钩子函数:canActivate&#39;</span>)
+            transition.next()
+        },
+        activate: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(transition)</span> {</span>
+            well.setColoredMessage(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;执行组件&#39;</span> + name + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;的钩子函数:activate&#39;</span>)
+            transition.next()
+        },
+        canDeactivate: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(transition)</span> {</span>
+            well.setColoredMessage(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;执行组件&#39;</span> + name + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;的钩子函数:canDeactivate&#39;</span>)
+            transition.next()
+        },
+        deactivate: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(transition)</span> {</span>
+            well.setColoredMessage(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;执行组件&#39;</span> + name + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;的钩子函数:deactivate&#39;</span>)
+            transition.next()
+        },
+        data: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(transition)</span> {</span>
+            well.setColoredMessage(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;执行组件&#39;</span> + name + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;的钩子函数:data&#39;</span>)
+            transition.next()
+        }
+    }
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> route;
+}
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	最后，将这些钩子函数应用于各个组件：</p>
+<pre class="javascript hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> Home = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#home&#39;</span>,
+    data: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> {
+            msg: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Hello, vue router!&#39;</span>,
+            path: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&#39;</span>
+        }
+    },
+    route: RouteHelper(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Home&#39;</span>)
+})
+
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> News = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#news&#39;</span>,
+    route: RouteHelper(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;News&#39;</span>)
+})
+
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> Message = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#message&#39;</span>,
+    route: RouteHelper(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Message&#39;</span>)
+})
+
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> About = Vue.extend({
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#about&#39;</span>,
+    route: RouteHelper(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;About&#39;</span>)
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我们按照以下步骤做个小实验：</p>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		运行应用（访问<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home</code>路径）</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		访问<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/news</code>路径</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		访问<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/home/message</code>路径</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		访问<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">/about</code>路径</li>
+</ol>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065520701-1747230444.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="372" src="/uploads/allimg/180222/105QIO5-13.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="754" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/06.Router/basic/basic_06.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	切换控制流水线</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	当用户点击了/home/news链接，然后再点击/home/message链接后，vue-router做了什么事情呢？它执行了一个切换管道</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065521701-1824249305.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="375" src="/uploads/allimg/180222/105QJb9-14.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="558" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如何做到这些呢？这个过程包含一些我们必须要做的工作：</p>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+			可以重用组件Home，因为重新渲染后，组件Home依然保持不变。</p>
+	</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+			需要停用并移除组件News。</p>
+	</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+			启用并激活组件Message。</p>
+	</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		<p style="margin: 10px 10px 10px 50px; padding: 0px;">
+			在执行步骤2和3之前，需要确保切换效果有效&mdash;&mdash;也就是说，为保证切换中涉及的所有组件都能按照期望的那样被停用/激活。</p>
+	</li>
+</ol>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<img alt="" src="/uploads/allimg/180222/105QL0H-15.png" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 800px;" /></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	切换的各个阶段</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我们可以把路由的切换分为三个阶段：可重用阶段，验证阶段和激活阶段。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我们以<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">home/news</code>切换到<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">home/message</code>为例来描述各个阶段。<br style="margin: 0px; padding: 0px;" />
+	（以下文字描述参考：<a href="http://router.vuejs.org/zh-cn/pipeline/index.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://router.vuejs.org/zh-cn/pipeline/index.html">http://router.vuejs.org/zh-cn/pipeline/index.html</a>）</p>
+<h3 style="margin: 5px 0px 5px 5px; padding: 10px 20px; font-size: 1.3em; font-weight: normal; line-height: 1.5; color: rgb(30, 144, 255); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	1. 可重用阶段</h3>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	检查当前的视图结构中是否存在可以重用的组件。这是通过对比两个新的组件树，找出共用的组件，然后检查它们的可重用性（通过&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">canReuse</code>&nbsp;选项）。默认情况下， 所有组件都是可重用的，除非是定制过。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065522701-996052433.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="319" src="/uploads/allimg/180222/105QI608-16.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="598" /></a></p>
+<h3 style="margin: 5px 0px 5px 5px; padding: 10px 20px; font-size: 1.3em; font-weight: normal; line-height: 1.5; color: rgb(30, 144, 255); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	2. 验证阶段</h3>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	检查当前的组件是否能够停用以及新组件是否可以被激活。这是通过调用路由配置阶段的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">canDeactivate</code>&nbsp;和&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">canActivate</code>&nbsp;钩子函数来判断的。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065523560-1593453726.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="286" src="/uploads/allimg/180222/105QGO2-17.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="606" /></a></p>
+<h3 style="margin: 5px 0px 5px 5px; padding: 10px 20px; font-size: 1.3em; font-weight: normal; line-height: 1.5; color: rgb(30, 144, 255); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	3.激活阶段</h3>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	一旦所有的验证钩子函数都被调用而且没有终止切换，切换就可以认定是合法的。路由器则开始禁用当前组件并启用新组件。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160721065524294-115652970.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="316" src="/uploads/allimg/180222/105QL2W-18.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 800px; background-image: none; display: inline;" title="image" width="606" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	此阶段对应钩子函数的调用顺序和验证阶段相同，其目的是在组件切换真正执行之前提供一个进行清理和准备的机会。界面的更新会等到所有受影响组件的&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">deactivate</code>&nbsp;和&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">activate</code>&nbsp;钩子函数执行之后才进行。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">data</code>&nbsp;这个钩子函数会在&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">activate</code>&nbsp;之后被调用，或者当前组件组件可以重用时也会被调用。</p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	总结</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文主要介绍了以下内容：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		介绍编写单页面应用的基本步骤</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		介绍嵌套路由</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		介绍具名路径</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		介绍路由对象</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		介绍钩子函数和执行顺序</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		介绍组件切换控制流水线</li>
+</ul>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：<a href='/a/PSzuopin/vue/23.html'>Vue.js——60分钟快速入门</a> </li>
+                <li>下一篇：<a href='/a/PSzuopin/vue/25.html'>Vue.js——60分钟webpack项目模板快速入门</a> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="PHP,异常处理">
+  <meta name="Description" content="1、PHP中异常的独特性 PHP中的异常的独特性，即PHP中的异常不同于主流语言C++、java中的异常。在Java中，异常是唯一的错误报告方式，而在PHP中却不是这样，而是把所有不正常的情况都视">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>浅谈PHP异常处理_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/WEBzuopin/JAVA/42.html">PHP导入Excel数据</a></li>
+<li><span>2</span><a href="/a/WEBzuopin/JAVA/41.html">10例糟糕的PHP代码</a></li>
+<li><span>3</span><a href="/a/WEBzuopin/4.html">111111</a></li>
+<li><span>4</span><a href="/a/WEBzuopin/JAVA/49.html">php面向对象精要</a></li>
+<li><span>5</span><a href="/a/WEBzuopin/JAVA/52.html">浅谈PHP异常处理</a></li>
+<li><span>6</span><a href="/a/WEBzuopin/JAVA/50.html">php面向对象精要</a></li>
+<li><span>7</span><a href="/a/WEBzuopin/JAVA/51.html">php面向对象精要</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>浅谈PHP异常处理</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 16:34</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=52&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/WEBzuopin/'>vue</a> > <a href='/a/WEBzuopin/JAVA/'>PHP</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'浅谈PHP异常处理',
+	litpic:'/uploads/allimg/180222/1-1P2221634430-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'浅谈PHP异常处理',
+	litpic:'/uploads/allimg/180222/1-1P2221634430-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <h4 style="padding: 5px 0px 5px 20px; font-size: 17px; color: rgb(255, 255, 255); box-shadow: rgb(95, 90, 75) 0px 0px 0px 1px, rgba(10, 10, 0, 0.498039) 1px 1px 6px 1px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; line-height: 25px; text-shadow: rgb(34, 34, 34) 2px 2px 3px; margin: 15px 0px !important; background: rgb(43, 102, 149) !important; border-radius: 6px !important;">
+	1、PHP中异常的独特性</h4>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　PHP中的异常的独特性，即PHP中的异常不同于主流语言C++、java中的异常。在Java中，异常是唯一的错误报告方式，而在PHP中却不是这样，而是把所有不正常的情况都视作了错误进行处理。这两种语言对异常和错误的界定存在分歧。什么是异常什么是错误，两种语言的设计者存在不同的观点。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　<span style="margin: 0px; padding: 0px; background-color: rgb(255, 204, 0);">PHP中的异常：</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　是程序在运行中出现不符合预期的情况及与正常流程不同的状况。一种不正常的情况，按照正常逻辑本不该出的错误，但仍然会出现的错误，这是属于逻辑和业务流程的错误，而不是编译或者语法上的错误。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　<span style="margin: 0px; padding: 0px; background-color: rgb(255, 204, 0);">PHP中的错误：</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　是属于php脚本自身的问题，大部分情况是由错误的语法，服务器环境导致，使得编译器无法通过检查，甚至无法运行的情况。warning、notice都是错误，只是他们的级别不同而已，并且错误是不能被try-catch捕获的。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;　　在PHP中遇到任何自身错误都会触发一个错误，而不是抛出异常。<span data-wiz-span="data-wiz-span" style="margin: 0px; padding: 0px;">PHP一旦遇到非正常代码，通常都会触发错误，而不是抛出异常。因此，如果想要使用异常处理不可预料的问题，是办不到的。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<span data-wiz-span="data-wiz-span" style="margin: 0px; padding: 0px;">典型例子：</span></p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); border-radius: 5px; font-family: &quot;Courier New&quot; !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Kite One&quot;, sans-serif;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">1</span> &lt;?<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">2</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">3</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">try</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">4</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> 1/0<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">5</span> } <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">catch</span> (<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">Exception</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$e</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">6</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$e</span>-&gt;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">getMessage();
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">7</span> }</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	结果：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<img alt="" src="/uploads/allimg/180222/1635102221-2.png" style="margin: 0px; padding: 0px; border: none; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	结果显示：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　此时出现了一个警告级别的错误，程序终止。</p>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<span data-wiz-span="data-wiz-span" style="margin: 0px; padding: 0px;">结论：</span></div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<span data-wiz-span="data-wiz-span" style="margin: 0px; padding: 0px;">　　</span>PHP通常是无法自动捕获有意义的异常，它把所有不正常的情况都视作了错误，你要想捕获异常就得使用if....else结构，保证代码是正常的，然后判断进行手动抛出异常。</div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px; text-align: right;">
+	<a href="https://www.cnblogs.com/phpstudy2015-6/p/8433541.html#_labelTop" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; transition: all 0.5s linear;">回到顶部</a><a name="_label1" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit;"></a></div>
+<h4 style="padding: 5px 0px 5px 20px; font-size: 17px; color: rgb(255, 255, 255); box-shadow: rgb(95, 90, 75) 0px 0px 0px 1px, rgba(10, 10, 0, 0.498039) 1px 1px 6px 1px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; line-height: 25px; text-shadow: rgb(34, 34, 34) 2px 2px 3px; margin: 15px 0px !important; background: rgb(43, 102, 149) !important; border-radius: 6px !important;">
+	2、PHP中的错误级别</h4>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;　　PHP中的异常机制是不足的，绝大多数情况下无法自动抛出异常，必须使用if....else语句先进行判断，在进行手动抛出异常。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　<strong style="margin: 0px; padding: 0px;">手动抛出异常的意义不大</strong>，是已经预料到的错误，这种方式将会使你陷入纷繁复杂的业务逻辑判断和处理中。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　因此我们可以通过一些特殊的函数来自定义错误处理函数，来接管PHP原生的错误处理函数，然后再进行抛出异常。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　接下来我们需要了解PHP中的一些错误。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<span style="margin: 0px; padding: 0px; background-color: rgb(255, 204, 0);">错误显示控制：</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　【ALL设置】</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　全局：php.ini中设置display_error = on/off；</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　局部：ini_set(&quot;display_error&quot;, true/false);</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<strong style="margin: 0px; padding: 0px;">PHP.ini中display_errors = Off失效的解决</strong>&nbsp;<br data-filtered="filtered" style="margin: 0px; padding: 0px;" />
+	<strong style="margin: 0px; padding: 0px;">　　问题：</strong>&nbsp;PHP设置文件php.ini中明明已经设置display_errors = Off，但是在运行过程中，网页上还是会出现错误信息。&nbsp;<br data-filtered="filtered" style="margin: 0px; padding: 0px;" />
+	<strong style="margin: 0px; padding: 0px;">　　解决：</strong>&nbsp;经 查log_errors= On，据官方的说法，当这个log_errors设置为On，那么必须指定error_log文件，如果没指定或者指定的文件没有权限写入，那么照样会输 出到正常的输出渠道，那么也就使得display_errors 这个指定的Off失效，错误信息还是打印了出来。于是将log_errors = Off，问题就解决了。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　【选择性设置显示错误】</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　全局：error_reporting =&nbsp;E_ALL | E_STRICT....</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　局部：error_reporting(E_ERROR | E_WARNING | E_PARSE)</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); border-radius: 5px; font-family: &quot;Courier New&quot; !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Kite One&quot;, sans-serif;">
+1     <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_ERROR</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">           致命的运行错误。错误无法恢复，暂停执行脚本。
+</span>2     <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_WARNING</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">         运行时警告(非致命性错误)。非致命的运行错误，脚本执行不会停止。
+</span>4     <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_PARSE</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">           编译时解析错误。解析错误只由分析器产生。
+</span>8     <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_NOTICE</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">          运行时提醒(这些经常是你代码中的bug引起的，也可能是有意的行为造成的。)
+</span>16    <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_CORE_ERROR</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> PHP  启动时初始化过程中的致命错误。
+</span>32    <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_CORE_WARNING</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">    PHP启动时初始化过程中的警告(非致命性错)。
+</span>64    <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_COMPILE_ERROR</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">   编译时致命性错。这就像由Zend脚本引擎生成了一个E_ERROR。
+</span>128   <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_COMPILE_WARNING</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 编译时警告(非致性错)。这就像由Zend脚本引擎生成了E_WARNING警告。
+</span>256   <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_USER_ERROR</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">      自定义错误消息。像用PHP函数trigger_error（程序员设置E_ERROR）
+</span>512   <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_USER_WARNING</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">    自定义警告消息。像用PHP函数trigger_error（程序员设的E_WARNING警告） 
+</span>1024  <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_USER_NOTICE</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">     自定义的提醒消息。像由使用PHP函数trigger_error（程序员E_NOTICE集）
+</span>2048  <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_STRICT</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">          编码标准化警告。允许PHP建议修改代码以确保最佳的互操作性向前兼容性。 
+</span>4096<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">  E_RECOVERABLE_ERROR   开捕致命错误。像E_ERROR，但可以通过用户定义的处理捕获（又见set_error_handler（））
+</span>8191  <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_ALL</span>             所有的错误和警告(不包括 <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_STRICT</span>) (<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_STRICT</span> will be part of <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_ALL</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">as</span> of PHP 6.0)14 16384 E_USER_DEPRECATED 15 30719 <span style="margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">E_ALL</span></pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;　　一共有十五种，使用二进制代替，0000 0000 0000 0011 表示 E_ERROR和E_WARNING</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　例如：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　error_reporting(3);　　//只显示E_ERROR和E_WARNING错误</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　error_reporting(-1);　　//只显示所有错误误</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;注意：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　在开发阶段通常是显示所有错误，方便解决问题；</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　在生产阶段通常是隐藏错误，并将需错误记录到文件中（错误日志）；</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　php.ini中设置：log_error = on/off;　　//记录、不记录</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　　　　　　　　error_log = php_errors.log　　//设定错误日志文件（此时没有给定路径则在当前位置生成）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　还可以通过ini_set()进行设置。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;</p>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px; text-align: right;">
+	<a href="https://www.cnblogs.com/phpstudy2015-6/p/8433541.html#_labelTop" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; transition: all 0.5s linear;">回到顶部</a><a name="_label2" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit;"></a></div>
+<h4 style="padding: 5px 0px 5px 20px; font-size: 17px; color: rgb(255, 255, 255); box-shadow: rgb(95, 90, 75) 0px 0px 0px 1px, rgba(10, 10, 0, 0.498039) 1px 1px 6px 1px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; line-height: 25px; text-shadow: rgb(34, 34, 34) 2px 2px 3px; margin: 15px 0px !important; background: rgb(43, 102, 149) !important; border-radius: 6px !important;">
+	3、PHP中的异常处理</h4>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px; text-align: right;">
+	<a href="https://www.cnblogs.com/phpstudy2015-6/p/8433541.html#_labelTop" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; transition: all 0.5s linear;">回到顶部</a><a name="_label3" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit;"></a></div>
+<h4 style="padding: 5px 0px 5px 20px; font-size: 17px; color: rgb(255, 255, 255); box-shadow: rgb(95, 90, 75) 0px 0px 0px 1px, rgba(10, 10, 0, 0.498039) 1px 1px 6px 1px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; line-height: 25px; text-shadow: rgb(34, 34, 34) 2px 2px 3px; margin: 15px 0px !important; background: rgb(43, 102, 149) !important; border-radius: 6px !important;">
+	　　3.1、set_error_handler(error_function, error_type)</h4>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　使用set_error_handler(error_function, error_type)函数设置自定义错误处理函数，接管原错误处理函数。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	eg.</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); border-radius: 5px; font-family: &quot;Courier New&quot; !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Kite One&quot;, sans-serif;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 1</span> &lt;?<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 2</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 3</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">//</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 方式一
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 4</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// set_error_handler(&#39;myError&#39;);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 5</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// function myError($errorNum, $errorMs, $errorFile, $errorLine){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 6</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">//     echo(&#39;set_error_handler: &#39; . $errorNum . &#39;:&#39; . $errorMs . &#39; in &#39; . $errorFile . &#39; on &#39; . $errorLine . &#39; line &#39;);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 7</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 8</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 9</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// 方式二</span>
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">10</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">class</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> ErrorClass{
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">11</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">//</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 必须静态public方法</span>
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">12</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">public</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">static</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">function</span> myError(<span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorNum</span>, <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorMs</span>, <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorFile</span>, <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorLine</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">){
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">13</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span>(&#39;set_error_handler: &#39; . <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorNum</span> . &#39;:&#39; . <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorMs</span> . &#39; in &#39; . <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorFile</span> . &#39; on &#39; . <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$errorLine</span> . &#39; line &#39;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">14</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">15</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">16</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">17</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">set_error_handler</span>([&#39;ErrorClass&#39;, &#39;myError&#39;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">]);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">18</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">19</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">20</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">try</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">21</span>     <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$a</span> = 5/0<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">22</span> } <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">catch</span> (<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">Exception</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$e</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">23</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;666666&quot;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">24</span> }</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	访问结果：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<strong style="margin: 0px; padding: 0px;"><img alt="" height="373" src="/uploads/allimg/180222/16351010G-7.png" style="margin: 0px; padding: 0px; border: none; max-width: 900px;" width="602" /></strong></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　由结果可知：我们自定义的myError方法截取了错误，此时我们可以主动的处理这些错误，抛出相应的异常。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　但是我们需要注意以下两点：</p>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　第一，如果存在该方法，相应的error_reporting()就不能在使用了。它将接管PHP原生错误处理函数，即所有的错误都会交给自定义的函数处理。</div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　第二，此方法不能处理以下级别的错误：E_ERROR、 E_PARSE、 E_CORE_ERROR、 E_CORE_WARNING、 E_COMPILE_ERROR、 E_COMPILE_WARNING，set_error_handler() 函数所在文件中产生的E_STRICT，该函数只能捕获系统产生的一些Warning、Notice级别的错误。</div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<span style="margin: 0px; padding: 0px; background-color: rgb(255, 255, 0);"><strong style="margin: 0px; padding: 0px;"><span data-wiz-span="data-wiz-span" style="margin: 0px; padding: 0px;">注意：</span></strong></span></div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<span data-wiz-span="data-wiz-span" style="margin: 0px; padding: 0px;">　　</span>如果在脚本执行前发生错误，由于此时自定义的错误处理函数还没有注册，因此就用不到这个自定义错误处理程序。</div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px; text-align: right;">
+	<a href="https://www.cnblogs.com/phpstudy2015-6/p/8433541.html#_labelTop" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; transition: all 0.5s linear;">回到顶部</a><a name="_label4" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit;"></a></div>
+<h4 style="padding: 5px 0px 5px 20px; font-size: 17px; color: rgb(255, 255, 255); box-shadow: rgb(95, 90, 75) 0px 0px 0px 1px, rgba(10, 10, 0, 0.498039) 1px 1px 6px 1px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; line-height: 25px; text-shadow: rgb(34, 34, 34) 2px 2px 3px; margin: 15px 0px !important; background: rgb(43, 102, 149) !important; border-radius: 6px !important;">
+	　　3.2、register_shutdown_function(exception_function)&nbsp;</h4>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　捕获PHP的错误：Fatal Error、Parse Error等，<span style="margin: 0px; padding: 0px; background-color: rgb(0, 255, 255);">这个方法是PHP脚本执行结束前最后一个调用的函数</span>，比如脚本错误、die()、exit、异常、正常结束都会调用。</div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　通过这个函数就可以在脚本结束前判断这次执行是否有错误产生，这时就要借助于一个函数：error_get_last()；这个函数可以拿到本次执行产生的所有错误。error_get_last();返回的信息：</div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　[type] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;- 错误类型<br data-filtered="filtered" style="margin: 0px; padding: 0px;" />
+	　　[message] &nbsp; &nbsp;- 错误消息<br data-filtered="filtered" style="margin: 0px; padding: 0px;" />
+	　　[file]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 发生错误所在的文件<br data-filtered="filtered" style="margin: 0px; padding: 0px;" />
+	　　[line] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - 发生错误所在的行</div>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	注意：当parse-time出错时是不会调用本函数的。只有在run-time出错的时候，才会调用本函数。即需要成功注册此函数才能使用。【测试3和测试4对比】</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;eg.</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); border-radius: 5px; font-family: &quot;Courier New&quot; !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Kite One&quot;, sans-serif;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 1</span> &lt;?<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 2</span>                 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 3</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">try</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 4</span>     <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$a</span> = 5/0<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 5</span> } <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">catch</span> (<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">Exception</span> <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$e</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 6</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;666666&quot;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 7</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 8</span>     
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 9</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">register_shutdown_function</span>(&#39;myshutdownfunc&#39;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">10</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> myshutdownfunc()
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">11</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">{
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">12</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">if</span> (<span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$error</span> =<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> error_get_last()) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">13</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;&lt;pre&gt;&quot;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">14</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">print_r</span>(<span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$error</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">15</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;&lt;/pre&gt;&quot;;<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">die</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">16</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">17</span> }</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	测试1：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<img alt="" src="/uploads/allimg/180222/163510ER-10.png" style="margin: 0px; padding: 0px; border: none; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	测试2：（使用echo &quot;string&quot;;替换try....catch）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<img alt="" src="/uploads/allimg/180222/1635104936-11.png" style="margin: 0px; padding: 0px; border: none; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	测试3：（使用echo &quot;string&quot;替换try...catch）</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	此时语法错误，register_shutdown_function函数未执行</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;<img alt="" src="/uploads/allimg/180222/16351054L-12.png" style="margin: 0px; padding: 0px; border: none; max-width: 900px;" /></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	测试4：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	新建一个文件，具有语法错误的php代码，并将其引入执行文件中，例如</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); border-radius: 5px; font-family: &quot;Courier New&quot; !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Kite One&quot;, sans-serif;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 1</span> ceshi2.<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">class</span>.<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php文件
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 2</span> &lt;?<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 3</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;string&quot;
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 4</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 5</span> ?&gt;
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 6</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 7</span> ceshi.<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">class</span>.<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php文件
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 8</span> &lt;?<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 9</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">10</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">register_shutdown_function</span>(&#39;myshutdownfunc&#39;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">11</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">function</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> myshutdownfunc()
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">12</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">{
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">13</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">if</span> (<span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$error</span> =<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> error_get_last()) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">14</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;&lt;pre&gt;&quot;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">15</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">print_r</span>(<span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$error</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">16</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;&lt;/pre&gt;&quot;;<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">die</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">17</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">18</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">19</span> 
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">20</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">include</span> &quot;ceshi2.class.php&quot;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">21</span> ?&gt;</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;结果：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<img alt="" src="/uploads/allimg/180222/163510C20-15.png" style="margin: 0px; padding: 0px; border: none; max-width: 900px;" /></p>
+<div style="margin: 0px; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px; text-align: right;">
+	<a href="https://www.cnblogs.com/phpstudy2015-6/p/8433541.html#_labelTop" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; transition: all 0.5s linear;">回到顶部</a><a name="_label5" style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit;"></a></div>
+<h4 style="padding: 5px 0px 5px 20px; font-size: 17px; color: rgb(255, 255, 255); box-shadow: rgb(95, 90, 75) 0px 0px 0px 1px, rgba(10, 10, 0, 0.498039) 1px 1px 6px 1px; font-family: 微软雅黑, 宋体, 黑体, Arial; height: 25px; line-height: 25px; text-shadow: rgb(34, 34, 34) 2px 2px 3px; margin: 15px 0px !important; background: rgb(43, 102, 149) !important; border-radius: 6px !important;">
+	　　3.3、set_exception_handler(exception_function)</h4>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;</p>
+<table style="margin: 0px; padding: 0px; border-collapse: collapse; border-spacing: 0px; border-style: solid; border-color: silver; word-break: break-word; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<tbody style="margin: 0px; padding: 0px;">
+		<tr style="margin: 0px; padding: 0px;">
+			<th style="margin: 0px; padding: 3px; text-align: left; border-style: solid; border-color: silver; border-collapse: collapse;">
+				参数</th>
+			<th style="margin: 0px; padding: 3px; text-align: left; border-style: solid; border-color: silver; border-collapse: collapse;">
+				描述</th>
+		</tr>
+		<tr style="margin: 0px; padding: 0px;">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				error_function</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; border-collapse: collapse;">
+				必需。规定未捕获的异常发生时调用的函数。<br data-filtered="filtered" style="margin: 0px; padding: 0px;" />
+				该函数必须在调用 set_exception_handler() 函数之前定义。<br data-filtered="filtered" style="margin: 0px; padding: 0px;" />
+				这个异常处理函数需要需要一个参数，即抛出的 exception 对象。</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	作用：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　set_exception_handler() 函数设置用户自定义的异常处理函数。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　该函数用于创建运行时期间的用户自己的异常处理方法。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	　　该函数会返回旧的异常处理程序，若失败，则返回 null。</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<span style="margin: 0px; padding: 0px; background-color: rgb(0, 255, 255);">提示：在这个异常处理程序被调用后，脚本会停止执行。</span></p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	&nbsp;eg.</p>
+<div class="cnblogs_code" style="margin: 5px 0px; padding: 5px; background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); overflow: auto; color: rgb(0, 0, 0); border-radius: 5px; font-family: &quot;Courier New&quot; !important;">
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+	<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Kite One&quot;, sans-serif;">
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 1</span> &lt;?<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">php
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 2</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">//</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 第一种放方法
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 3</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// function myException($exception) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 4</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">//     echo &quot;&lt;b&gt;Exception:&lt;/b&gt; &quot; , $exception-&gt;getMessage();
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 5</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 6</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// set_exception_handler(&#39;myException&#39;);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 7</span>  
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 8</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">// 第二种方法</span>
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> 9</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">class</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;"> MyError{
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">10</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">//</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 0); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">必须是静态public方法</span>
+<span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">11</span>     <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">public</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">static</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">function</span> myException(<span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$exception</span><span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">) {
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">12</span>         <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">echo</span> &quot;&lt;b&gt;Exception:&lt;/b&gt; &quot; , <span style="margin: 0px; padding: 0px; color: rgb(128, 0, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">$exception</span>-&gt;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">getMessage();
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">13</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">    }
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">14</span> <span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">}
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">15</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">set_exception_handler</span>([&#39;MyError&#39;, &#39;myException&#39;<span style="margin: 0px; padding: 0px; font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">]);
+</span><span style="margin: 0px; padding: 0px; color: rgb(0, 128, 128); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">16</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">throw</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">new</span> <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 255); font-family: &quot;Courier New&quot; !important; line-height: 1.5 !important;">Exception</span>(&#39;Uncaught Exception occurred---没有人处理的异常&#39;);</pre>
+	<div class="cnblogs_code_toolbar" style="margin: 5px 0px 0px; padding: 0px;">
+		<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5 !important;"><a style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-weight: inherit; line-height: inherit; text-decoration: underline; transition: all 0.5s linear; border: none !important;" title="复制代码"><img alt="复制代码" src="/uploads/allimg/180222/1635104G6-0.gif" style="margin: 0px; padding: 0px; max-width: 900px; border: none !important;" /></a></span></div>
+</div>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	运行结果：</p>
+<p style="margin: 10px auto; padding: 0px; color: rgb(68, 68, 68); font-family: &quot;Microsoft YaHei&quot;, Arial, Helvetica, sans-serif, 宋体; font-size: 14px;">
+	<img alt="" src="/uploads/allimg/180222/16351045Z-18.png" style="margin: 0px; padding: 0px; border: none; max-width: 900px;" /></p>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：<a href='/a/WEBzuopin/JAVA/51.html'>php面向对象精要(3)</a> </li>
+                <li>下一篇：没有了 </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

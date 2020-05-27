@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="富文本编辑">
+  <meta name="Description" content="相信很多人都使用过多种富文本编辑器，富文本编辑器常用于编辑博客、用户交互，富文本编辑器分为两种：所见即所得和非所见即所得 两种富文本编辑器的实现原理是不相同的。 1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>所见即所得富文本编辑器实现原理_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/PSzuopin/vue/29.html">Vue.js——基于$.a</a></li>
+<li><span>2</span><a href="/a/PSzuopin/vue/24.html">Vue.js——vue-route</a></li>
+<li><span>3</span><a href="/a/PSzuopin/javascript/45.html">学习Javascript闭包（</a></li>
+<li><span>4</span><a href="/a/PSzuopin/vue/27.html">Vue.js——使用$.a</a></li>
+<li><span>5</span><a href="/a/PSzuopin/vue/32.html">Vue.js——60分钟组</a></li>
+<li><span>6</span><a href="/a/PSzuopin/vue/26.html">Vue.js——60分钟b</a></li>
+<li><span>7</span><a href="/a/PSzuopin/2.html">纸杯设计</a></li>
+<li><span>8</span><a href="/a/PSzuopin/vue/28.html">Vue.js——vue-resou</a></li>
+<li><span>9</span><a href="/a/PSzuopin/jquery/35.html">细说jquery ui和jqg</a></li>
+<li><span>10</span><a href="/a/PSzuopin/vue/30.html">Vue.js——60分钟组</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>所见即所得富文本编辑器实现原理</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 15:10</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=43&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/PSzuopin/'>JavaScript</a> > <a href='/a/PSzuopin/HTML/'>HTML</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'所见即所得富文本编辑器实现原理',
+	litpic:'/uploads/180222/1-1P2221510352I.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'所见即所得富文本编辑器实现原理',
+	litpic:'/uploads/180222/1-1P2221510352I.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	相信很多人都使用过多种富文本编辑器，富文本编辑器常用于编辑博客、用户交互，富文本编辑器分为两种：所见即所得和非所见即所得</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	两种富文本编辑器的实现原理是不相同的。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	1. 非所见即所得编辑器</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这种编辑器的实现原理很简单，用textarea元素就可以实现，假如要实现粗体、斜体、下划线、颜色字、图片的效果，只需在字的中间加上自定义标签即可，例如：<span class="Apple-converted-space">&nbsp;</span><font color="#0000ff" style="margin: 0px; padding: 0px;">[b]富文本编辑器[b]</font><span class="Apple-converted-space">&nbsp;</span>，[img]src=&rdquo;<a href="http://www.google.com.hk/intl/zh-CN/images/logo_cn.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://www.google.com.hk/intl/zh-CN/images/logo_cn.png">http://www.google.com.hk/intl/zh-CN/images/logo_cn.png</a>&rdquo;[img]当然这些规则你得自己通过js进行定制。当POST提交后，再把这些标签转换为html标签。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	2. 所见即所得编辑器</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在1中我提到的几种效果，我们无法在textarea中见到立竿见影的效果（所见即所得），而文本域本身也只是支持一些字符的输入，并不支持显示html。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如何做到编辑像文本域，又能够即时所见呢？答案就是使用iframe作为内容编辑区域。iframe本身也是一个嵌套页面，它如何能够被编辑呢？这里有一些关键的属性，它们可以做到让iframe可以被编辑。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	还是直接上代码来得方便一些，代码也很少。</p>
+<pre class="xml hljs " id="cd6fc22fa5694fd3aca145d5ed644e02" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">language</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;javascript&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">//初始化编辑器</span>
+    <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> <span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">init</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> ifr = document.getElementById(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;editor&quot;</span>);
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> doc = ifr.contentDocument || ifr.contentWindow.document; <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// W3C || IE</span>
+        doc.designMode = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;on&quot;</span>;
+        doc.contentEditable = <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span>;
+        doc.write(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;html&gt;&lt;head&gt;&lt;style&gt;body{ margin:3px; word-wrap:break-word; word-break: break-all; }&lt;/style&gt;&lt;/head&gt;&lt;body&gt;GoodNessEditor&lt;/body&gt;&lt;/html&gt;&#39;</span>);
+        alert(doc.body.innerHTML);
+    }
+
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">//设置选定的文本为粗体/正常</span>
+    <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> <span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">setBold</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> win = document.getElementById(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;editor&quot;</span>).contentWindow;
+        win.document.execCommand(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;Bold&quot;</span>, <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>, <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">null</span>);
+        win.focus();
+    }
+</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;button&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;bBtn&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">value</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;B&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">style</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;font-weight:bold&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">onclick</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;setBold();&quot;</span> /&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">iframe</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;editor&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;600px&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;400px&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">style</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;border:solid 1px;&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">iframe</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+    init();
+</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	很重要的几点<span class="Apple-converted-space">&nbsp;</span><br style="margin: 0px; padding: 0px;" />
+	&nbsp;&nbsp;&nbsp; (1). 用<font color="#f79646" style="margin: 0px; padding: 0px;"><strong style="margin: 0px; padding: 0px;">ifr.contentDocument || ifr.contentWindow.document</strong></font><font color="#000000" style="margin: 0px; padding: 0px;">方式获取iframe的文档对象<span class="Apple-converted-space">&nbsp;</span><br style="margin: 0px; padding: 0px;" />
+	&nbsp;&nbsp;&nbsp; (2). 分别设置<strong style="margin: 0px; padding: 0px;"><font color="#f79646" style="margin: 0px; padding: 0px;">designMode</font></strong>属性为&rsquo;on&rsquo;，<strong style="margin: 0px; padding: 0px;"><font color="#f79646" style="margin: 0px; padding: 0px;">contentEditable</font></strong>属性为&rsquo;true&rsquo;让iframe可编辑<span class="Apple-converted-space">&nbsp;</span><br style="margin: 0px; padding: 0px;" />
+	&nbsp;&nbsp;&nbsp; (3). 通过<font color="#f79646" style="margin: 0px; padding: 0px;"><strong style="margin: 0px; padding: 0px;">doc.body.innerHTML</strong></font>方法获取内容，这个内容是我们最终要插入到数据库或显示在页面上的（例如用户评论）</font></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<font color="#000000" style="margin: 0px; padding: 0px;">大家可以运行上面的代码，可以看到如下截图中的效果：</font></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<a href="http://images.cnblogs.com/cnblogs_com/keepfool/201112/20111221001938968.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;"><img alt="image" border="0" height="589" src="/uploads/allimg/180222/15105914B-0.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="816" /></a>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<font color="#000000" style="margin: 0px; padding: 0px;">但是在实际运行的时候，<span style="margin: 0px; padding: 0px; color: red;">你是否发现除了chrome浏览器外（用IETester, Firefox, Chrome测试）</span>打开这个页面都处于正在加载的状态（那个轮子转啊转，转个不停&hellip;）</font></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<font color="#000000" style="margin: 0px; padding: 0px;">只要<strong style="margin: 0px; padding: 0px;">在doc.write()方法前后加上doc.open(), doc.close()</strong>就可以了（在写之前开启，写完之后关闭）。</font></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<font color="#000000" style="margin: 0px; padding: 0px;">最后，我们的Web程序中经常使用jQuery作为基础类库，那就把上面的代码也改造为jQuery吧。代码如下：</font></p>
+<pre class="xml hljs " id="5191872be8534418b8765ea707d9ead2" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">lang</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;en&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">xmlns</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">http-equiv</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;Content-Type&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">content</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>KF富文本编辑器<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text/javascript&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;jquery.min.js&quot;</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        $(<span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> <span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+            $d = $(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;#editor&quot;</span>)[<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>].contentWindow.document; <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// IE、FF都兼容</span>
+            $d.designMode = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;on&quot;</span>;
+            $d.contentEditable = <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span>;
+            $d.open();
+            $d.close();
+            $(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;body&quot;</span>, $d).append(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&lt;div&gt;A&lt;/div&gt;&lt;div&gt;B&lt;/div&gt;&lt;div&gt;C&lt;/div&gt;&quot;</span>);
+
+            $(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#insert_img&#39;</span>).click(<span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> <span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+                <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 在iframe中插入一张图片</span>
+                <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> img = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&lt;img src=&quot;&#39;</span> + $(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#path&#39;</span>).val() + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&quot; /&gt;&#39;</span>;
+                $(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;body&quot;</span>, $d).append(img);
+            });
+
+            $(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#preview&#39;</span>).click(<span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> <span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+                <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 获取iframe的body内容，用于显示或者插入到数据库</span>
+                alert($(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#editor&#39;</span>).contents().find(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;body&#39;</span>).html());
+                $(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#preview_area&#39;</span>).html($(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#editor&#39;</span>).contents().find(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;body&#39;</span>).html());
+
+            });
+        });
+
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">iframe</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;editor&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;600px&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;200px&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">style</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;border:solid 1px;&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">iframe</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;path&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">value</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;http://www.google.com.hk/intl/zh-CN/images/logo_cn.png&quot;</span> /&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;button&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;insert_img&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">value</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;插入图片&quot;</span> /&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;button&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;preview&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">value</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;预览&quot;</span> /&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">style</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;border: 1px dashed #ccc;&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;preview_area&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	效果图如下：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/keepfool/201112/201112210019429412.png" style="margin: 0px; padding: 0px; outline: none; color: rgb(255, 99, 71);"><img alt="image" border="0" src="/uploads/allimg/180222/15105aB0-1.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	是不是觉得很简单呢？</p>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：没有了 </li>
+                <li>下一篇：没有了 </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

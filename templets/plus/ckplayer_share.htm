@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="{dede:global.cfg_soft_lang /}"?>
+<ckplayer>
+	<share_html>
+	{embed src="{dede:global.cfg_cmsurl runphp='yes'}global $cfg_basehost,$cfg_cmsurl; if(!strstr($cfg_cmsurl,'http://')){@me = $cfg_basehost.$cfg_cmsurl;}else{@me = $cfg_cmsurl;}{/dede:global.cfg_cmsurl}/ckplayer/ckplayer.swf?[$share]" quality="high" width="600" height="400" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"}{/embed}
+	</share_html>
+	<share_flash>
+{dede:global.cfg_cmsurl runphp='yes'}global $cfg_basehost,$cfg_cmsurl; if(!strstr($cfg_cmsurl,'http://')){@me = $cfg_basehost.$cfg_cmsurl;}else{@me = $cfg_cmsurl;}{/dede:global.cfg_cmsurl}/ckplayer/ckplayer.swf?[$share]
+	</share_flash>
+	<share_flashvars>
+	f,a,s,my_url,my_pic,p
+	</share_flashvars>
+	<share_path>
+	{dede:global.cfg_cmsurl runphp='yes'}global $cfg_basehost,$cfg_cmsurl; if(!strstr($cfg_cmsurl,'http://')){@me = $cfg_basehost.$cfg_cmsurl;}else{@me = $cfg_cmsurl;}{/dede:global.cfg_cmsurl}/ckplayer/share/
+	</share_path>
+    <share_replace>
+	</share_replace>
+	<share_permit>0</share_permit><!--是否有视听许可证,默认0没有，1是有-->
+	<share_uuid>
+	c25cf02c-1705-412d-bd4b-77a10b380f08
+	</share_uuid>
+	<share_button>
+		<share>
+			<id>qqmb</id>
+			<img>qq.png</img>
+			<coordinate>20,50</coordinate>
+		</share>
+		<share>
+			<id>sinaminiblog</id>
+			<img>sina.png</img>
+			<coordinate>101,50</coordinate>
+		</share>
+		<share>
+			<id>qzone</id>
+			<img>qzone.png</img>
+			<coordinate>182,50</coordinate>
+		</share>
+		<share>
+			<id>renren</id>
+			<img>rr.png</img>
+			<coordinate>263,50</coordinate>
+		</share>
+		<share>
+			<id>kaixin001</id>
+			<img>kaixin001.png</img>
+			<coordinate>20,85</coordinate>
+		</share>
+		<share>
+			<id>tianya</id>
+			<img>tianya.png</img>
+			<coordinate>101,85</coordinate>
+		</share>
+		<share>
+			<id>feixin</id>
+			<img>feixin.png</img>
+			<coordinate>182,85</coordinate>
+		</share>
+		<share>
+			<id>msn</id>
+			<img>msn.png</img>
+			<coordinate>263,85</coordinate>
+		</share>
+	</share_button>
+</ckplayer>

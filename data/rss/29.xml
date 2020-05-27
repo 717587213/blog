@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+<channel>
+<title>CSS</title>
+<link>http://localhost/a/PSzuopin/CSS/</link>
+<description>前端技术 / CSS</description>
+<language>zh-cn</language>
+<generator><![CDATA[Copyright &amp;copy; 2002-2017 DEDECMS. 织梦科技 版权所有 &lt;a href=http://www.dedecms.com target='_blank'&gt;Power by DedeCms&lt;/a&gt;]]></generator>
+<webmaster>desdev@vip.qq.com</webmaster>
+<item>
+    <title><![CDATA[Web布局中的几种宽高自适应]]></title>
+    <link>http://localhost/a/PSzuopin/CSS/40.html</link>
+    <description><![CDATA[前言 打开浏览器，输入一个网址，显示一个页面，页面最基本的布局和框架用户一目了然。但是用户所用的浏览器、显示器、分辨率大多都是不一样的，如何确保不同用户持有不同设备]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>CSS</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+
+</channel>
+</rss>

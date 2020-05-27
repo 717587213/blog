@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="Vue,入门,Vue.js">
+  <meta name="Description" content="Vue.js介绍 Vue.js 是当下很火的一个JavaScript MVVM库，它是以数据驱动和组件化的思想构建的。相比于Angular.js，Vue.js提供了更加简洁、更易于理解的API，使得我们能够快速地上手并使用Vue">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>Vue.js——60分钟快速入门_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/PSzuopin/vue/28.html">Vue.js——vue-resou</a></li>
+<li><span>2</span><a href="/a/PSzuopin/vue/24.html">Vue.js——vue-route</a></li>
+<li><span>3</span><a href="/a/PSzuopin/vue/30.html">Vue.js——60分钟组</a></li>
+<li><span>4</span><a href="/a/PSzuopin/vue/32.html">Vue.js——60分钟组</a></li>
+<li><span>5</span><a href="/a/PSzuopin/jquery/35.html">细说jquery ui和jqg</a></li>
+<li><span>6</span><a href="/a/PSzuopin/vue/29.html">Vue.js——基于$.a</a></li>
+<li><span>7</span><a href="/a/PSzuopin/vue/27.html">Vue.js——使用$.a</a></li>
+<li><span>8</span><a href="/a/PSzuopin/2.html">纸杯设计</a></li>
+<li><span>9</span><a href="/a/PSzuopin/javascript/45.html">学习Javascript闭包（</a></li>
+<li><span>10</span><a href="/a/PSzuopin/vue/26.html">Vue.js——60分钟b</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>Vue.js——60分钟快速入门</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 10:23</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=23&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/PSzuopin/'>JavaScript</a> > <a href='/a/PSzuopin/vue/'>vue</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'Vue.js——60分钟快速入门',
+	litpic:'/uploads/180222/1-1P222102424923.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'Vue.js——60分钟快速入门',
+	litpic:'/uploads/180222/1-1P222102424923.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	Vue.js介绍</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="https://github.com/vuejs/vue" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" target="_blank">Vue.js</a>是当下很火的一个JavaScript MVVM库，它是以数据驱动和组件化的思想构建的。相比于Angular.js，Vue.js提供了更加简洁、更易于理解的API，使得我们能够快速地上手并使用Vue.js。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如果你之前已经习惯了用jQuery操作DOM，学习Vue.js时请先抛开手动操作DOM的思维，因为Vue.js是数据驱动的，你无需手动操作DOM。它通过一些特殊的HTML语法，将DOM和数据绑定起来。一旦你创建了绑定，DOM将和数据保持同步，每当变更了数据，DOM也会相应地更新。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	当然了，在使用Vue.js时，你也可以结合其他库一起使用，比如jQuery。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文的Demo和源代码已放到GitHub，如果您觉得本篇内容不错，请点个赞，或在GitHub上加个星星！</p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/01.GettingStarted/v-for.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">v-for Demo</a>&nbsp;<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/01.GettingStarted/v-bind.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">v-bind Demo</a>&nbsp;<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/01.GettingStarted/simple-demo.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">Page Demo</a>&nbsp;<a class="btn-demo" href="https://github.com/keepfool/vue-tutorials" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">GitHub Source</a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	MVVM模式</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	下图不仅概括了MVVM模式（Model-View-ViewModel），还描述了在Vue.js中ViewModel是如何和View以及Model进行交互的。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<img alt="MVVM" src="http://cn.vuejs.org/images/mvvm.png" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 700px;" /></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">ViewModel是Vue.js的核心，它是一个Vue实例。</strong>Vue实例是作用于某一个HTML元素上的，这个元素可以是HTML的body元素，也可以是指定了id的某个元素。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	当创建了ViewModel后，双向绑定是如何达成的呢？</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	首先，我们将上图中的DOM Listeners和Data Bindings看作两个工具，它们是实现双向绑定的关键。<br style="margin: 0px; padding: 0px;" />
+	从View侧看，ViewModel中的DOM Listeners工具会帮我们监测页面上DOM元素的变化，如果有变化，则更改Model中的数据；<br style="margin: 0px; padding: 0px;" />
+	从Model侧看，当我们更新Model中的数据时，Data Bindings工具会帮我们更新页面中的DOM元素。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	Hello World示例</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	了解一门语言，或者学习一门新技术，编写Hello World示例是我们的必经之路。<br style="margin: 0px; padding: 0px;" />
+	这段代码在画面上输出&quot;Hello World!&quot;。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--这是我们的View--&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+            {{ message }}
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 这是我们的Model</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> exampleData = {
+            message: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Hello World!&#39;</span>
+        }
+
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 创建一个 Vue 实例或 &quot;ViewModel&quot;</span>
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 它连接 View 与 Model</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: exampleData
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	使用Vue的过程就是定义MVVM各个组成部分的过程的过程。</p>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		<strong style="margin: 0px; padding: 0px;">定义View</strong></li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		<strong style="margin: 0px; padding: 0px;">定义Model</strong></li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		<strong style="margin: 0px; padding: 0px;">创建一个Vue实例或&quot;ViewModel&quot;，它用于连接View和Model</strong></li>
+</ol>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在创建Vue实例时，需要传入一个<strong style="margin: 0px; padding: 0px;">选项对象</strong>，选项对象可以包含数据、挂载元素、方法、模生命周期钩子等等。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在这个示例中，<strong style="margin: 0px; padding: 0px;">选项对象</strong>的<strong style="margin: 0px; padding: 0px;">el属性</strong>指向View，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">el: &#39;#app&#39;</code>表示该Vue实例将挂载到<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;div id=&quot;app&quot;&gt;...&lt;/div&gt;</code>这个元素；<strong style="margin: 0px; padding: 0px;">data属性</strong>指向Model，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">data: exampleData</code>表示我们的Model是exampleData对象。<br style="margin: 0px; padding: 0px;" />
+	Vue.js有多种数据绑定的语法，最基础的形式是文本插值，使用一对大括号语法，在运行时<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">{{ message }}</code>会被数据对象的message属性替换，所以页面上会输出&quot;Hello World!&quot;。</p>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Vue.js已经更新到2.0版本了，但由于还不是正式版，<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">本文的代码都是1.0.25版本的。</span></p>
+<h3 style="margin: 5px 0px 5px 5px; padding: 10px 20px; font-size: 1.3em; font-weight: normal; line-height: 1.5; color: rgb(30, 144, 255); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	双向绑定示例</h3>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	MVVM模式本身是实现了双向绑定的，在Vue.js中可以使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-model</code>指令在表单元素上创建双向数据绑定。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--这是我们的View--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>{{ message }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;message&quot;</span>/&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	将message绑定到文本框，当更改文本框的值时，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;p&gt;{{ message }}&lt;/p&gt;</code>&nbsp;中的内容也会被更新。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065309718-2118753556.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="1" height="212" src="/uploads/allimg/180222/10120962E-1.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 700px; display: inline;" title="1" width="449" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	反过来，如果改变message的值，文本框的值也会被更新，我们可以在Chrome控制台进行尝试。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065312015-708112076.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="2" height="596" src="/uploads/allimg/180222/10120a304-2.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 700px; display: inline;" title="2" width="678" /></a></p>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Vue实例的data属性指向exampleData，它是一个引用类型，改变了exampleData对象的属性，同时也会影响Vue实例的data属性。</p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	Vue.js的常用指令</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	上面用到的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-model</code>是Vue.js常用的一个指令，那么指令是什么呢？</p>
+<div class="bs-callout bs-callout-info" style="margin: 10px 0px 10px 50px; padding: 20px; border-width: 1px 1px 1px 5px; border-style: solid; border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(27, 128, 158); border-image: initial; border-radius: 3px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">Vue.js的指令是以v-开头的，它们作用于HTML元素，指令提供了一些特殊的特性，将指令绑定在元素上时，指令会为绑定的目标元素添加一些特殊的行为，我们可以将指令看作特殊的HTML特性（attribute）。</strong></div>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Vue.js提供了一些常用的内置指令，接下来我们将介绍以下几个内置指令：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		v-if指令</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		v-show指令</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		v-else指令</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		v-for指令</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		v-bind指令</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		v-on指令</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Vue.js具有良好的扩展性，我们也可以开发一些自定义的指令，后面的文章会介绍自定义指令。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-if指令</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-if</code>是条件渲染指令，它根据表达式的真假来删除和插入元素，它的基本语法如下：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+v-if=&quot;<em style="margin: 0px; padding: 0px;">expression</em>&quot;</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	expression是一个返回bool值的表达式，表达式可以是一个bool属性，也可以是一个返回bool的运算式。例如：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>Hello, Vue.js!<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-if</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;yes&quot;</span>&gt;</span>Yes!<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-if</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;no&quot;</span>&gt;</span>No!<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-if</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;age &gt;= 25&quot;</span>&gt;</span>Age: {{ age }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-if</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;name.indexOf(&#39;jack&#39;) &gt;= 0&quot;</span>&gt;</span>Name: {{ name }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: {
+                yes: <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span>,
+                no: <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>,
+                age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">28</span>,
+                name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;keepfool&#39;</span>
+            }
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">注意：</strong>yes, no, age, name这4个变量都来源于Vue实例选项对象的data属性。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065313781-1005102718.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="313" src="/uploads/allimg/180222/1012092191-3.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="384" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这段代码使用了4个表达式：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		数据的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">yes</code>属性为true，所以<span style="margin: 0px; padding: 0px; color: rgb(255, 255, 255); background-color: rgb(79, 129, 189);">&quot;Yes!&quot;</span>会被输出；</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		数据的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">no</code>属性为false，所以<span style="margin: 0px; padding: 0px; color: rgb(255, 255, 255); background-color: rgb(79, 129, 189);">&quot;No!&quot;</span>不会被输出；</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		运算式<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">age &gt;= 25</code>返回true，所以<span style="margin: 0px; padding: 0px; color: rgb(255, 255, 255); background-color: rgb(79, 129, 189);">&quot;Age: 28&quot;</span>会被输出；</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		运算式<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">name.indexOf(&#39;jack&#39;) &gt;= 0</code>返回false，所以<span style="margin: 0px; padding: 0px; color: rgb(255, 255, 255); background-color: rgb(79, 129, 189);">&quot;Name: keepfool&quot;</span>不会被输出。</li>
+</ul>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">注意：</strong>v-if指令是根据条件表达式的值来执行<strong style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">元素的插入或者删除行为。</span></strong></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这一点可以从渲染的HTML源代码看出来，面上只渲染了3个&lt;h1&gt;元素，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-if</code>值为false的&lt;h1&gt;元素没有渲染到HTML。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065315515-1776406933.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="269" src="/uploads/allimg/180222/1012093395-4.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="525" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为了再次验证这一点，可以在Chrome控制台更改age属性，使得表达式<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">age &gt;= 25</code>的值为false，可以看到<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;h1&gt;Age: 28&lt;/h1&gt;</code>元素被删除了。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065317577-1183006666.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="3" height="734" src="/uploads/allimg/180222/1012096217-5.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 700px; display: inline;" title="3" width="634" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	age是定义在选项对象的data属性中的，为什么Vue实例可以直接访问它呢？<br style="margin: 0px; padding: 0px;" />
+	这是因为<strong style="margin: 0px; padding: 0px;">每个Vue实例都会代理其选项对象里的data属性。</strong></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-show指令</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-show</code>也是条件渲染指令，和v-if指令不同的是，使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-show</code>指令的元素始终会被渲染到HTML，它只是简单地为元素设置CSS的style属性。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>Hello, Vue.js!<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-show</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;yes&quot;</span>&gt;</span>Yes!<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-show</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;no&quot;</span>&gt;</span>No!<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-show</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;age &gt;= 25&quot;</span>&gt;</span>Age: {{ age }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-show</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;name.indexOf(&#39;jack&#39;) &gt;= 0&quot;</span>&gt;</span>Name: {{ name }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: {
+                yes: <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span>,
+                no: <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>,
+                age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">28</span>,
+                name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;keepfool&#39;</span>
+            }
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065320577-322007545.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="314" src="/uploads/allimg/180222/10120a957-6.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="500" /></a></h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在Chrome控制台更改age属性，使得表达式<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">age &gt;= 25</code>的值为false，可以看到<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">&lt;h1&gt;Age: 24&lt;/h1&gt;</code>元素被设置了style=&quot;display:none&quot;样式。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065322656-1570128969.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="4" height="734" src="/uploads/allimg/180222/1012091948-7.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 700px; display: inline;" title="4" width="634" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-else指令</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	可以用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-else</code>指令为<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-if</code>或<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-show</code>添加一个&ldquo;else块&rdquo;。<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-else</code>元素必须立即跟在<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-if</code>或<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-show</code>元素的后面&mdash;&mdash;否则它不能被识别。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-if</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;age &gt;= 25&quot;</span>&gt;</span>Age: {{ age }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-else</span>&gt;</span>Name: {{ name }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>---------------------分割线---------------------<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-show</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;name.indexOf(&#39;keep&#39;) &gt;= 0&quot;</span>&gt;</span>Name: {{ name }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-else</span>&gt;</span>Sex: {{ sex }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: {
+                age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">28</span>,
+                name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;keepfool&#39;</span>,
+                sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+            }
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-else</code>元素是否渲染在HTML中，取决于前面使用的是<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-if</code>还是<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-show</code>指令。<br style="margin: 0px; padding: 0px;" />
+	这段代码中<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-if</code>为true，后面的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-else</code>不会渲染到HTML；<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-show</code>为tue，但是后面的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-else</code>仍然渲染到HTML了。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065325609-935780863.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="686" src="/uploads/allimg/180222/1012094128-8.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="667" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-for指令</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-for</code>指令基于一个数组渲染一个列表，它和JavaScript的遍历语法相似：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+v-for=&quot;item in items&quot;</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	items是一个数组，item是当前被遍历的数组元素。</p>
+<div class="code-toolbar" style="margin: 0px 40.75px; padding: 6px; color: rgb(255, 255, 255); font-size: 16px; background: rgb(54, 66, 74); border-radius: 2px 2px 0px 0px; height: 40px; box-sizing: border-box; position: relative; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	<a class="toggle-code-link" style="margin: 0px; padding: 0px; outline: none; cursor: pointer;"><img alt="" src="/uploads/allimg/180222/101209BF-9.png" style="margin: 0px; padding: 0px; border: none !important; position: absolute; left: 0px; top: 8px; width: 24px; height: 24px; max-width: 700px;" /><span style="margin: 0px 0px 0px 20px; padding: 0px; box-sizing: border-box; display: inline-block; line-height: 28px;">隐藏代码</span></a></div>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">link</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">rel</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;stylesheet&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">href</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;styles/demo.css&quot;</span> /&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+                        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>Name<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+                        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>Age<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+                        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>Sex<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;person in people&quot;</span>&gt;</span>
+                        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>{{ person.name  }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+                        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>{{ person.age  }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+                        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>{{ person.sex  }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: {
+                people: [{
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Jack&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">30</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+                }, {
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Bill&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">26</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+                }, {
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Tracy&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">22</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Female&#39;</span>
+                }, {
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Chris&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">36</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+                }]
+            }
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我们在选项对象的data属性中定义了一个people数组，然后在#app元素内使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-for</code>遍历people数组，输出每个person对象的姓名、年龄和性别。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065327202-406012811.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="294" src="/uploads/allimg/180222/1012096336-10.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="469" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/01.GettingStarted/v-for.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-bind指令</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-bind</code>指令可以在其名称后面带一个参数，中间放一个冒号隔开，这个参数通常是HTML元素的特性（attribute），例如：<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-bind:class</code></p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+v-bind:<em style="margin: 0px; padding: 0px;">argument</em>=&quot;<em style="margin: 0px; padding: 0px;">expression</em>&quot;</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	下面这段代码构建了一个简单的分页条，v-bind指令作用于元素的class特性上。<br style="margin: 0px; padding: 0px;" />
+	这个指令包含一个表达式，表达式的含义是：高亮当前页。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">link</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">rel</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;stylesheet&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">href</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;styles/demo.css&quot;</span> /&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;pagination&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;n in pageCount&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">href</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;javascripit:void(0)&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-bind:class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;activeNumber === n + 1 ? &#39;active&#39; : &#39;&#39;&quot;</span>&gt;</span>{{ n + 1 }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">li</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">ul</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: {
+                activeNumber: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>,
+                pageCount: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">10</span>
+            }
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	注意<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-for=&quot;n in pageCount&quot;</code>这行代码，pageCount是一个整数，遍历时n从0开始，然后遍历到pageCount &ndash;1结束。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065328499-156638431.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="105" src="/uploads/allimg/180222/10120a3V-11.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="500" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/01.GettingStarted/v-bind.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-on指令</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-on</code>指令用于给监听DOM事件，它的用语法和v-bind是类似的，例如监听&lt;a&gt;元素的点击事件：</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-on:click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;doSomething&quot;</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	有两种形式调用方法：<strong style="margin: 0px; padding: 0px;">绑定一个方法（让事件指向方法的引用），或者使用内联语句。</strong><br style="margin: 0px; padding: 0px;" />
+	Greet按钮将它的单击事件直接绑定到greet()方法，而Hi按钮则是调用say()方法。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;message&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+                <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--click事件直接绑定一个方法--&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-on:click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;greet&quot;</span>&gt;</span>Greet<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+                <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--click事件使用内联语句--&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-on:click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;say(&#39;Hi&#39;)&quot;</span>&gt;</span>Hi<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">p</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: {
+                message: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Hello, Vue.js!&#39;</span>
+            },
+            <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 在 `methods` 对象中定义方法</span>
+            methods: {
+                greet: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+                    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// // 方法内 `this` 指向 vm</span>
+                    alert(<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.message)
+                },
+                say: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(msg)</span> {</span>
+                    alert(msg)
+                }
+            }
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065330109-1825840680.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="5" height="483" src="/uploads/allimg/180222/10120943c-12.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 700px; display: inline;" title="5" width="457" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	v-bind和v-on的缩写</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Vue.js为最常用的两个指令<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-bind</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">v-on</code>提供了缩写方式。<strong style="margin: 0px; padding: 0px;">v-bind指令可以缩写为一个冒号，v-on指令可以缩写为@符号。</strong></p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--完整语法--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">href</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;javascripit:void(0)&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-bind:class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;activeNumber === n + 1 ? &#39;active&#39; : &#39;&#39;&quot;</span>&gt;</span>{{ n + 1 }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--缩写语法--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">href</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;javascripit:void(0)&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;activeNumber=== n + 1 ? &#39;active&#39; : &#39;&#39;&quot;</span>&gt;</span>{{ n + 1 }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span>
+
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--完整语法--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-on:click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;greet&quot;</span>&gt;</span>Greet<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span>
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--缩写语法--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;greet&quot;</span>&gt;</span>Greet<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span></pre>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	综合示例</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	现在我们已经介绍了一些Vue.js的基础知识了，结合以上知识我们可以来做个小Demo。</p>
+<pre class="xml hljs " style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-doctype" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">meta</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">charset</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;UTF-8&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">title</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">link</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">rel</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;stylesheet&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">href</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;styles/demo.css&quot;</span> /&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">head</span>&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">fieldset</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">legend</span>&gt;</span>
+                    Create New Person
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">legend</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>Name:<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;newPerson.name&quot;</span>/&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>Age:<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;newPerson.age&quot;</span>/&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>Sex:<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">select</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;newPerson.sex&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">option</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">value</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;Male&quot;</span>&gt;</span>Male<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">option</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">option</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">value</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;Female&quot;</span>&gt;</span>Female<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">option</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">select</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;createPerson&quot;</span>&gt;</span>Create<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">fieldset</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>Name<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>Age<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>Sex<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>Delete<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;person in people&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>{{ person.name }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>{{ person.age }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>{{ person.sex }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&#39;text-center&#39;&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;deletePerson($index)&quot;</span>&gt;</span>Delete<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">body</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+            el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+            data: {
+                newPerson: {
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+                },
+                people: [{
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Jack&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">30</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+                }, {
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Bill&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">26</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+                }, {
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Tracy&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">22</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Female&#39;</span>
+                }, {
+                    name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Chris&#39;</span>,
+                    age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">36</span>,
+                    sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>
+                }]
+            },
+            methods:{
+                createPerson: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span>{</span>
+                    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.people.push(<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.newPerson);
+                    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 添加完newPerson对象后，重置newPerson对象</span>
+                    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.newPerson = {name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&#39;</span>, age: <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>, sex: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Male&#39;</span>}
+                },
+                deletePerson: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(index)</span>{</span>
+                    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 删一个数组元素</span>
+                    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.people.splice(index,<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>);
+                }
+            }
+        })
+    </span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">html</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160627065332359-1941638431.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="6" height="557" src="/uploads/allimg/180222/10120954H-13.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 700px; display: inline;" title="6" width="643" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在我的GitHub Pages查看该Demo：</p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/vue-tutorials/01.GettingStarted/simple-demo.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	总结</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文简单介绍了Vue.js的MVVM模型和它的双向绑定机制，然后以一个Hello World示例开始了我们的Vue.js之旅，接着我们了解了几个比较常用的指令，最后根据这些知识我们构建了一个简单的示例。</p>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：没有了 </li>
+                <li>下一篇：<a href='/a/PSzuopin/vue/24.html'>Vue.js——vue-router 60分钟快速入门</a> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

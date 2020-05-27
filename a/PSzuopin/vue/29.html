@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="Vue,Vue.js,ajax,数据的跨域增删查改">
+  <meta name="Description" content="概述 之前我们学习了Vue.js的一些基础知识，以及如何开发一个组件，然而那些示例的数据都是local的。 在实际的应用中，几乎90%的数据是来源于服务端的，前端和服务端之间的数据交互">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>Vue.js——基于$.ajax实现数据的跨域增删查改_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/PSzuopin/vue/32.html">Vue.js——60分钟组</a></li>
+<li><span>2</span><a href="/a/PSzuopin/2.html">纸杯设计</a></li>
+<li><span>3</span><a href="/a/PSzuopin/javascript/45.html">学习Javascript闭包（</a></li>
+<li><span>4</span><a href="/a/PSzuopin/vue/27.html">Vue.js——使用$.a</a></li>
+<li><span>5</span><a href="/a/PSzuopin/vue/28.html">Vue.js——vue-resou</a></li>
+<li><span>6</span><a href="/a/PSzuopin/vue/30.html">Vue.js——60分钟组</a></li>
+<li><span>7</span><a href="/a/PSzuopin/vue/26.html">Vue.js——60分钟b</a></li>
+<li><span>8</span><a href="/a/PSzuopin/vue/24.html">Vue.js——vue-route</a></li>
+<li><span>9</span><a href="/a/PSzuopin/jquery/35.html">细说jquery ui和jqg</a></li>
+<li><span>10</span><a href="/a/PSzuopin/vue/29.html">Vue.js——基于$.a</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>Vue.js——基于$.ajax实现数据的跨域增删查改</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 11:09</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=29&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/PSzuopin/'>JavaScript</a> > <a href='/a/PSzuopin/vue/'>vue</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'Vue.js——基于$.ajax实现数据的跨域增删查改',
+	litpic:'/uploads/allimg/180222/1-1P2221110450-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'Vue.js——基于$.ajax实现数据的跨域增删查改',
+	litpic:'/uploads/allimg/180222/1-1P2221110450-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	概述</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	之前我们学习了Vue.js的一些基础知识，以及如何开发一个组件，然而那些示例的数据都是local的。<br style="margin: 0px; padding: 0px;" />
+	在实际的应用中，几乎90%的数据是来源于服务端的，前端和服务端之间的数据交互一般是通过ajax请求来完成的。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	说起ajax请求，大家第一时间会想到jQuery。除了拥有强大的DOM处理能力，jQuery提供了较丰富的ajax处理方法，它不仅支持基于XMLHttpRequest的ajax请求，也能处理跨域的JSONP请求。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	之前有读者问我，Vue.js能结合其他库一起用吗？答案当然是肯定的，Vue.js和jQuery一起使用基本没有冲突，尽可放心大胆地使用。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文的主要内容如下：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		同源策略和跨域概念</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		跨域资源共享</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		JSONP概念</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		REST Web Services</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		基于$.ajax实现跨域GET请求</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		基于$.ajax实现JSONP请求</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		基于$.ajax实现跨域POST请求</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		基于$.ajax实现跨域PUT请求</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		基于$.ajax实现跨域DELETE请求</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文的服务端程序和客户端程序是部署在不同服务器上的，本文所有示例请求都是跨域的。<br style="margin: 0px; padding: 0px;" />
+	源代码已放到GitHub，如果您觉得本篇内容不错，请点个赞，或在GitHub上加个星星！</p>
+<div class="demo" style="margin: 0px 0px 20px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-get.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">CORS GET</a>&nbsp;<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-jsonp.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">JSONP GET</a>&nbsp;<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-post.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">CORS POST</a>&nbsp;<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-put.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">CORS PUT</a>&nbsp;<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-delete.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">完整CURD示例</a>&nbsp;<a class="btn-demo" href="https://github.com/keepfool/vue-tutorials" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">GitHub Source</a></div>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	基础概念</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在进入本文正题之前，我们需要先了解一些基础概念（如果你已经对这些基础有所了解，可跳过此段落）。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	同源策略和跨域概念</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">同源策略（Same-orgin policy）</strong>限制了一个源（orgin）中加载脚本或脚本与来自其他源（orgin）中资源的交互方式。<br style="margin: 0px; padding: 0px;" />
+	<font color="#ff0000" style="margin: 0px; padding: 0px;">如果两个页面拥有相同的协议（protocol），端口（port）和主机（host），那么这两个页面就属于同一个源（orgin）。</font></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	同源之外的请求都可以称之为跨域请求。<br style="margin: 0px; padding: 0px;" />
+	下表给出了相对<a href="http://store.company.com/dir/page.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;">http://store.company.com/dir/page.html</a>同源检测的示例：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<table class="post-table" style="margin: 10px 10px 10px 50px; padding: 0px; border-collapse: collapse; border-spacing: 0px; border-radius: 0px; border-style: solid; border-color: silver; word-break: break-word; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<tbody style="margin: 0px; padding: 0px;">
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<th style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; background: rgb(241, 241, 241); font-size: 15px; border-collapse: collapse;">
+				URL</th>
+			<th style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; background: rgb(241, 241, 241); font-size: 15px; border-collapse: collapse;">
+				结果</th>
+			<th style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; background: rgb(241, 241, 241); font-size: 15px; border-collapse: collapse;">
+				原因</th>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				<a href="http://store.company.com/dir2/other.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://store.company.com/dir2/other.html ">http://store.company.com/dir2/other.html</a></td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				成功</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				&nbsp;</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				<a href="http://store.company.com/dir/inner/another.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://store.company.com/dir/inner/another.html">http://store.company.com/dir/inner/another.html</a></td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				成功</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				&nbsp;</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				<a href="https://store.company.com/secure.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="https://store.company.com/secure.html">https://store.company.com/secure.html</a></td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				失败</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				协议不同</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				<a href="http://store.company.com:81/dir/etc.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://store.company.com:81/dir/etc.html">http://store.company.com:81/dir/etc.html</a></td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				失败</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				端口不同</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				<a href="http://news.company.com/dir/other.html" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://news.company.com/dir/other.html">http://news.company.com/dir/other.html</a></td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				失败</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				主机名不同</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;"><font color="#ff0000" style="margin: 0px; padding: 0px;">我们可以简单粗暴地理解为同一站点下的资源相互访问都是同源的，跨站点的资源访问都是跨域的。</font></strong></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	跨域资源共享</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">跨域资源共享（CORS）</strong>是一份浏览器技术的规范，提供了Web服务器从不同网域传来沙盒脚本的方法，以避开浏览器的同源策略，是JSONP模式的现代版。与JSONP不同，CORS除了支持GET方法以外，还支持其他HTTP方法。用CORS可以让网页设计师用一般的XMLHTTPRequest，这种方式的错误处理比JSONP要来的好。另一方面，JSONP可以在不支持CORS的老旧浏览器上运作，现代的浏览器都支持CORS。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在网页<a href="http://caniuse.com/#feat=cors" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;">http://caniuse.com/#feat=cors</a>上列出了主流浏览器对CORS的支持情况，包含PC端和移动端的浏览器。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063336046-1167128707.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="441" src="/uploads/allimg/180222/11113T0C-0.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="750" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	JSONP概念</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	由于同源策略，一般来说不允许JavaScript跨域访问其他服务器的页面对象，但是HTML的&lt;script&gt;元素是一个例外。利用 &lt;script&gt; 元素的这个开放策略，网页可以得到从其他来源动态产生的 JSON资料，而这种使用模式就是所谓的 JSONP。<strong style="margin: 0px; padding: 0px;">用 JSONP 抓到的资料并不是 JSON，而是任意的JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。</strong></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	REST Web Services简介</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	HTTP协议是Web的标准之一，HTTP协议包含一些标准的操作方法，例如：<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">GET, POST, PUT, Delete</code>等，用这些方法能够实现对Web资源的CURD操作，下表列出了这些方法的操作定义。</p>
+<table class="post-table" style="margin: 10px 10px 10px 50px; padding: 0px; border-collapse: collapse; border-spacing: 0px; border-radius: 0px; border-style: solid; border-color: silver; word-break: break-word; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<tbody style="margin: 0px; padding: 0px;">
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<th style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; background: rgb(241, 241, 241); font-size: 15px; border-collapse: collapse;">
+				HTTP方法</th>
+			<th style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; background: rgb(241, 241, 241); font-size: 15px; border-collapse: collapse;">
+				资源处理</th>
+			<th style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; background: rgb(241, 241, 241); font-size: 15px; border-collapse: collapse;">
+				说明</th>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				GET</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				读取资源（Read）</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				<strong style="margin: 0px; padding: 0px;">获取</strong>被请求URI（Request-URI）指定的信息（以实体的格式）。</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				POST</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				创建资源（Create）</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				在服务器上<strong style="margin: 0px; padding: 0px;">创建</strong>一个新的资源，并返回新资源的URI。</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				PUT</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				更新资源（Update）</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				指定URI资源存在则<strong style="margin: 0px; padding: 0px;">更新</strong>资源，指定URI资源不存在则<strong style="margin: 0px; padding: 0px;">创建</strong>一个新资源。</td>
+		</tr>
+		<tr style="margin: 0px; padding: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0);">
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				DELETE</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				删除资源（Delete）</td>
+			<td style="margin: 0px; padding: 3px; border-style: solid; border-color: silver; color: rgb(51, 51, 51); border-collapse: collapse;">
+				<strong style="margin: 0px; padding: 0px;">删除</strong>请求URI指定的资源。</td>
+		</tr>
+	</tbody>
+</table>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在REST应用中，默认通过HTTP协议，并且使用GET、POST、PUT和DELETE方法对资源进行操作，这样的设计风格和Web标准完全契合。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	REST的最佳应用场景是公开服务，使用HTTP并遵循REST原则的Web服务，我们称之为RESTful Web Service。RESTful Web Service从以下三个方面进行资源定义：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		直观简短的资源地址：URI，比如：http://example.com/resources/</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		传输的资源：Web Service接受与返回的互联网媒体类型，比如JSON，XML等</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		对资源的操作：Web Service在该资源上所支持的一系列请求方法（比如：GET，POST，PUT或Delete）</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	下图展示了RESTful Web Service的执行流程</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063338202-2124262622.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image (1)" border="0" height="507" src="/uploads/allimg/180222/11113UO2-1.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image (1)" width="928" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文的服务端程序是基于ASP.NET Web API构建的。<br style="margin: 0px; padding: 0px;" />
+	在了解了这些基础知识后，我们就分别来构建服务端程序和客户端程序吧。</p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	服务端环境准备</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如果您是前端开发人员，并且未接触过ASP.NET Web API，可以跳过此段落。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	新建Web API应用程序</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063340171-1144295924.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="568" src="/uploads/allimg/180222/11113W0V-2.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="786" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063341483-103277154.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="568" src="/uploads/allimg/180222/11113R3F-3.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="756" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063342655-501369181.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="313" src="/uploads/allimg/180222/11113Q228-4.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="706" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063344608-1007526608.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="471" src="/uploads/allimg/180222/11113W037-5.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="499" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	添加Model, Controller</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063345827-1806160700.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="470" src="/uploads/allimg/180222/11113QW0-6.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="501" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063346983-321771304.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="607" src="/uploads/allimg/180222/11113S102-7.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="786" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063348124-286822031.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="238" src="/uploads/allimg/180222/11113S1Y-8.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="586" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063349077-1261208860.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="238" src="/uploads/allimg/180222/11113UJ8-9.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="586" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063350374-505572545.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="446" src="/uploads/allimg/180222/11113T208-10.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="500" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	初始化数据库</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063351874-129248163.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="565" src="/uploads/allimg/180222/11113Q407-11.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="737" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	分别执行以下3个命令：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063353030-1489493401.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="431" src="/uploads/allimg/180222/11113RM9-12.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="600" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	打开VS的Server Explorer，选择刚创建好的数据库，右键New Query，执行以下sql语句：</p>
+<div class="code-toolbar" style="margin: 0px 40.75px; padding: 6px; color: rgb(255, 255, 255); font-size: 16px; background: rgb(54, 66, 74); border-radius: 2px 2px 0px 0px; height: 40px; box-sizing: border-box; position: relative; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;" width="100%">
+	<a class="toggle-code-link" style="margin: 0px; padding: 0px; outline: none; cursor: pointer;"><img src="/uploads/allimg/180222/11113VC5-13.png" style="margin: 0px; padding: 0px; border: none !important; position: absolute; left: 0px; top: 8px; width: 24px; height: 24px; max-width: 100%;" /><span style="margin: 0px 0px 0px 20px; padding: 0px; box-sizing: border-box; display: inline-block; line-height: 28px;">显示代码</span></a></div>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063354171-437177896.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="487" src="/uploads/allimg/180222/11113R526-14.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="672" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	让Web API以CamelCase输出JSON</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	C#偏向于PascalCase的命名规范，而JavaScript则偏向于camelCase的命名规范，为了让JavaScript接收到的JSON数据是camelCase的，在Global.asax文件中添加以下几行代码：</p>
+<pre class="cs hljs " id="dcaad2809705400092dc30790c4e01fc" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> formatters = GlobalConfiguration.Configuration.Formatters;
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> jsonFormatter = formatters.JsonFormatter;
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> settings = jsonFormatter.SerializerSettings;
+settings.Formatting = Formatting.Indented;
+settings.ContractResolver = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> CamelCasePropertyNamesContractResolver();</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063355311-1795216393.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="370" src="/uploads/allimg/180222/11113S105-15.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="671" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063356405-1864522356.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="507" src="/uploads/allimg/180222/11113S919-16.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="650" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	可以在以下地址访问构建好的Web API：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://211.149.193.19:8080/Help" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://211.149.193.19:8080/Help">http://211.149.193.19:8080/Help</a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	访问Customers数据：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://211.149.193.19:8080/api/Customers" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://211.149.193.19:8080/api/Customers">http://211.149.193.19:8080/api/Customers</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	创建组件和AjaxHelper</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文的示例仍然是表格组件的CURD，只不过这次咱们的数据是从服务端获取的。<br style="margin: 0px; padding: 0px;" />
+	在实现数据的CURD之前，我们先准备好一些组件和Ajax帮助方法。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	创建和注册simple-grid组件</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	simple-grid组件用于绑定和显示数据</p>
+<pre class="xml hljs " id="ac383de9eb8842949cd648620b721ea5" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;grid-template&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;col in columns&quot;</span>&gt;</span>
+                    {{ col | capitalize}}
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;(index,entry) in dataList&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;col in columns&quot;</span>&gt;</span>
+                    {{entry[col]}}
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">src</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;js/vue.js&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+    Vue.component(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;simple-grid&#39;</span>, {
+        template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#grid-template&#39;</span>,
+        props: [<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;dataList&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;columns&#39;</span>]
+    })
+</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+</pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	创建和注册modal-dialog组件</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	数据的新建和编辑将使用模态对话框，modal-dialog组件的作用就在于此。</p>
+<pre class="xml hljs " id="7e0dd641a68b41f9b97f2f07efd00e7c" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-template&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialogs&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-bind:class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;{ &#39;dialog-active&#39;: show }&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-content&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;close rotate&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;iconfont icon-close&quot;</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;close&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">slot</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">name</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;header&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">slot</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">slot</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">name</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;body&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">slot</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">slot</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">name</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;footer&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">slot</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-overlay&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span><span class="javascript" style="margin: 0px; padding: 0px;">
+    Vue.component(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;modal-dialog&#39;</span>, {
+        template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#dialog-template&#39;</span>,
+        props: [<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;show&#39;</span>],
+        methods: {
+            close: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+                <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.show = <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>
+            }
+        }
+    })
+</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">script</span>&gt;</span>
+</pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	AjaxHelper</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	基于$.ajax声明一个简单的AjaxHelper构造器，AjaxHelper构造器的原型对象包含5个方法，分别用于处理<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">GET, POST, PUT, DELETE和JSONP</code>请求。</p>
+<pre class="javascript hljs " id="a14f91a216bd44569859a0f53803444d" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> <span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">AjaxHelper</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.ajax = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(url, type, dataType, data, callback)</span> {</span>
+        $.ajax({
+            url: url,
+            type: type,
+            dataType: dataType,
+            data: data,
+            success: callback,
+            error: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(xhr, errorType, error)</span> {</span>
+                alert(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Ajax request error, errorType: &#39;</span> + errorType +  <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;, error: &#39;</span> + error)
+            }
+        })
+    }
+}
+AjaxHelper.prototype.get = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(url, data, callback)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.ajax(url, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;GET&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;json&#39;</span>, data, callback)
+}
+AjaxHelper.prototype.post = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(url, data, callback)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.ajax(url, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;POST&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;json&#39;</span>, data, callback)
+}
+
+AjaxHelper.prototype.put = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(url, data, callback)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.ajax(url, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;PUT&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;json&#39;</span>, data, callback)
+}
+
+AjaxHelper.prototype.delete = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(url, data, callback)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.ajax(url, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;DELETE&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;json&#39;</span>, data, callback)
+}
+
+AjaxHelper.prototype.jsonp = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(url, data, callback)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.ajax(url, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;GET&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;jsonp&#39;</span>, data, callback)
+}
+
+AjaxHelper.prototype.constructor = AjaxHelper</pre>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现GET请求</h1>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	发送get请求</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<pre class="javascript hljs " id="bdc2284f2d184195bfa80ef5fa41c7ee" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> ajaxHelper = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> AjaxHelper()
+
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> demo = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+    el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+    data: {
+        gridColumns: [<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;customerId&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;companyName&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;contactName&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;phone&#39;</span>],
+        gridData: [],
+        apiUrl: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;http://localhost:15341/api/Customers&#39;</span>
+    },
+    ready: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.getCustomers()
+    },
+    methods: {
+
+        getCustomers: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+            <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 定义vm变量，让它指向this,this是当前的Vue实例</span>
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>,
+                callback = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(data)</span> {</span>
+                    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 由于函数的作用域，这里不能用this</span>
+                    vm.$set(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;gridData&#39;</span>, data)
+                }
+            ajaxHelper.get(vm.apiUrl, <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">null</span>, callback)
+        }
+    }
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	由于客户端和服务端Web API是分属于不同站点的，它们是不同的源，这构成了跨域请求。<br style="margin: 0px; padding: 0px;" />
+	这时请求是失败的，浏览器会提示一个错误：<br style="margin: 0px; padding: 0px;" />
+	<font color="#ff0000" style="margin: 0px; padding: 0px;">No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource. Origin &#39;</font><a href="http://127.0.0.1::8020'/" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><font color="#ff0000" style="margin: 0px; padding: 0px;">http://127.0.0.1::8020&#39;</font></a><font color="#ff0000" style="margin: 0px; padding: 0px;">&nbsp;is therefore not allowed access.</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063357499-1932320741.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="659" src="/uploads/allimg/180222/11113S232-17.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="665" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	跨域解决方案</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	现在碰到了请求跨域的问题，结合前面讲的一些概念，我们大致可以猜到解决跨域请求的两种方式：</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		在服务端启用CORS。</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		让无服务端拥有处理JSONP的能力。</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这两种跨域解决方案的区别是什么呢？</p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		JSONP只支持GET请求；CORS则支持GET、POST、PUT、DELETE等标准的HTTP方法</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		使用JSONP时，服务端要处理客户端请求的callback参数（&quot;callback&quot;这个名称是可以指定的）；而使用CORS则不需要提供这样的处理。</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		JSONP从服务端获取到的是script文件；CORS则是一段XML或JSON或其他格式的数据</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		JSONP支持IE8, IE9复古的浏览器；CORS则支持现代主流的浏览器</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	选择JSONP还是CORS？除了极少数的情况，我们都应当选择CORS作为最佳的跨域解决方案。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	启用CORS</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在Nuget Package Manager Console下输入以下命令:</p>
+<pre class="cs hljs " id="09ec2c9a7a84403e8a6332264ecfd3cc" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+Install-Package Microsoft.AspNet.WebApi.Cors</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	首先，在WebApiConfig中启用CORS</p>
+<pre class="cs hljs " id="5f743b38dc1b4066bb30e00985b69192" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">public</span> <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">static</span> <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">class</span> WebApiConfig
+{
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">public</span> <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">static</span> <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">void</span> <span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(25, 70, 157);">Register</span>(HttpConfiguration config)
+    {
+       	<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// ...</span>
+        config.EnableCors();
+    }
+}
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	然后在CustomersController上添加EnableCors特性，origins、headers和methods都设为*</p>
+<pre class="cs hljs " id="1b8c98826d9642a69b2ac690fffb7efd" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+[EnableCors(origins: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;*&quot;</span>, headers: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;*&quot;</span>, methods: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;*&quot;</span>)]
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">public</span> <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">class</span> CustomersController : ApiController
+{
+ 
+}
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Web API的CORS配置说明及原理，下面这个地址已经讲得很清楚了：<br style="margin: 0px; padding: 0px;" />
+	<a href="http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api">http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api</a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	刷新页面，现在数据可以正常显示了。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063358546-499654757.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="345" src="/uploads/allimg/180222/11113V963-18.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="683" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-get.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<font color="#ff0000" style="margin: 0px; padding: 0px;">在Chrome开发工具的Network选项下，可以看到Response Header的Content-Type是application/json。</font></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063359546-1683855889.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="283" src="/uploads/allimg/180222/11113R161-19.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="646" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	文章开头也说了，CORS的跨域方式支持现代的主流浏览器，但是不支持IE9及以下这些古典的浏览器。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063403717-174884779.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="625" src="/uploads/allimg/180222/11113S401-20.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="683" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如果我们偏要在IE9浏览器中（Vue.js不支持IE8及以下的浏览器，所以不考虑IE 6,7,8）实现跨域访问，该怎么做呢？<br style="margin: 0px; padding: 0px;" />
+	答案是使用JSONP请求。</p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现JSONP请求</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	将getCustomers方法的get请求变更为jsonp请求：</p>
+<pre class="javascript hljs " id="9141a1b1634c421e96e87c94712b7a21" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+getCustomers: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 定义vm变量，让它指向this,this是当前的Vue实例</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>,
+        callback = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(data)</span> {</span>
+            <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 由于函数的作用域，这里不能用this</span>
+            vm.$set(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;gridData&#39;</span>, data)
+        }
+    ajaxHelper.jsonp(vm.apiUrl, <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">null</span>, callback)
+}
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	刷新页面，请求虽然成功了，但画面没有显示数据，并且弹出了请求错误的消息。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063405327-1659043697.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="717" src="/uploads/allimg/180222/11113Q429-21.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="695" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	让WebAPI支持JSONP请求</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在Nuget Package Manager中输入以下命令：</p>
+<pre class="cs hljs " id="cd802ea6db8d4fc89b3d5d178b695d01" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+Install-Package WebApiContrib.Formatting.Jsonp</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	然后在Global.asax的Application_Start()方法中注册JsonpMediaTypeFormatter：</p>
+<pre class="cs hljs " id="adbbc87047ab4984a837c758b8c58e95" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 注册JsonpMediaTypeFormatter，让WebAPI能够处理JSONP请求</span>
+config.Formatters.Insert(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>, <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> JsonpMediaTypeFormatter(jsonFormatter));
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	刷新页面，使用JSONP请求也能够正常显示数据了。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063406671-683217428.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="713" src="/uploads/allimg/180222/11113V630-22.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="695" /></a></h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063408092-697177282.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="298" src="/uploads/allimg/180222/11113UI4-23.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="601" /></a></p>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">注意：</strong>使用JSONP时，服务端返回的不再是一段JSON了，而是一个script脚本。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在IE9下查看该页面，simple-grid组件也能正常显示数据：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063409171-1833562381.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="631" src="/uploads/allimg/180222/11113S2b-24.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="680" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-jsonp.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现POST请求</h1>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	1. 创建表单对话框</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	添加一个Create按钮，然后使用modal-dialog组件创建一个表单对话框：</p>
+<pre class="xml hljs " id="a11985a785c64733bdfe034f2165cd46" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--...已省略--&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;this.show = true&quot;</span>&gt;</span>Create<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">modal-dialog</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-bind:show.sync</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;show&quot;</span>&gt;</span>
+
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">header</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-header&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">slot</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;header&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-title&quot;</span>&gt;</span>Create New Customer<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">header</span>&gt;</span>
+
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-body&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">slot</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;body&quot;</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-show</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;item.customerId&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>Customer Id<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;item.customerId&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">disabled</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;disabled&quot;</span> /&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>Company Name<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;item.companyName&quot;</span> /&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>Contact Name<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;item.contactName&quot;</span> /&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>Phone<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">input</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">type</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;text&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-model</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;item.phone&quot;</span> /&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;createCustomer&quot;</span>&gt;</span>Save<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">modal-dialog</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span></pre>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">注意：</strong>在新建Customer时，由于item.customerId为空，所以item.customerId关联的表单不会显示；在修改Customer时，item.customerId关联的表单会显示出来。另外，item.customerId是不可编辑的。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	2. 修改Vue实例</h2>
+<pre class="javascript hljs " id="ca20b42358bf42e49ddb2d16c171ce06" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> demo = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+    el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+    data: {
+        show: <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>,
+        gridColumns: [{
+            name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;customerId&#39;</span>,
+            isKey: <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span>
+        }, {
+            name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;companyName&#39;</span>
+        }, {
+            name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;contactName&#39;</span>
+        }, {
+            name: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;phone&#39;</span>
+        }],
+        gridData: [],
+        apiUrl: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;http://localhost:15341/api/Customers&#39;</span>,
+        item: {}
+    },
+    ready: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.getCustomers()
+    },
+    methods: {
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// ... 已省略</span>
+        createCustomer: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>,
+                callback = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(data)</span> {</span>
+                    vm.$set(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;item&#39;</span>, {})
+                        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 添加成功后，重新加载页面数据</span>
+                    vm.getCustomers()
+                }
+                <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 将vm.item直接POST到服务端</span>
+            ajaxHelper.post(vm.apiUrl, vm.item, callback)
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.show = <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>
+        }
+    }
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">修改Vue实例的data选项：</strong></p>
+<ul style="margin: 10px 0px 10px 50px; padding: 2px 32px; border-left: 4px solid rgb(226, 227, 228); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: disc;">
+		添加<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">show</code>属性：用于显示或隐藏表单对话框</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: disc;">
+		修改<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">gridColumns</code>属性：列包含两个属性，name表示列名称，isKey表示列是否为主键列</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: disc;">
+		添加<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">item</code>属性：用于新增Customer或修改Customer</li>
+</ul>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">添加createCustomer方法：</strong></p>
+<pre class="javascript hljs " id="9304ceba35924d76aa2b806d8167f7b0" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+createCustomer: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>,
+        callback = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(data)</span> {</span>
+            vm.$set(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;item&#39;</span>, {})
+            <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 添加成功后，重新加载页面数据</span>
+            vm.getCustomers()
+        }
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 将vm.item直接POST到服务端</span>
+        ajaxHelper.post(vm.apiUrl, vm.item, callback)
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.show = <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>
+}</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063411280-438273948.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="24" height="532" src="/uploads/allimg/180222/11113Q041-25.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 100%; display: inline;" title="24" width="697" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-put.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现PUT请求</h1>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	1. 修改sample-grid的template</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	给主键列添加链接，绑定click事件，事件指向loadEntry方法，loadEntry方法用于加载当前选中的数据。</p>
+<pre class="xml hljs " id="fcac2db4dc454a13981ff298afbbe9b1" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;grid-template&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;col in columns&quot;</span>&gt;</span>
+                    {{ col.name | capitalize}}
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">th</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">thead</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;(index,entry) in dataList&quot;</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-for</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;col in columns&quot;</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-if</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;col.isKey&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">href</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;javascript:void(0)&quot;</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;loadEntry(entry[col.name])&quot;</span>&gt;</span>{{ entry[col.name] }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">a</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span>&gt;</span>
+                    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-else</span>&gt;</span>{{ entry[col.name] }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span>&gt;</span>
+                <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">td</span>&gt;</span>
+            <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tr</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">tbody</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">table</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">template</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	2. 修改simple-grid的methods选项</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在simple-grid的methods选项下，添加一个<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">loadEntry</code>方法，该方法调用$.dispatch向父组件派发事件<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">load-entry</code>，并将key作为事件的入参，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">load-entry</code>是绑定在父组件的事件名称。</p>
+<pre class="javascript hljs " id="c6a6d19c9d5d414baf35070abb29a94b" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+Vue.component(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;simple-grid&#39;</span>, {
+    template: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#grid-template&#39;</span>,
+    props: [<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;dataList&#39;</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;columns&#39;</span>],
+    methods: {
+        loadEntry: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(key)</span> {</span>
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.$dispatch(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;load-entry&#39;</span>, key)
+        }
+    }
+})
+</pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	3. 修改Vue实例的HTML</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在Vue实例的simple-grid标签上绑定自定义事件<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">load-entry</code>，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">load-entry</code>事件指向<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">loadCustomer</code>方法，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">loadCustomer</code>方法用于加载选中的Customer数据。</p>
+<pre class="xml hljs " id="61fb650cc2a0449499d830567f81d3a8" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--...已省略--&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">simple-grid</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:data-list</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;gridData&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:columns</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;gridColumns&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-on:load-entry</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;loadCustomer&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">simple-grid</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--...已省略--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我们应将2和3结合起来看，下图阐述了从点击simple-grid数据的链接开始，到最终打开对话框的完整过程：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063414936-203186305.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="465" src="/uploads/allimg/180222/11113U019-26.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 100%; background-image: none; display: inline;" title="image" width="693" /></a></p>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">注意：<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">load-entry</code></strong>是Vue实例的事件，而不是simple-grid组件的事件，尽管load-entry是写在simple-grid<simple-grid style="margin: 0px; padding: 0px;">标签上的。详情请参考上一篇文章的编译作用域</simple-grid></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	由于在新建模式和修改模式下标题内容是不同的，因此需要修改modal-dialog的<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">slot=&quot;header&quot;</code>部分。<br style="margin: 0px; padding: 0px;" />
+	根据<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">item.customerId</code>是否有值确定修改模式和新建模式，修改模式下显示&quot;Edit Customer - xxx&quot;，新建模式下显示&quot;Create New Customer&quot;</p>
+<pre class="xml hljs " id="8a93d98437df4a7fbd5cf7aabcd3fea5" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">modal-dialog</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-bind:show.sync</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;show&quot;</span>&gt;</span>
+
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">header</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-header&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">slot</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;header&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-title&quot;</span>&gt;</span>{{ item.customerId ? &#39;Edit Customer - &#39; + item.contactName : &#39;Create New Customer&#39; }}<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">h1</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">header</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">modal-dialog</span>&gt;</span></pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	4. 修改Vue实例</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为data选项添加<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">title</code>属性，用于显示对话框的标题。</p>
+<pre class="javascript hljs " id="68bea74a93e94449ac034fa81b32d338" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> demo = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> Vue({
+    el: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;#app&#39;</span>,
+    data: {
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// ...已省略</span>
+        title: <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;&#39;</span>
+        <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// ...已省略</span>
+    }
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// ...已省略</span>
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	然后追加3个方法：<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">loadCustomer</code>,&nbsp;<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">saveCustomer</code>和<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">updateCustomer</code>。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<pre class="javascript hljs " id="2b2a3958abcf4155ac84a4b02ae7ef9c" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+loadCustomer: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(customerId)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>
+    vm.gridData.forEach(<span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(item)</span> {</span>
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">if</span> (item.customerId === customerId) {
+            <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 使用$.set设置item</span>
+            vm.$set(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;item&#39;</span>, item)
+            <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span>
+        }
+    }),
+    vm.$set(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;show&#39;</span>, <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span>)
+},
+saveCustomer: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.item.customerId ? <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.updateCustomer() : <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.createCustomer()
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.show = <span class="hljs-literal" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">false</span>
+},
+updateCustomer: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">()</span> {</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 定义vm变量，让它指向this,this是当前的Vue实例</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">var</span> vm = <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>,
+        callback = <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(data)</span> {</span>
+            <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 更新成功后，重新加载页面数据</span>
+            vm.getCustomers()
+        }
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 将vm.item直接PUT到服务端</span>
+    ajaxHelper.put(vm.apiUrl + <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;/&#39;</span> + vm.item.customerId, vm.item, callback)
+}
+</pre>
+<br style="margin: 0px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;" />
+<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">saveCustomer</code><span style="color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">方法根据</span><code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">item.customerId</code><span style="color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">是否有值确定修改模式和新建模式，如果是新建模式则调用</span><code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">createCustomer</code><span style="color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">方法，如果是修改模式则调用</span><code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">updateCustomer</code><span style="color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">方法。</span>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	另外，需要将Save按钮的click事件绑定到saveCustomer方法。</p>
+<pre class="xml hljs " id="35cf4337f2474fcc841f6cac8b300e62" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;dialog-body&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">slot</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;body&quot;</span>&gt;</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--...已省略--&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">label</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span> @<span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">click</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;saveCustomer&quot;</span>&gt;</span>Save<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">button</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--...已省略--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063417905-2016008223.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="25" height="543" src="/uploads/allimg/180222/11113RN1-27.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 100%; display: inline;" title="25" width="697" /></a></p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	5. 添加$watch</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	使用$watch跟踪data选项show属性的变化，每当关闭对话框时就重置item。</p>
+<pre class="javascript hljs " id="44d35ef445cc46d28e880366e5b66162" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+demo.$watch(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;show&#39;</span>, <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(newVal, oldVal)</span>{</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">if</span>(!newVal){
+        <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.item = {}
+    }
+})
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为什么要这么做呢？因为每次打开对话框，不知道是以新建模式还是修改模式打开的，如果不重置item，倘若先以修改模式打开对话框，再以新建模式打开对话框，新建模式的对话框将会显示上次打开的数据。</p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-put.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现DELETE请求</h1>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	1. 修改simple-grid组件</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在methods选项中添加方法<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">deleteEntry</code>：</p>
+<pre class="javascript hljs " id="48f90e51ff1344559ae8a3be234074b1" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+deleteEntry: <span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(entry)</span> {</span>
+    <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">this</span>.$dispatch(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;delete-entry&#39;</span>, entry)
+}
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	调用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">$.dispatch</code>向父组件派发事件<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">delete-entry</code>。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	2. 修改Vue实例的HTML</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在simple-grid标签上绑定自定义事件<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">delete-entry</code>，该事件指向<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">deleteCustomer</code>方法。</p>
+<pre class="xml hljs " id="91a89f4e5a1a4582939bde7affd37bb8" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">id</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;app&quot;</span>&gt;</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--...已省略--&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">simple-grid</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:data-list</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;gridData&quot;</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">:columns</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;gridColumns&quot;</span> 
+            <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-on:load-entry</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;loadCustomer&quot;</span> 
+            <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">v-on:delete-entry</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;deleteCustomer&quot;</span>&gt;</span>
+        <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">simple-grid</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">&lt;!--...已省略--&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201607/341820-20160707063424921-625242796.gif" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="26" height="543" src="/uploads/allimg/180222/11113UN3-28.gif" style="margin: 0px; padding: 0px; border: 1px solid rgb(238, 238, 238) !important; max-width: 100%; display: inline;" title="26" width="697" /></a></p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/jquery-zepto/ajax-cors-delete.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	总结</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本篇介绍了同源策略、跨域、CORS和REST等概念，并结合Vue.js和$.ajax实现了一个简单的CURD跨域示例。<br style="margin: 0px; padding: 0px;" />
+	下一篇，我们将使用Vue的插件vue-resource来完成这些工作。</p>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：<a href='/a/PSzuopin/vue/28.html'>Vue.js——vue-resource全攻略</a> </li>
+                <li>下一篇：<a href='/a/PSzuopin/vue/30.html'>Vue.js——60分钟组件快速入门（下篇）</a> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

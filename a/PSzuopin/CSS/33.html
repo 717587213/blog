@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="CSS3,三角形运用">
+  <meta name="Description" content="概述 在早期的前端Web设计开发年代，完成一些页面元素时，我们必须要有专业的PS美工爸爸，由PS美工爸爸来切图，做一些圆角、阴影、锯齿或者一些小图标。 在CSS3出现后，借助一些具">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets/grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets/grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets/grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets/grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets/grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets/grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets/grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets/grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets/grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets/grbk/js/dedeajax2.js"></script>
+  <title>酷酷的CSS3三角形运用_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/liuyan'><i class="iconfont">&#xe608;</i></a>
+            <a href='http://wpa.qq.com/msgrd?v=3&uin=717587213&site=qq&menu=yes' target='_blank'><i>&#xe623;</i></a>
+            <a href='http://localhost/a/dizhi'><i>&#xe6d9;</i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i>&#xe720;</i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/liuyan'><i>&#xe608;</i>留言板</a>
+                <a href='http://wpa.qq.com/msgrd?v=3&uin=717587213&site=qq&menu=yes'><i>&#xe623;</i>QQ对话</a>
+                <a href='http://localhost/a/dizhi'><i>&#xe6d9;</i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i>&#xe648;</i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>前端技术</a>
+          <a href='http://localhost/a/WEBzuopin'>后台语言</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>UI设计</a>
+          <a href='http://localhost/a/ruanjianxiazai'>趣文收藏</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i>&#xe648;</i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/PSzuopin/vue/30.html">Vue.js——60分钟组</a></li>
+<li><span>2</span><a href="/a/PSzuopin/vue/29.html">Vue.js——基于$.a</a></li>
+<li><span>3</span><a href="/a/PSzuopin/2.html">纸杯设计</a></li>
+<li><span>4</span><a href="/a/PSzuopin/CSS/33.html">酷酷的CSS3三角形运</a></li>
+<li><span>5</span><a href="/a/PSzuopin/vue/25.html">Vue.js——60分钟w</a></li>
+<li><span>6</span><a href="/a/PSzuopin/vue/23.html">Vue.js——60分钟快</a></li>
+<li><span>7</span><a href="/a/PSzuopin/vue/28.html">Vue.js——vue-resou</a></li>
+<li><span>8</span><a href="/a/PSzuopin/1.html">金融现货交易所画</a></li>
+<li><span>9</span><a href="/a/PSzuopin/vue/24.html">Vue.js——vue-route</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>酷酷的CSS3三角形运用</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 11:37</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=33&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/PSzuopin/'>前端技术</a> > <a href='/a/PSzuopin/CSS/'>CSS</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'酷酷的CSS3三角形运用',
+	litpic:'/uploads/allimg/180222/1-1P222113K40-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'酷酷的CSS3三角形运用',
+	litpic:'/uploads/allimg/180222/1-1P222113K40-L.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	概述</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<br style="margin: 0px; padding: 0px;" />
+	在早期的前端Web设计开发年代，完成一些页面元素时，我们必须要有专业的PS美工爸爸，由PS美工爸爸来切图，做一些圆角、阴影、锯齿或者一些小图标。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在CSS3出现后，借助一些具有魔力的CSS3属性，使得这些元素大多都可以由开发人员自己来完成。<br style="margin: 0px; padding: 0px;" />
+	在开始阅读这篇文章前，我们先喊个口号：不想当艺术家的程序员不是好设计师！</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	本文的Demo和源代码已放到GitHub，如果您觉得本篇内容不错，请点个赞，或在GitHub上加个星星！</p>
+<div class="demo" style="margin: 0px 0px 20px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/css3-tutorials/shapes/triangles.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">Triangle Demo</a><a class="btn-demo" href="https://keepfool.github.io/css3-tutorials/shapes/demo/user-center.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">Page Demo</a><a class="btn-demo" href="https://github.com/keepfool/css3-tutorials" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">GitHub Source</a></div>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	图例</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我们先来看一副设计图</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143920735-987703814.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="915" src="/uploads/allimg/180222/113S515R-0.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="480" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这幅图复杂的元素不多，布局也较为简单，我们大致分析一下，需要PS美工爸爸帮忙做的只有一件事情，就是将上半部分的蓝色背景图给抠出来。<br style="margin: 0px; padding: 0px;" />
+	除此之外，出现在这幅设计图的一些特殊形状和小图标，都可以通过CSS3来实现。<br style="margin: 0px; padding: 0px;" />
+	我们将这些特殊形状和小图标分为两类：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">1. 可以用Icon Font实现的</strong></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143926469-219386075.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="117" src="/uploads/allimg/180222/113S5LD-1.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="143" /></a><a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143927906-2108676167.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="50" src="/uploads/allimg/180222/113S512E-2.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="50" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Icon Font是将一些图标作成字体文件，在CSS中指定font-face和font-family，然后为每个图标指定相应的class。<br style="margin: 0px; padding: 0px;" />
+	<strong style="margin: 0px; padding: 0px;">在网页中使用Icon Font就像使用普通的文字一样，比如font-size属性可以设定图标的大小，设定color属性可以设定图标的颜色。</strong><br style="margin: 0px; padding: 0px;" />
+	更多内容，请参考阿里巴巴矢量图标管理网站：<a href="http://iconfont.cn/" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;" title="http://iconfont.cn/">http://iconfont.cn/</a>。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">2. 不能用IconFont实现的</strong></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143929281-1131341595.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="520" src="/uploads/allimg/180222/113S52003-3.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="501" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为什么这些图形不用IconFont实现呢？因为通常Icon Font提供的都是一些正方形的矢量图标，也就是长等于宽的图标。<br style="margin: 0px; padding: 0px;" />
+	本篇要讲的就是如何通过CSS3来实现这4个图形。</p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	三角形</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	不知大家注意到了没有，这4个图形都包含了一个特殊的元素&mdash;&mdash;三角形。<br style="margin: 0px; padding: 0px;" />
+	这4个图形，都是由三角形、长方形，或者是一个被啃掉了一口的长方形组成的。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	CSS3是如何实现三角形的呢？&mdash;&mdash;答案是通过<strong style="margin: 0px; padding: 0px;">边框</strong>，也就是border属性。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	长方形边框</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	HTML的块级元素都是长方形的，比如我们设定了以下样式：</p>
+<pre class="xml hljs " id="243bbd3e58744f88bb3f67d0622ba5b0" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">style</span>&gt;</span><span class="css" style="margin: 0px; padding: 0px;">
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.simple-retangle</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">margin</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">50</span>px auto</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">200</span>px</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">200</span>px</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid salmon</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">style</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;simple-retangle&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	如大家所认知的，这只是一个简单的长方形，这个长方形在画面中是这样显式的：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143931125-1528395231.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="280" src="/uploads/allimg/180222/113S55L0-4.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="279" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这个长方形太单调了，再给它点颜色看看，咱们来个彩色边框吧。</p>
+<pre class="xml hljs " id="1eb4fa18289641e29b49ab7ebd2d7961" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">style</span>&gt;</span><span class="css" style="margin: 0px; padding: 0px;">
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.colored-border-retangle</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">margin</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">50</span>px auto</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">200</span>px</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">200</span>px</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-top</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid coral</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid lightblue</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid lightgreen</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid mediumpurple</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">style</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;colored-border-retangle&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在画面中，每个边框都变成一个梯形了。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143933547-1038719182.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="281" src="/uploads/allimg/180222/113S52T0-5.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="280" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为什么它会变成梯形呢？</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143934844-71428785.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="299" src="/uploads/allimg/180222/113S51N1-6.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="616" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	请注意长方形的4个角，以<strong style="margin: 0px; padding: 0px;">左上角</strong>为例，它到底是属于左边框还是上边框呢？<br style="margin: 0px; padding: 0px;" />
+	<strong style="margin: 0px; padding: 0px;">左上角</strong>，既属于<strong style="margin: 0px; padding: 0px;">左边框</strong>，又属于<strong style="margin: 0px; padding: 0px;">上边框</strong>，角落的归属成了一个问题，浏览器为了不让边框打架，就让二位各分一半吧。<br style="margin: 0px; padding: 0px;" />
+	于是乎左上角就被一分为二，变成了两个三角形，三角形靠近哪个边框，就显示那个边框的颜色。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	三角形的实现</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	再看看文章开头的4个图案，你是不是又发现了这样一个规律？每个三角形都是&ldquo;小家碧玉&rdquo;的，它们<strong style="margin: 0px; padding: 0px;">没有内容</strong>。<br style="margin: 0px; padding: 0px;" />
+	既然如此，我们把上面这个彩色边框的矩形内容拿掉，看看会发生什么。</p>
+<pre class="xml hljs " id="1b51dc28410c467796bd161fcb462802" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">style</span>&gt;</span><span class="css" style="margin: 0px; padding: 0px;">
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.colored-border-empty-retangle</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">margin</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">50</span>px auto</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-top</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid coral</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid lightblue</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid lightgreen</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid mediumpurple</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">style</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;colored-border-empty-retangle&quot;</span>&gt;</span><span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	呜，cool！左边和右边都是三角形了&nbsp;耶！</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143936469-1909504043.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="174" src="/uploads/allimg/180222/113S52D1-7.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="490" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为什么上边和下边还是梯形呢？这是因为<strong style="margin: 0px; padding: 0px;">块级元素默认会在页面上水平平铺。</strong><br style="margin: 0px; padding: 0px;" />
+	理解这一点，让上边和下边也变成三角形就简单了，<strong style="margin: 0px; padding: 0px;"><font color="#ff0000" style="margin: 0px; padding: 0px;">将元素的width属性设为0：</font></strong></p>
+<pre class="css hljs " id="9e7498dae6384589b113d61e266c8e9a" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+&lt;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">style</span>&gt;
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.colored-border-empty-retangle</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">margin</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">50</span>px auto</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-top</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid coral</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid lightblue</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid lightgreen</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">40</span>px solid mediumpurple</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+&lt;/<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">style</span>&gt;
+&lt;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span> <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">class</span>=&quot;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">colored-border-empty-retangle</span>&quot;&gt;&lt;/<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span>&gt;
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	现在上下左右4个边框都是三角形了。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143937469-239041358.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="141" src="/uploads/allimg/180222/113S5IK-8.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="306" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	假设我们不要4个三角形，也不要让它们凑一块，我们就只要1个三角形，该如何做呢？<br style="margin: 0px; padding: 0px;" />
+	<strong style="margin: 0px; padding: 0px;"><font color="#ff0000" style="margin: 0px; padding: 0px;">将其他3个边框的颜色设为透明色：</font></strong></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	&nbsp;</p>
+<pre class="css hljs " id="74b0c53054a849c0a65540d6982482c8" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+&lt;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">style</span>&gt;
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-top</span>,
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-right</span>,
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-bottom</span>,
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-left</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">margin</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">20</span>px auto</span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">100</span>px solid transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+    
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-top</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-top-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> coral</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+    
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-right</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> lightblue</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+    
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-bottom</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> lightgreen</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+    
+    <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.triangle-left</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+        <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> mediumpurple</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+&lt;/<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">style</span>&gt;
+&lt;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span> <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">class</span>=&quot;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">triangle-top</span>&quot;&gt;&lt;/<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span>&gt;
+&lt;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span> <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">class</span>=&quot;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">triangle-right</span>&quot;&gt;&lt;/<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span>&gt;
+&lt;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span> <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">class</span>=&quot;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">triangle-bottom</span>&quot;&gt;&lt;/<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span>&gt;
+&lt;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span> <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">class</span>=&quot;<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">triangle-left</span>&quot;&gt;&lt;/<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span>&gt;</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143939172-1414219459.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="686" src="/uploads/allimg/180222/113S54622-9.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="341" /></a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	图案实现</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	知道了三角形的实现方法，那么下面4个图案实现起来就小Case了。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143940844-1712183959.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="520" src="/uploads/allimg/180222/113S532B-10.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="501" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这4个图案分别是：旗帜，向右的双实心箭头，气泡和丝带。</p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/css3-tutorials/shapes/triangles.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;" target="_blank">View Demo</a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为了便于这几种图案的演示，我们先设定以下基础共通的样式</p>
+<pre class="css hljs " id="038cc4cca2f443f193f1277b0dc26782" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+* <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">font-family</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> simhei, sans-serif</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">box-sizing</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> border-box</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">html</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">font-size</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">62.5</span>%</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">body</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">background-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> lightblue</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">div</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">margin</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">20</span>px auto</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span></pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现旗帜</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	旗帜图案是下半部分被啃掉了一口的长方形，这一口是个三角形。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143942219-1772201755.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="190" src="/uploads/allimg/180222/113S54050-11.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="666" /></a><br style="margin: 0px; padding: 0px;" />
+	根据以上知识，我们很自然地就能想到实现方法，<strong style="margin: 0px; padding: 0px;">将border-bottom的颜色设置为透明的。</strong></p>
+<pre class="css hljs " id="77d6ae662d3d44918a8107e501554026" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.flag</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2</span>rem solid <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#FF6600</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-top-width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">4</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom-width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2</span>rem</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现双实心箭头</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	双实心箭头则是由两个三角形组成的</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143943641-343623838.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="171" src="/uploads/allimg/180222/113S5FU-12.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="666" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	为了减少页面的HTML元素，我们可以只提供一个元素实现第1个三角形，然后借助CSS3的伪类实现第2个三角形。<br style="margin: 0px; padding: 0px;" />
+	第1个三角形使用了相对定位，第2个三角形使用了绝对定位，使得第2个三角形能够紧挨着第1个三角形。</p>
+<pre class="css hljs " id="b056b449f93c4219ab665b5fcd13e293" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.rds-arrow-wrapper</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> relative</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">20</span>em</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">text-align</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> center</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.rds-arrow</span>,
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.rds-arrow</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:after</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">display</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> inline-block</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> relative</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-top</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>rem solid transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2</span>rem solid <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#fff</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>rem solid transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2</span>rem solid transparent</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.rds-arrow</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">margin-left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>rem</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.rds-arrow</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:after</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">content</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&quot;</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> absolute</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">100</span>%</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">top</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> -<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</pre>
+<p class="note" style="margin: 10px 10px 10px 50px; padding: 12px 15px; position: relative; background: rgb(255, 244, 204); border-left: 5px solid rgb(255, 224, 112); color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	需要注意的是，箭头方向是向右的，但在CSS里面是通过border-left的颜色来控制的。</p>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现气泡</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	气泡是我们常见的一种图案，<strong style="margin: 0px; padding: 0px;">它是由一个三角形和一个长方形组成的。</strong></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143944969-2016096020.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="181" src="/uploads/allimg/180222/113S54002-13.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="666" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	由于三角形是放在长方形前面的，所以我们使用<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">:before</code>伪类，并设置<strong style="margin: 0px; padding: 0px;">绝对定位。</strong></p>
+<pre class="css hljs " id="5a4b35f57f19458a8d444725cd66f232" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.bubble</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> relative</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">background-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#33AAEE</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">10</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">3</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">font-size</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">line-height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">3</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#FFF</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">text-align</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> center</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.bubble</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:before</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> absolute</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">content</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&quot;</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">100</span>%</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">top</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-top</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem solid transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem solid <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#33AAEE</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem solid transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem solid transparent</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.bubble</span> <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.text</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">display</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> inline-block</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</pre>
+<h2 style="margin: 5px 0px 5px 5px; padding: 10px 20px; line-height: 1.5; color: rgb(255, 99, 71); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	实现丝带</h2>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	丝带的实现则稍微复杂一些，不过我们可以将它拆分成3个部分：</p>
+<ol style="margin: 0px 0px 0px 30px; padding-right: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<li style="margin: 10px 0px 5px; padding: 0px; list-style: decimal;">
+		一个显示文字的长方形</li>
+	<li style="margin: 5px 0px; padding: 0px; list-style: decimal;">
+		左右两侧的耳朵（被啃了一口的长方形）</li>
+	<li style="margin: 5px 0px 10px; padding: 0px; list-style: decimal;">
+		在下方用于显示阴影的两个小三角形</li>
+</ol>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143946938-762379744.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="603" src="/uploads/allimg/180222/113S540G-14.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="469" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">第1步：实现丝带主体长方形</strong></p>
+<pre class="css hljs " id="c9c586e89d024a22b5aff479f8f1144e" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> relative</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">10</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">height</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">3</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">padding</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.7</span>rem <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">font-size</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1.6</span>rem <span class="hljs-important" style="margin: 0px; padding: 0px;">!important</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#fff</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">text-align</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> center</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">background</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#ff0066</span></span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143948531-608193946.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="134" src="/uploads/allimg/180222/113S531W-15.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="271" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">第2步：实现丝带左右两侧的耳朵</strong></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">:before</code>伪类实现左耳朵，<code style="margin: 0px; padding: 2px 4px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 14.4px; color: rgb(199, 37, 78); white-space: nowrap; background-color: rgb(249, 242, 244); border-radius: 4px;">:after</code>伪类实现右耳朵</p>
+<pre class="css hljs " id="2a6cbfa09e294346bdf0eaedbb2b11b2" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:before</span>,
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:after</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">content</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&quot;</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> absolute</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">display</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> block</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> -<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1.5</span>rem solid <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#ff0066</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">z-index</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> -<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span></span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:before</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> -<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2.4</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right-width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1.5</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">box-shadow</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>px <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>px <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span> <span class="hljs-function" style="margin: 0px; padding: 0px;">rgba(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">176</span>, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">102</span>, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">166</span>, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.8</span>)</span></span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:after</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> -<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2.4</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-left-width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1.5</span>rem</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-right-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">box-shadow</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>px <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span> <span class="hljs-function" style="margin: 0px; padding: 0px;">rgba(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">176</span>, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">102</span>, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">166</span>, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.8</span>)</span></span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143950110-1386000729.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="120" src="/uploads/allimg/180222/113S5C14-16.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="284" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<strong style="margin: 0px; padding: 0px;">第3步：实现阴影</strong></p>
+<pre class="css hljs " id="c2eb16ad040b4dc08f621b5e94575055" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span> <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon-content</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:before</span>,
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span> <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon-content</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:after</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">content</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&quot;</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">position</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> absolute</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">display</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> block</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-style</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> solid</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-color</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-hexcolor" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">#bf004c</span> transparent transparent transparent</span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">bottom</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> -<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span> <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon-content</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:before</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">left</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem</span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+
+<span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon</span> <span class="hljs-class" style="margin: 0px; padding: 0px; color: rgb(68, 85, 136); font-weight: bold;">.ribbon-content</span><span class="hljs-pseudo" style="margin: 0px; padding: 0px;">:after</span> <span class="hljs-rules" style="margin: 0px; padding: 0px;">{
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">right</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+    <span class="hljs-rule" style="margin: 0px; padding: 0px;"><span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">border-width</span>:<span class="hljs-value" style="margin: 0px; padding: 0px;"> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0.6</span>rem <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span> <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span></span></span>;
+<span class="hljs-rule" style="margin: 0px; padding: 0px;">}</span></span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	HTML代码：</p>
+<pre class="xml hljs " id="753631e99dbf4cf7a8c5cf51723bc93a" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; max-height: 600px; border: 1px solid rgb(238, 238, 238); overflow: auto; text-size-adjust: none;">
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;ribbon&quot;</span>&gt;</span>
+    <span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span> <span class="hljs-attribute" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">class</span>=<span class="hljs-value" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;ribbon-content&quot;</span>&gt;</span>金卡会员<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">span</span>&gt;</span>
+<span class="hljs-tag" style="margin: 0px; padding: 0px; color: rgb(0, 0, 128);">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px;">div</span>&gt;</span>
+</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	最终效果：</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images2015.cnblogs.com/blog/341820/201606/341820-20160625143951828-1121462053.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="113" src="/uploads/allimg/180222/113S51E0-17.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; background-image: none; display: inline;" title="image" width="292" /></a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	页面实现</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	有以上的知识基础，实现本文开头的设计图就较为简单了。<br style="margin: 0px; padding: 0px;" />
+	由于代码较长，我就不贴出来了，请各位直接到GitHub上查看这个demo吧。</p>
+<p class="demo" style="margin: 10px 10px 10px 50px; padding: 15px; text-align: center; background-color: rgb(245, 245, 245); border-radius: 4px; color: rgb(102, 102, 102); overflow: hidden; font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a class="btn-demo" href="https://keepfool.github.io/css3-tutorials/shapes/demo/user-center.html" style="margin: 10px; padding: 5px 20px; outline: none; box-sizing: border-box; background-color: rgb(25, 181, 134); border: none; cursor: pointer; display: inline-block; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; text-shadow: rgba(35, 69, 90, 0.509804) 0px -1px 0px; border-radius: 3px; box-shadow: rgb(205, 219, 226) 0px 2px 2px; transition: opacity 0.2s linear; color: rgb(255, 255, 255) !important;">View Demo</a></p>
+<h1 style="margin: 15px 0px 15px 5px; padding: 10px 20px; font-size: 1.7em; line-height: 1.5; clear: both; color: rgb(51, 51, 51); position: relative; border-bottom: 1px solid rgb(226, 227, 228); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif;">
+	总结</h1>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	读完以上内容，是不是觉得实现这些图案变得很简单了？是不是感觉很酷？现在你可以叫自己为爸爸了。<br style="margin: 0px; padding: 0px;" />
+	三角形的运用场景非常之多，你尽可以发挥你的想象去实现它们！</p>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets/grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets/grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：没有了 </li>
+                <li>下一篇：没有了 </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets/grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets/grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets/grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets/grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets/grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets/grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets/grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets/grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets/grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets/grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets/grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets/grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets/grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets/grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets/grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

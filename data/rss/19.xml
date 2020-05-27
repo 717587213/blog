@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+<channel>
+<title>vue</title>
+<link>http://localhost/a/PSzuopin/vue/</link>
+<description>前端技术 / vue</description>
+<language>zh-cn</language>
+<generator><![CDATA[Copyright &amp;copy; 2002-2017 DEDECMS. 织梦科技 版权所有 &lt;a href=http://www.dedecms.com target='_blank'&gt;Power by DedeCms&lt;/a&gt;]]></generator>
+<webmaster>desdev@vip.qq.com</webmaster>
+<item>
+    <title><![CDATA[Vue.js——60分钟组件快速入门（上篇）]]></title>
+    <link>http://localhost/a/PSzuopin/vue/32.html</link>
+    <description><![CDATA[组件简介 组件系统是Vue.js其中一个重要的概念，它提供了一种抽象，让我们可以使用独立可复用的小组件来构建大型应用，任意类型的应用界面都可以抽象为一个组件树： 那么什么是]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——60分钟组件快速入门（下篇）]]></title>
+    <link>http://localhost/a/PSzuopin/vue/30.html</link>
+    <description><![CDATA[概述 上一篇我们重点介绍了组件的创建、注册和使用，熟练这几个步骤将有助于深入组件的开发。另外，在子组件中定义props，可以让父组件的数据传递下来，这就好比子组件告诉父组]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——基于$.ajax实现数据的跨域增删查改]]></title>
+    <link>http://localhost/a/PSzuopin/vue/29.html</link>
+    <description><![CDATA[概述 之前我们学习了Vue.js的一些基础知识，以及如何开发一个组件，然而那些示例的数据都是local的。 在实际的应用中，几乎90%的数据是来源于服务端的，前端和服务端之间的数据交互]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——vue-resource全攻略]]></title>
+    <link>http://localhost/a/PSzuopin/vue/28.html</link>
+    <description><![CDATA[概述 上一篇我们介绍了如何将$.ajax和Vue.js结合在一起使用，并实现了一个简单的跨域CURD示例。Vue.js是数据驱动的，这使得我们并不需要直接操作DOM，如果我们不需要使用jQuery的DOM选择]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——使用$.ajax和vue-resource实现OAuth的注册、登]]></title>
+    <link>http://localhost/a/PSzuopin/vue/27.html</link>
+    <description><![CDATA[概述 上一篇我们介绍了如何使用vue resource处理HTTP请求，结合服务端的REST API，就能够很容易地构建一个增删查改应用。 这个应用始终遗留了一个问题，Web App在访问REST API时，没有经过]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——60分钟browserify项目模板快速入门]]></title>
+    <link>http://localhost/a/PSzuopin/vue/26.html</link>
+    <description><![CDATA[概述 在之前的一系列vue.js文章，我们都是用传统模式引用vue.js以及其他的js文件的，这在开发时会产生一些问题。 首先，这限定了我们的开发模式是基于页面的，而不是基于组件的，组]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——60分钟webpack项目模板快速入门]]></title>
+    <link>http://localhost/a/PSzuopin/vue/25.html</link>
+    <description><![CDATA[概述 browserify是一个 CommonJS风格的模块管理和打包工具，上一篇我们简单地介绍了Vue.js官方基于browserify构筑的一套开发模板。webpack提供了和browserify类似的功能，在前端资源管理这方面]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——vue-router 60分钟快速入门]]></title>
+    <link>http://localhost/a/PSzuopin/vue/24.html</link>
+    <description><![CDATA[概述 vue-router是Vue.js官方的路由插件，它和vue.js是深度集成的，适合用于构建单页面应用。vue的单页面应用是基于路由和组件的，路由用于设定访问路径，并将路径和组件映射起来。传]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+<item>
+    <title><![CDATA[Vue.js——60分钟快速入门]]></title>
+    <link>http://localhost/a/PSzuopin/vue/23.html</link>
+    <description><![CDATA[Vue.js介绍 Vue.js 是当下很火的一个JavaScript MVVM库，它是以数据驱动和组件化的思想构建的。相比于Angular.js，Vue.js提供了更加简洁、更易于理解的API，使得我们能够快速地上手并使用Vue]]></description>
+    <pubDate>2018-02-22</pubDate>
+    <category>vue</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+
+</channel>
+</rss>

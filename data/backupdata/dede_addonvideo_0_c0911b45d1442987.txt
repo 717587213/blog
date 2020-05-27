@@ -1,0 +1,1 @@
+INSERT INTO `dede_addonvideo` VALUES('2','21','','','127.0.0.1','/uploads/media/zhouheiya.mp4','/uploads/media/zhouheiya.mp4');

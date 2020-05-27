@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>ckplayer播放器配置方案修改</title>
+<link href="css/base.css" rel="stylesheet" type="text/css">
+<script language="javascript">
+var searchconfig = false;
+function Nav()
+{
+	if(window.navigator.userAgent.indexOf("MSIE")>=1) return 'IE';
+	else if(window.navigator.userAgent.indexOf("Firefox")>=1) return 'FF';
+	else return "OT";
+}
+function $Obj(objname)
+{
+	return document.getElementById(objname);
+}
+function ShowConfig(em,allgr)
+{
+	if(searchconfig) location.reload();
+	for(var i=1;i<=allgr;i++)
+	{
+		if(i==em) $Obj('td'+i).style.display = (Nav()=='IE' ? 'block' : 'table');
+		else $Obj('td'+i).style.display = 'none';
+	}
+	$Obj('addvar').style.display = 'none';
+}
+
+function ShowHide(objname)
+{
+	var obj = $Obj(objname);
+	if(obj.style.display != "none") obj.style.display = "none";
+	else obj.style.display = (Nav()=='IE' ? 'block' : 'table-row');
+}
+
+function backSearch()
+{
+	location.reload();
+}
+function getSearch()
+{
+	var searchKeywords = $Obj('keywds').value;
+	var myajax = new DedeAjax($Obj('_search'));
+	myajax.SendGet('sys_info.php?dopost=search&keywords='+searchKeywords)
+	$Obj('_searchback').innerHTML = '<input name="searchbackBtn" type="button" value="返回" id="searchbackBtn" onclick="backSearch()"/>'
+	$Obj('_mainsearch').innerHTML = '';
+	searchconfig = true;
+}
+</script>
+<script type="text/javascript" src="js/jquery.colorpicker.js" charset="utf-8"></script>
+
+
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D6D6D6" align="center">
+  <tr>
+   <td height="28" background="images/tbg.gif" style="padding-left:10px;"><b>CKplayer视频播放器配置方案管理：修改配置方案</b></td>
+  </tr>
+  <tr>
+   <td height="24" bgcolor="#ffffff" align="center"> <a href='javascript:ShowConfig(1,4)'>基本设置</a>  | <a href='javascript:ShowConfig(2,4)'>前置广告</a>  | <a href='javascript:ShowConfig(3,4)'>暂停广告</a>  | <a href='javascript:ShowConfig(4,4)'>滚动文字广告</a></td>
+  </tr>
+</table>
+
+
+
+<table width="98%" border="0" cellpadding="0" cellspacing="0" style="margin-top:10px" bgcolor="#D6D6D6" align="center">
+  <tr>
+   <td height="28" align="right" background="images/tbg.gif" style="border:1px solid #cfcfcf;border-bottom:none;">
+   </td>
+  </tr>
+  <tr>
+   <td bgcolor="#FFFFFF" width="100%">
+   <form action="ckplayercommon_edit.php" method="post" enctype="multipart/form-data" name="form1">
+	<input type="hidden" name="id" value="<?php echo $ckData['id']?>">
+	<input type="hidden" name="dopost" value="saveedit">
+     <table width="100%" style='' id="td1" border="0" cellspacing="1" cellpadding="1" bgcolor="#cfcfcf">
+      <tr align="center" bgcolor="#FBFCE2" height="25">
+       <td width="200">参数名称</td>
+       <td>参数值</td>
+       <td width="310">参数说明</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">配置方案名称：</td>
+       <td align="left" style="padding:3px;">
+         <input type="text" name="stylename" id="stylename" value="<?php echo $ckData['stylename']?>" /></td>
+       <td>填写区分于其他配置方案的名称</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">播放器皮肤风格文件名：</td>
+       <td align="left" style="padding:3px;">
+         <input type="text" name="skin" id="skin" value="<?php echo $ckData['skin']?>" /> [<a href="ckplayer_dlstyle.php"><b>获取更多皮肤风格</b></a>]</td>
+       <td>填写获取的皮肤文件名，无需填写后缀。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">视频自动播放设置：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='autoplay' value="1" <?php if($ckData['autoplay']=="1") echo " checked='checked' "?> /> 自动播放
+         <input type='radio' name='autoplay' value="0" <?php if($ckData['autoplay']=="0") echo " checked='checked' "?>/> 不自动播放但加载视频
+         <input type='radio' name='autoplay' value="2" <?php if($ckData['autoplay']=="2") echo " checked='checked' "?>/> 不加载视频</td>
+       <td>播放器打开时视频默认的播放状态</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">PC端播放器尺寸：</td>
+       <td align="left" style="padding:3px;">
+         宽度： <input type='text' name='dwidth' id="dwidth" value="<?php echo $ckData['dwidth']?>" size="5" /> px &nbsp;&nbsp; 高度： <input type='text' name='dheight' id="dheight" value="<?php echo $ckData['dheight']?>" size="5" /> px
+       </td>
+       <td>电脑端显示播放器的大小</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">手机端播放器尺寸：</td>
+       <td align="left" style="padding:3px;">
+         宽度： 
+         <input type='text' name='mwidth' id="mwidth" value="<?php echo $ckData['mwidth']?>" size="5" />
+         <select name="wunit" id="wunit" style="width:50px;height:18px;">
+                <option value='1' <?php if($ckData['wunit']=="1") echo "selected"?>>px</option>
+                <option value='0' <?php if($ckData['wunit']=="0") echo "selected"?>>%</option>
+         </select> &nbsp;&nbsp; 
+         高度： 
+         <input type='text' name='mheight' id="mheight" value="<?php echo $ckData['mheight']?>" size="5" />
+         <select name="hunit" id="hunit" style="width:50px;height:18px;">
+                <option value='1' <?php if($ckData['hunit']=="1") echo "selected"?>>px</option>
+                <option value='0' <?php if($ckData['hunit']=="0") echo "selected"?>>%</option>
+         </select>
+       </td>
+       <td>手机端显示播放器的大小</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">默认音量：</td>
+       <td align="left" style="padding:3px;"><input type="text" name="volume" id="volume" value="<?php echo $ckData['volume']?>" /></td>
+       <td>视频播放的默认音量（0-100之间的数字）</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">播放器LOGO：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='showlogo' value="logo.swf" <?php if($ckData['showlogo']=="logo.swf") echo " checked='checked' "?> /> 开启
+         <input type='radio' name='showlogo' value="null" <?php if($ckData['showlogo']=="null") echo " checked='checked' "?> /> 关闭 （如需更换logo请联系QQ：991778797或者微信：81018504付费替换）
+       </td>
+       <td>视频播放前显示的播放器LOGO</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">LOGO显示的最短时间(毫秒)：</td>
+       <td align="left" style="padding:3px;"><input type="text" name="logotime" id="logotime" value="<?php echo $ckData['logotime']?>" /></td>
+       <td>视频播放前LOGO显示的最少时间，0为不设置</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">播放器左上角水印图片：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='showmark' value="cklogo.png" <?php if($ckData['showmark']=="cklogo.png") echo " checked='checked' "?> /> 开启
+         <input type='radio' name='showmark' value="null" <?php if($ckData['showmark']=="null") echo " checked='checked' "?> /> 关闭 （如需更换水印请联系QQ：991778797或者微信：81018504付费替换）
+       </td>
+       <td>播放器左上角一直显示的水印图片</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">视频播放完成后：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='endmotion' value="1" <?php if($ckData['endmotion']=="1") echo " checked='checked' "?> /> 重新播放
+         <input type='radio' name='endmotion' value="2" <?php if($ckData['endmotion']=="2") echo " checked='checked' "?> /> 停止播放
+         <input type='radio' name='endmotion' value="5" <?php if($ckData['endmotion']=="5") echo " checked='checked' "?> /> 显示暂停广告
+         <input type='radio' name='endmotion' value="3" <?php if($ckData['endmotion']=="3") echo " checked='checked' "?> /> 显示推荐视频
+       </td>
+       <td>视频播放结束后播放器的动作</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">自动隐藏控制栏：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='cthidden' value="0" <?php if($ckData['cthidden']=="0") echo " checked='checked' "?>/> 不自动隐藏
+         <input type='radio' name='cthidden' value="1" <?php if($ckData['cthidden']=="1") echo " checked='checked' "?>/> 仅全屏时自动隐藏
+         <input type='radio' name='cthidden' value="2" <?php if($ckData['cthidden']=="2") echo " checked='checked' "?>/> 都自动隐藏</td>
+       <td>播放器控制栏是否开启自动隐藏</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">控制栏隐藏延时（毫秒）：</td>
+       <td align="left" style="padding:3px;">
+         <input type="text" name="cthidtime" id="cthidtime" value="<?php echo $ckData['cthidtime']?>" /></td>
+       <td>鼠标离开控制栏多少毫秒后隐藏</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">控制栏隐藏后的简单进度条：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='simplebar' value="1" <?php if($ckData['simplebar']=="1") echo " checked='checked' "?> /> 开启
+         <input type='radio' name='simplebar' value="0" <?php if($ckData['simplebar']=="0") echo " checked='checked' "?> /> 关闭
+       </td>
+       <td>控制栏隐藏后在底部显示的简单进度条</td>
+      </tr>
+     </table>
+     
+     
+     
+     <table width="100%" style='display:none;' id="td2" border="0" cellspacing="1" cellpadding="1" bgcolor="#cfcfcf">
+      <tr align="center" bgcolor="#FBFCE2" height="25">
+       <td width="200">参数名称</td>
+       <td>参数值</td>
+       <td width="310">参数说明</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">前置广告内容：</td>
+       <td align="left" style="padding:3px;">
+         <input name="adpre" type="text" id="adpre" value="<?php echo $ckData['adpre']?>" style='width:95%;' class='pubinputs' /></td>
+       <td>图片、flash或视频地址，多个用“|”隔开。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">前置广告链接：</td>
+       <td align="left" style="padding:3px;"><input name="adpreurl" type="text" id="adpreurl" value="<?php echo $ckData['adpreurl']?>" class='pubinputs' style='width:95%;' /></td>
+       <td>当前置广告的连接，多个请按广告的顺序用“|”隔开。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">前置广告时间：</td>
+       <td align="left" style="padding:3px;"><input name="adpretime" type="text" id="adpretime" size="10" value="<?php echo $ckData['adpretime']?>" class='pubinputs' /> (前置广告显示的时间[单位：秒]，多个用“|”隔开。)</td>
+       <td>前置广告播放的时间</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">前置广告音量：</td>
+       <td align="left" style="padding:3px;"><input name="advolume" type="text" id="advolume" value="<?php echo $ckData['advolume']?>" class='pubinputs' /> (前置广告是视频时播放的音量大小)</td>
+       <td>前置广告播放的音量（0-100之间的数字）</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">前置广告播放方式：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='adpreorder' value="1" <?php if($ckData['adpreorder']=="1") echo " checked='checked' "?> /> 随机播放
+         <input type='radio' name='adpreorder' value="0" <?php if($ckData['adpreorder']=="0") echo " checked='checked' "?> /> 顺序播放
+       </td>
+       <td>当有多个前置广告时可以设置播放顺序</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">前置广告跳过按钮：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='adprejp' value="1" <?php if($ckData['adprejp']=="1") echo " checked='checked' "?> /> 开启
+         <input type='radio' name='adprejp' value="0" <?php if($ckData['adprejp']=="0") echo " checked='checked' "?> /> 关闭
+       </td>
+       <td>播放前置广告时是否显示跳过广告按钮</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">可跳过前置广告的会员级别：</td>
+       <td align="left" style="padding:3px;">
+         <select name="jpmember" id="jpmember" style="width:150">
+                <?php
+                $dsql->SetQuery("Select * from `#@__arcrank` where rank>=0");
+                $dsql->Execute();
+                while($row = $dsql->GetArray()){
+                	if($row['rank']==0) $row['membername'] = "游客";
+					if($row['rank'] == $ckData['jpmember']) echo "     <option value='{$row['rank']}' selected>{$row['membername']}</option>\r\n";
+					else echo "     <option value='{$row['rank']}'>{$row['membername']}</option>\r\n";
+                }
+              ?>
+         </select>
+       </td>
+       <td>可使用跳过广告按钮的会员级别</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">不显示前置广告的会员级别：</td>
+       <td align="left" style="padding:3px;">
+         <select name="unshow" id="unshow" style="width:150">
+                <?php
+                $dsql->SetQuery("Select * from `#@__arcrank` where rank>=0");
+                $dsql->Execute();
+                while($row = $dsql->GetArray()){
+                	if($row['rank']==0) $row['membername'] = "不设置";
+					if($row['rank'] == $ckData['unshow']) echo "     <option value='{$row['rank']}' selected>{$row['membername']}</option>\r\n";
+					else echo "     <option value='{$row['rank']}'>{$row['membername']}</option>\r\n";
+                }
+              ?>
+         </select>
+       </td>
+       <td>不显示前置广告的用户组</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">前置广告静音按钮：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='adpremute' value="1" <?php if($ckData['adpremute']=="1") echo " checked='checked' "?> /> 开启
+         <input type='radio' name='adpremute' value="0" <?php if($ckData['adpremute']=="0") echo " checked='checked' "?> /> 关闭
+       </td>
+       <td>当前置广告是视频时是否显示静音按钮</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">播放广告时预加载视频：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='adpreload' value="1" <?php if($ckData['adpreload']=="1") echo " checked='checked' "?> /> 开启
+         <input type='radio' name='adpreload' value="0" <?php if($ckData['adpreload']=="0") echo " checked='checked' "?> /> 关闭
+       </td>
+       <td>前置广告播放时是否同时加载视频</td>
+      </tr>
+    </table>
+      
+      
+      
+    <table width="100%" style='display:none;' id="td3" border="0" cellspacing="1" cellpadding="1" bgcolor="#cfcfcf">
+      <tr align="center" bgcolor="#FBFCE2" height="25">
+       <td width="200">参数名称</td>
+       <td>参数值</td>
+       <td width="310">参数说明</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">暂停广告内容：</td>
+       <td align="left" style="padding:3px;"><input name="adpau" type="text" id="adpau"  value="<?php echo $ckData['adpau']?>" class='pubinputs' style='width:95%;' /></td>
+       <td>图片或flash地址，不支持视频，多个请用“|”隔开。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">暂停广告链接：</td>
+       <td align="left" style="padding:3px;"><input name="adpauurl" type="text" id="adpauurl" style='width:95%;' class='pubinputs' value="<?php echo $ckData['adpauurl']?>" /></td>
+       <td>暂停广告的连接，多个请按广告的顺序用“|”隔开。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">暂停广告关闭按钮：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='adpaucls' value="1" <?php if($ckData['adpaucls']=="1") echo " checked='checked' "?>/> 开启
+         <input type='radio' name='adpaucls' value="0" <?php if($ckData['adpaucls']=="0") echo " checked='checked' "?>/> 关闭
+       </td>
+       <td>是否在暂停广告右上角显示关闭按钮</td>
+      </tr>
+      </table>
+      
+      
+      <table width="100%" style='display:none;' id="td4" border="0" cellspacing="1" cellpadding="1" bgcolor="#cfcfcf">
+      <tr align="center" bgcolor="#FBFCE2" height="25">
+       <td width="200">参数名称</td>
+       <td>参数值</td>
+       <td width="310">参数说明</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">是否开启滚动文字广告：</td>
+       <td align="left" style="padding:3px;">
+         <input type='radio' name='admarstatus' value="0" <?php if($ckData['admarstatus']=="0") echo " checked='checked' "?> /> 关闭
+         <input type='radio' name='admarstatus' value="1" <?php if($ckData['admarstatus']=="1") echo " checked='checked' "?> /> 开启但不显示关闭按钮
+         <input type='radio' name='admarstatus' value="2" <?php if($ckData['admarstatus']=="2") echo " checked='checked' "?> /> 开启并显示关闭按钮
+       </td>
+       <td>没有滚动文字广告时请关闭</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">滚动文字广告内容：</td>
+       <td align="left" style="padding:3px;"><textarea  name="admarcontent" id="admarcontent" class='pubinputs' class='textarea_info' row='4' style='width:98%;height:50px'><?php echo $ckData['admarcontent']?></textarea>
+       </td>
+       <td>播放器顶部滚动显示的文字，限250字。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">滚动文字广告链接：</td>
+       <td align="left" style="padding:3px;"><input name="admarurl" type="text" id="admarurl" style='width:95%;' class='pubinputs' value="<?php echo $ckData['admarurl']?>" /></td>
+       <td>滚动文字广告的链接。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">滚动文字颜色：</td>
+       <td align="left" style="padding:3px;">
+         <input name="admarcolor" type="text" id="admarcolor" size="20" value="<?php echo $ckData['admarcolor']?>" />
+       </td>
+       <td>滚动文字广告的字体颜色。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">滚动文字背景颜色：</td>
+       <td align="left" style="padding:3px;">
+         <input name="admarbgc" type="text" id="admarbgc" size="20" value="<?php echo $ckData['admarbgc']?>" />
+       </td>
+       <td>滚动文字广告的背景颜色。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">滚动文字背景透明度：</td>
+       <td align="left" style="padding:3px;">
+         <input name="admarbgt" type="text" id="admarbgt" size="20" value="<?php echo $ckData['admarbgt']?>" />
+       </td>
+       <td>滚动文字背景透明度（越小越透明）</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">是否开启发光效果：</td>
+       <td align="left" style="padding:3px;">
+       	 <input type='radio' name='admarlight' value="1" <?php if($ckData['admarlight']=="1") echo " checked='checked' "?> /> 开启
+       	 <input type='radio' name='admarlight' value="0" <?php if($ckData['admarlight']=="0") echo " checked='checked' "?> /> 关闭
+         
+       </td>
+       <td>是否开启滚动广告的文字发光效果。</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#F9FCEF">
+       <td width="200">滚动广告的文字发光颜色：</td>
+       <td align="left" style="padding:3px;">
+         <input name="lightcolor" type="text" id="lightcolor" size="20" value="<?php echo $ckData['lightcolor']?>" />
+       </td>
+       <td>滚动文字广告的文字发光的颜色</td>
+      </tr>
+      <tr align="center" height="25" bgcolor="#ffffff">
+       <td width="200">滚动文字发光透明度：</td>
+       <td align="left" style="padding:3px;">
+         <input name="lightc" type="text" id="lightc" size="20" value="<?php echo $ckData['lightc']?>" />
+       </td>
+       <td>滚动广告文字发光的透明度（越小越透明）</td>
+      </tr>
+    </table>
+      
+      
+      
+    <table width="100%" border="0" cellspacing="1" cellpadding="1"  style="border:1px solid #cfcfcf;border-top:none;">
+      <tr bgcolor="#FFFFFF">
+        <td width="100" height="51">&nbsp;</td>
+        <td>
+        	<input type="submit" name="Submit" value=" 保 存 " class="np coolbg" />　 　
+            <input type="reset" name="Submit" value=" 重 置 " class="coolbg np" />　 　
+          <input type="reset" name="Submit" value=" 返 回 " onClick="location.href='<?php echo $ENV_GOBACK_URL?>';" class="np coolbg" />
+         </td>
+      </tr>
+    </table>
+   </form>
+   
+   </td>
+  </tr>
+</table>
+<script type="text/javascript">
+    var text = document.getElementById("volume");
+	var ladtext = document.getElementById("advolume");
+	var madbg = document.getElementById("admarbgt");
+	var lightc = document.getElementById("lightc");
+	text.onkeyup = function(){
+		this.value=this.value.replace(/\D/g,'');
+		if(text.value>100){
+			text.value = 100;
+		}
+    }
+	ladtext.onkeyup = function(){
+		this.value=this.value.replace(/\D/g,'');
+		if(ladtext.value>100){
+			ladtext.value = 100;
+		}
+    }
+	madbg.onkeyup = function(){
+		this.value=this.value.replace(/\D/g,'');
+		if(madbg.value>100){
+			madbg.value = 100;
+		}
+    }
+	lightc.onkeyup = function(){
+		this.value=this.value.replace(/\D/g,'');
+		if(lightc.value>100){
+			lightc.value = 100;
+		}
+    }
+
+    $(function(){
+        $("#admarcolor").colorpicker({
+            fillcolor:true
+        });
+		$("#lightcolor").colorpicker({
+            fillcolor:true
+        });
+        $("#admarbgc").colorpicker({
+            fillcolor:true,
+            success:function(o,color){
+                $(o).css("color",color);
+            }
+        });
+    });
+</script>
+</body>
+</html>

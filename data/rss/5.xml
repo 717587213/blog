@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+<channel>
+<title>设计作品</title>
+<link>http://localhost/a/tucao/</link>
+<description>设计作品</description>
+<language>zh-cn</language>
+<generator><![CDATA[Copyright &amp;copy; 2002-2017 DEDECMS. 织梦科技 版权所有 &lt;a href=http://www.dedecms.com target='_blank'&gt;Power by DedeCms&lt;/a&gt;]]></generator>
+<webmaster>desdev@vip.qq.com</webmaster>
+<item>
+    <title><![CDATA[ps作品]]></title>
+    <link>http://localhost/a/tucao/20.html</link>
+    <description><![CDATA[ps作品ps作品ps作品]]></description>
+    <pubDate>2018-02-21</pubDate>
+    <category>设计作品</category>
+    <author>admin</author>
+    <comments>未知</comments>
+</item>
+
+</channel>
+</rss>

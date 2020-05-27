@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="Javascript,闭包">
+  <meta name="Description" content="闭 包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。 下面就是我的学习笔记，对于Javascript初学者应该是很有用的。 一、变量的作用域 要理解闭">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>学习Javascript闭包（Closure）_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/PSzuopin/2.html">纸杯设计</a></li>
+<li><span>2</span><a href="/a/PSzuopin/vue/24.html">Vue.js——vue-route</a></li>
+<li><span>3</span><a href="/a/PSzuopin/vue/28.html">Vue.js——vue-resou</a></li>
+<li><span>4</span><a href="/a/PSzuopin/vue/27.html">Vue.js——使用$.a</a></li>
+<li><span>5</span><a href="/a/PSzuopin/vue/32.html">Vue.js——60分钟组</a></li>
+<li><span>6</span><a href="/a/PSzuopin/vue/29.html">Vue.js——基于$.a</a></li>
+<li><span>7</span><a href="/a/PSzuopin/vue/30.html">Vue.js——60分钟组</a></li>
+<li><span>8</span><a href="/a/PSzuopin/jquery/35.html">细说jquery ui和jqg</a></li>
+<li><span>9</span><a href="/a/PSzuopin/vue/26.html">Vue.js——60分钟b</a></li>
+<li><span>10</span><a href="/a/PSzuopin/javascript/45.html">学习Javascript闭包（</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>学习Javascript闭包（Closure）</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 16:15</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=45&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/PSzuopin/'>JavaScript</a> > <a href='/a/PSzuopin/javascript/'>javascript</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'学习Javascript闭包（Closure）',
+	litpic:'/uploads/180222/1-1P222161609136.jpg',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'学习Javascript闭包（Closure）',
+	litpic:'/uploads/180222/1-1P222161609136.jpg',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<span class="firstchar" style="margin: 0px; padding: 0px; list-style-type: none; border: none;">闭</span>包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	下面就是我的学习笔记，对于Javascript初学者应该是很有用的。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<span style="font-weight: 800;">一、变量的作用域</span></p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	要理解闭包，首先必须理解Javascript特殊的变量作用域。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	变量的作用域无非就是两种：全局变量和局部变量。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	Javascript语言的特殊之处，就在于函数内部可以直接读取全局变量。</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　var n=999;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　function f1(){<br />
+		　　　　alert(n);<br />
+		　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　f1(); // 999</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	另一方面，在函数外部自然无法读取函数内的局部变量。</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　function f1(){<br />
+		　　　　var n=999;<br />
+		　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　alert(n); // error</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	这里有一个地方需要注意，函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　function f1(){<br />
+		　　　　n=999;<br />
+		　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　f1();</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　alert(n); // 999</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<span style="font-weight: 800;">二、如何从外部读取局部变量？</span></p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	出于种种原因，我们有时候需要得到函数内的局部变量。但是，前面已经说过了，正常情况下，这是办不到的，只有通过变通方法才能实现。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	那就是在函数的内部，再定义一个函数。</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　function f1(){</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　var n=999;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　function f2(){<br />
+		　　　　　　alert(n); // 999<br />
+		　　　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　}</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1就是不可见的。这就是Javascript语言特有的&quot;链式作用域&quot;结构（chain scope），子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　function f1(){</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　var n=999;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　function f2(){<br />
+		　　　　　　alert(n);&nbsp;<br />
+		　　　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　return f2;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　var result=f1();</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　result(); // 999</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<span style="font-weight: 800;">三、闭包的概念</span></p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	上一节代码中的f2函数，就是闭包。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	各种专业文献上的&quot;闭包&quot;（closure）定义非常抽象，很难看懂。我的理解是，闭包就是能够读取其他函数内部变量的函数。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成&quot;定义在一个函数内部的函数&quot;。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<span style="font-weight: 800;">四、闭包的用途</span></p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	怎么来理解这句话呢？请看下面的代码。</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　function f1(){</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　var n=999;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　nAdd=function(){n+=1}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　function f2(){<br />
+		　　　　　　alert(n);<br />
+		　　　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　return f2;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　var result=f1();</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　result(); // 999</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　nAdd();</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　result(); // 1000</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	这段代码中另一个值得注意的地方，就是&quot;nAdd=function(){n+=1}&quot;这一行，首先在nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<span style="font-weight: 800;">五、使用闭包的注意点</span></p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<span style="font-weight: 800;">六、思考题</span></p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	如果你能理解下面两段代码的运行结果，应该就算理解闭包的运行机制了。</p>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	代码片段一。</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　var name = &quot;The Window&quot;;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　var object = {<br />
+		　　　　name : &quot;My Object&quot;,</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　getNameFunc : function(){<br />
+		　　　　　　return function(){<br />
+		　　　　　　　　return this.name;<br />
+		　　　　　　};</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　};</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　alert(object.getNameFunc()());</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	<br />
+	代码片段二。</p>
+<blockquote style="margin: 2em; padding: 1em; list-style-type: none; border: 0.3em solid rgb(224, 223, 204); color: rgb(17, 17, 17); background-color: rgb(245, 242, 240); border-radius: 1em; font-family: Consolas, Monaco, &quot;Andale Mono&quot;, monospace; text-shadow: white 0px 1px; overflow: auto; letter-spacing: -0.12px; word-spacing: 2.4px;">
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　var name = &quot;The Window&quot;;</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　var object = {<br />
+		　　　　name : &quot;My Object&quot;,</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　getNameFunc : function(){<br />
+		　　　　　　var that = this;<br />
+		　　　　　　return function(){<br />
+		　　　　　　　　return that.name;<br />
+		　　　　　　};</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　　　}</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　};</p>
+	<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; font-size: 1.6em; line-height: 28.8px;">
+		　　alert(object.getNameFunc()());</p>
+</blockquote>
+<p style="margin: 1em 0px 0px 0.8em; padding: 0px; list-style-type: none; border: none; color: rgb(17, 17, 17); font-size: 1.6em; line-height: 28.8px; font-family: Georgia, serif; letter-spacing: -0.12px; word-spacing: 2.4px; background-color: rgb(245, 245, 213);">
+	（完）</p>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：没有了 </li>
+                <li>下一篇：没有了 </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

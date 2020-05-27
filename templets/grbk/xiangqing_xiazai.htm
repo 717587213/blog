@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="{dede:field.keywords/}">
+  <meta name="Description" content="{dede:field.description  function='html2text(@me)'/}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='{dede:global.cfg_templets_skin/}/css/header.css' rel='stylesheet'/>
+  <link href='{dede:global.cfg_templets_skin/}/css/footer.css' rel='stylesheet'/>
+  <link href='{dede:global.cfg_templets_skin/}/css/mobile.css' rel='stylesheet'/>
+  <link href='{dede:global.cfg_templets_skin/}/css/article.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='{dede:global.cfg_templets_skin/}/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/dedeajax2.js"></script>
+  <title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  {dede:include filename="head.htm"/}
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i>&#xe616;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	{dede:arclist row='10' titlelen='40' typeid='2'       }
+            	<li><span>[field:global.autoindex/]</span><a href="[field:typelink/]">[field:title/]</a></li>
+			{/dede:arclist}
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i>&#xe629;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>{dede:field.title/}</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : {dede:field.writer/}</li>
+                  <li>时间 ：{dede:field.pubdate function="MyDate('Y-m-d H:i',@me)"/}</li>
+                  <li>观看 ：<script src="{dede:field name='phpurl'/}/count.php?view=yes&aid={dede:field name='id'/}&mid={dede:field name='mid'/}"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  {dede:field name='position'/}</div>
+            </div>
+            <div class='info-article'>
+               <p>
+                {dede:field.introduce/}
+				<br />
+				<br />
+				<hr/>
+				<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="{dede:global.cfg_templets_skin/}/images/xiangqing/download.png" />
+			{dede:field name='softlinks'/}
+		</div>
+		<!--<div class="btn-view">
+			<img class="icon" src="{dede:global.cfg_templets_skin/}/images/xiangqing/eye.png" />
+			<li><a href="{dede:field.officialdemo/}" target="_blank">在线演示</a></li>
+		</div>-->
+	</div>
+</div>
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>{dede:prenext get='pre'/}</li>
+                <li>{dede:prenext get='next'/}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe627;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>最新更新</div>
+                      <div class='menu-info'>坤坤的最新收藏文章</div>
+                      <a href='{dede:global.cfg_basehost/}/a/wenzhangwangzhanshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/wenzhangwangzhanshoucang'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> Web特效 </div>
+                      <div class='menu-info'>坤坤的炫酷网页特效</div>
+                      <a href='{dede:global.cfg_basehost/}/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/WEBzuopin' target='_blank'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>展示页面</div>
+                      <div class='menu-info'>坤坤写的网页作品集</div>
+                      <a href='{dede:global.cfg_basehost/}/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/WEBzuopin' target='_blank'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='{dede:global.cfg_basehost/}/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/ruanjianxiazai' target='_blank'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种程序软件教程</div>
+                      <a href='{dede:global.cfg_basehost/}/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/gaojichengxujiaocheng' target='_blank'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>js游戏</div>
+                        <div class='menu-info'>各类有意思的js游戏</div>
+                        <a href='{dede:global.cfg_basehost/}/a/WEBzuopin' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/WEBzuopin' target='_blank'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>Ps作品</div>
+                        <div class='menu-info'>被喷的可怕的ps作品</div>
+                        <a href='{dede:global.cfg_basehost/}/a/PSzuopin' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/PSzuopin' target='_blank'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>小视频</div>
+                        <div class='menu-info'>收藏的小视频</div>
+                        <a href='{dede:global.cfg_basehost/}/a/shipinshoucang' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='{dede:global.cfg_basehost/}/a/shipinshoucang' target='_blank'><img src='{dede:global.cfg_templets_skin/}/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url({dede:global.cfg_templets_skin/}/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url({dede:global.cfg_templets_skin/}/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+{dede:include filename="footer.htm"/}
+
+<script src = '{dede:global.cfg_templets_skin/}/js/Popup.js' type='text/javascript'></script>
+<script src = '{dede:global.cfg_templets_skin/}/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '{dede:global.cfg_templets_skin/}/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="{dede:global.cfg_templets_skin/}/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

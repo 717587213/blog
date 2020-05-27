@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="Sublime">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="导入Excel数据,PHP">
+  <meta name="Description" content="在 Sourceforge 上提供了一个开源的PHP导入Excel数据的类，在下载的项目中也提供了简单的示例。下面我做了一些简易的包装，让PHP导入Excel数据用起来更为简便。 首先看看示例代码，了解">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="applicable-device"content="pc,mobile"/>
+  <link rel="shortcut icon" href="/templets/blog/image/heart.ico" />
+  <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/footer.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/article.css' rel='stylesheet'/>
+  <link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/code.js" ></script>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/templets//grbk/css/shThemeDefault.css"/>
+  <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/view.php?aid=254">
+  <script src ='/templets//grbk/js/jquery-2.2.0.min.js' type='text/javascript'></script>
+  <script language="javascript" type="text/javascript" src="/templets//grbk/js/dedeajax2.js"></script>
+  <title>PHP导入Excel数据_我的网站</title>
+  </head>
+  <body style='background-color:#313131'>
+    <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+   <div class='article-bd'>
+    <div class='bd-wrapper'>
+      <div class='bd-sidelist'>
+        <div class='sidelist-tip tip'><p><i class="iconfont">&#xe63f;</i>热门推荐</p></div>
+        <div class='sidelist-menu'>
+          <ul class='sidelist-list'>
+		  	<li><span>1</span><a href="/a/WEBzuopin/JAVA/41.html">10例糟糕的PHP代码</a></li>
+<li><span>2</span><a href="/a/WEBzuopin/JAVA/50.html">php面向对象精要</a></li>
+<li><span>3</span><a href="/a/WEBzuopin/JAVA/51.html">php面向对象精要</a></li>
+<li><span>4</span><a href="/a/WEBzuopin/JAVA/42.html">PHP导入Excel数据</a></li>
+<li><span>5</span><a href="/a/WEBzuopin/JAVA/52.html">浅谈PHP异常处理</a></li>
+<li><span>6</span><a href="/a/WEBzuopin/JAVA/49.html">php面向对象精要</a></li>
+<li><span>7</span><a href="/a/WEBzuopin/4.html">111111</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class='bd-container'>
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_douban db"></a>
+            <a class="bds_sqq sqq"></a>
+            <a class="bds_kaixin001 kxw"></a>
+            <a class="bds_fbook facebook"></a>
+            <a class="bds_twi twitter"></a>
+            <span class="bds_more"></span>
+         </div>
+        <div class='container-tip tip'>
+          <i class="iconfont">&#xe643;</i>博文正文
+        </div>
+        <div class='container-wrapper'>
+          <div class='container-info'>
+            <div class='info-title'>
+              <h1>PHP导入Excel数据</h1>
+            </div>
+             <div class='info-inner'>
+                <ul class='inner-lt'>
+                  <li>作者 : admin</li>
+                  <li>时间 ：2018-02-22 15:07</li>
+                  <li>观看 ：<script src="/plus/count.php?view=yes&aid=42&mid=1"type='text/javascript' language="javascript"></script></li>
+                </ul>
+                <div class='inner-gt'>当前位置:  <a href='http://localhost/'>主页</a> > <a href='/a/WEBzuopin/'>vue</a> > <a href='/a/WEBzuopin/JAVA/'>PHP</a> > </div>
+            </div>
+            <div class='info-article'>
+               <p>
+               <script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'PHP导入Excel数据',
+	litpic:'/uploads/180222/1-1P222150Paa.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+				<script src="/ckplayer/ckplayer_common.php?id=1" language="javascript"></script>
+﻿<script type="text/javascript">
+var videoinfo={
+	basehost:'http://localhost',
+	path:'',
+	vurl:'',
+	html5url:'',
+	title:'PHP导入Excel数据',
+	litpic:'/uploads/180222/1-1P222150Paa.png',
+	keytime:'',
+	keyword:'',
+	arcurl:encodeURIComponent(window.location.href)
+}
+</script>
+
+               <p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	在<a href="http://sourceforge.net/projects/phpexcelreader" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;">Sourceforge</a>上提供了一个开源的PHP导入Excel数据的类，在下载的项目中也提供了简单的示例。下面我做了一些简易的包装，让PHP导入Excel数据用起来更为简便。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	首先看看示例代码，了解一下Excel Reader的基本使用方式（按照下面的注释step by step）</p>
+<pre class="code hljs xml" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Consolas; max-height: 600px; border-width: 1px 1px 1px 5px; border-style: dashed dashed dashed solid; border-color: rgb(255, 153, 0) rgb(255, 153, 0) rgb(255, 153, 0) rgb(108, 226, 108); border-image: initial; overflow: auto; text-size-adjust: none;">
+<span style="margin: 0px; padding: 0px; color: red;"><span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;?php</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 1.引用ExcelReader类文件</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">require_once</span> </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Excel/reader.php&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+</span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 2.实例化读取Excel的类</span>
+</span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span> = </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> </span><span class="php" style="margin: 0px; padding: 0px;">Spreadsheet_Excel_Reader();
+</span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 3.设置输出编码</span>
+</span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;setOutputEncoding(</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;utf-8&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">);
+</span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 4.读取指定的excel</span>
+</span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;read(</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;test.xls&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">);
+
+
+</span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 5.循环输出每一行数据，这里读取的是Excel的第一个Sheet表格</span>
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// sheets[0][&#39;numRows&#39;]代表行数</span>
+<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">sheet</span></span></span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">s[0][&#39;numCols&#39;]代表列数</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">for</span> </span><span class="php" style="margin: 0px; padding: 0px;">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span> &lt;= <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;sheets[<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>][</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;numRows&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">]; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span>++) { </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 遍历行</span>
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">for</span> </span><span class="php" style="margin: 0px; padding: 0px;">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span> &lt;= <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;shee</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;">ts[<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>][<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;numCols&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">]; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span>++) { </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 遍历列</span>
+        </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">echo</span> </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;\&quot;&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">.<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;sheets[<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>][</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;cells&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">][<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span>][<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span>].</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;\&quot;,&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+    }
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">echo</span> </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;\n&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+}
+
+</span><span style="margin: 0px; padding: 0px; color: red;"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">?&gt;</span></span></span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	这个简单的例子只是输出了Excel中每个单元格的值，我们还需要拼接sql语句最终将这些值插入到数据库中，而且当Excel的第一行为列头时，这一行数据是不能够插入到数据表中的。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	下面的步骤就来演示这一简单过程。</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	1. 创建数据库，数据表</p>
+<pre class="code hljs sql" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Consolas; max-height: 600px; border-width: 1px 1px 1px 5px; border-style: dashed dashed dashed solid; border-color: rgb(255, 153, 0) rgb(255, 153, 0) rgb(255, 153, 0) rgb(108, 226, 108); border-image: initial; overflow: auto; text-size-adjust: none;">
+<span style="margin: 0px; padding: 0px; color: rgb(64, 128, 128);"><span class="hljs-comment" style="margin: 0px; padding: 0px; font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">--创建test数据库</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">create</span> </span><span class="hljs-operator" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">database</span> test;</span>
+use test;
+<span style="margin: 0px; padding: 0px; color: rgb(64, 128, 128);"><span class="hljs-comment" style="margin: 0px; padding: 0px; font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">--创建books表</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">create</span> <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">table</span> </span><span class="hljs-operator" style="margin: 0px; padding: 0px;">books
+(
+ISBN </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-operator" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">varchar</span></span></span><span class="hljs-operator" style="margin: 0px; padding: 0px;">(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">50</span>) </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-operator" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">primary</span> <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">key</span></span></span><span class="hljs-operator" style="margin: 0px; padding: 0px;">,
+Pubdate </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-operator" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">varchar</span></span></span><span class="hljs-operator" style="margin: 0px; padding: 0px;">(<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">50</span>)
+);</span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	2. 拼接sql</p>
+<pre class="code hljs xml" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Consolas; max-height: 600px; border-width: 1px 1px 1px 5px; border-style: dashed dashed dashed solid; border-color: rgb(255, 153, 0) rgb(255, 153, 0) rgb(255, 153, 0) rgb(108, 226, 108); border-image: initial; overflow: auto; text-size-adjust: none;">
+<span style="margin: 0px; padding: 0px; color: red;"><span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">&lt;?php</span>
+
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">require_once</span> </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Excel/reader.php&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+
+@ <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$db</span> = mysql_connect ( </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;localhost&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">, </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;root&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">, </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;root&#39;</span> </span><span class="php" style="margin: 0px; padding: 0px;">) <span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">or</span> </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">die</span> </span><span class="php" style="margin: 0px; padding: 0px;">( </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;Could not connect to database.&quot;</span> </span><span class="php" style="margin: 0px; padding: 0px;">); </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 连接数据库</span>
+</span><span class="php" style="margin: 0px; padding: 0px;">mysql_query ( </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;set names &#39;utf-8&#39;&quot;</span> </span><span class="php" style="margin: 0px; padding: 0px;">); </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 输出中文</span>
+</span><span class="php" style="margin: 0px; padding: 0px;">mysql_select_db ( </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;test&#39;</span> </span><span class="php" style="margin: 0px; padding: 0px;">); </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 选择数据库</span>
+
+</span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span> = </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">new</span> </span><span class="php" style="margin: 0px; padding: 0px;">Spreadsheet_Excel_Reader ();
+<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;setOutputEncoding ( </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;utf-8&#39;</span> </span><span class="php" style="margin: 0px; padding: 0px;">);
+<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;read ( </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Books.xls&#39;</span> </span><span class="php" style="margin: 0px; padding: 0px;">);
+
+</span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 调用ImportExcelData方法</span>
+</span><span class="php" style="margin: 0px; padding: 0px;">ImportExcelData ( <font color="#ff0000" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>, </font></span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;books&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">, </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">array</span><font color="#ff0000" style="margin: 0px; padding: 0px;"> </font></span></span><span class="php" style="margin: 0px; padding: 0px;">(</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;ISBN&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">, </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;Pubdate&#39;</span><font color="#ff0000" style="margin: 0px; padding: 0px;"> </font></span></span><span class="php" style="margin: 0px; padding: 0px;">), </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">true</span><font color="#ff0000" style="margin: 0px; padding: 0px;"> </font></span></span><span class="php" style="margin: 0px; padding: 0px;">);</span><span class="php" style="margin: 0px; padding: 0px;">
+
+</span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">/**
+ * 将读取到的Excel数据导入到数据库中
+ *
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@access</span> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">public
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span>
+ </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">*            hasColumnHeader    是否包含列头
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span>
+ </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">*            columnArray        要插入的列
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span>
+ </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">*            tableName 要插入的表
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@return</span> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">bool
+ */</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(25, 70, 157);">ImportExcelData</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$tableName</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$columnArray</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$hasColumnHeader</span> = </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">false</span></span></span></span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">)</span> {</span>
+    </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 默认不包含列头，起始行就为1</span>
+    </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$start</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>;
+    
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">if</span> </span><span class="php" style="margin: 0px; padding: 0px;">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$hasColumnHeader</span>) {
+        </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 如果包含列头，跳过列头，起始行为2</span>
+        </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$start</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2</span>;
+    }
+    </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 生成insert语句的前半部分</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 形式如这种：insert into table_name(&#39;field1&#39;,&#39;field2&#39;...) va</span></span></span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">lues</span>
+    </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$insert_statement</span> = CreateInsertStatement ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$tableName</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$columnArray</span> );
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">for</span></span></span><span class="php" style="margin: 0px; padding: 0px;">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span> = <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$start</span>; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span> &lt;= <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);">&gt;sheet</span><span class="php" style="margin: 0px; padding: 0px;">s [<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>] [</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;numRows&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">]; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span> ++) { </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 遍历行</span>
+        </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> = <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$insert_</span></span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">statem</span></span></span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">ent</span>;
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;(&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+        </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">for</span></span></span><span class="php" style="margin: 0px; padding: 0px;">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span> &lt;= <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;sheets [<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>] [</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;numCols&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">]; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span> ++) { </span><span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 遍历列</span>
+            </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&#39;&quot;</span> </span><span class="php" style="margin: 0px; padding: 0px;">. <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;sheets [<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>] [</span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;cells&#39;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">] [<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span>] [<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span>] . </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&#39;,&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+        }
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> = trimEnd ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span>, </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;,&quot;</span> </span><span class="php" style="margin: 0px; padding: 0px;">);
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;);&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$res</span> = mysql_query ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> );
+    }
+}
+
+</span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">/**
+ * 创建插入sql的语句
+ *
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@access</span> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">public
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span>
+ </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">*            tableName
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span>
+ </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">*            columnArray
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@return</span> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">string
+ */</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(25, 70, 157);">CreateInsertStatement</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$tableName</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$columnArray</span>)</span> {</span>
+    <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> = </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;insert into &quot;</span>.</span><font color="#333333" style="margin: 0px; padding: 0px;"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$tableName</span></span></font><span class="php" style="margin: 0px; padding: 0px;">.<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;(&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">foreach</span> </span><span class="php" style="margin: 0px; padding: 0px;">( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$columnArray</span> </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">as</span> </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$c</span> ) {
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&quot;</span> </span><span class="php" style="margin: 0px; padding: 0px;">. <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$c</span> . </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;,&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+    }
+    <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> = trimEnd ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span>, </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;,&quot;</span> </span><span class="php" style="margin: 0px; padding: 0px;">);
+    <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= </span><span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;) values&quot;</span></span></span><span class="php" style="margin: 0px; padding: 0px;">;
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span>;
+}
+
+</span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">/**
+ * 移除字符串中指定的尾部字符
+ *
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@access</span> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">public
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span>
+ </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">*            str
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span>
+ </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">*            strEnd
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@return</span> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">string
+ */</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> </span><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(25, 70, 157);">trimEnd</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$str</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$strEnd</span>)</span> {</span>
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">return</span> </span><span class="php" style="margin: 0px; padding: 0px;">substr ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$str</span>, - (strlen ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$strEnd</span> )) ) == <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$strEnd</span> ? substr ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$str</span>, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>, strlen ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$str</span> ) - strlen ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$strEnd</span> ) ) : <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$str</span>;
+}
+</span><span style="margin: 0px; padding: 0px; color: red;"><span class="php" style="margin: 0px; padding: 0px;"><span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-weight: bold;">?&gt;</span></span></span></pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	3. 优化</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	上面的方法有一个问题，每次生成一个insert语句，就执行一次插入操作，如果Excel的数据量很大，那么执行的插入操作也非常多。既然如此，何不生成一批sql语句后再执行插入操作呢？</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	我对ImportExcelData方法做了简单的优化，加了一个batchSize参数，表示每次执行多少条插入语句，也许这样的做法会更加节约资源。</p>
+<pre class="code hljs php" style="margin: 0px 40.75px 10px; padding: 15px 25px; white-space: pre-wrap; word-wrap: break-word; line-height: 1.42857; color: rgb(0, 0, 0); word-break: break-all; background: rgb(248, 248, 255); border-radius: 0.3em; font-family: Consolas; max-height: 600px; border-width: 1px 1px 1px 5px; border-style: dashed dashed dashed solid; border-color: rgb(255, 153, 0) rgb(255, 153, 0) rgb(255, 153, 0) rgb(108, 226, 108); border-image: initial; overflow: auto; text-size-adjust: none;">
+<span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">/**
+ * 将读取到的Excel数据导入到数据库中
+ *
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@access</span> </span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">public
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span> </span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">hasColumnHeader    是否包含列头
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span> </span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">columnArray        要插入的列
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span> </span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">tableName         要插入的表
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@param</span> </span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">batchSize            每次执行插入语句的条数
+ *<span class="hljs-phpdoc" style="margin: 0px; padding: 0px;"> </span></span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 159, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;"><span class="hljs-phpdoc" style="margin: 0px; padding: 0px;">@return</span> </span></span><span style="margin: 0px; padding: 0px; color: rgb(63, 85, 191);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">bool
+ */</span>
+</span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">function</span> </span><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-title" style="margin: 0px; padding: 0px; color: rgb(25, 70, 157);">ImportExcelData</span><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>,<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$tableName</span>,<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$columnArray</span>,<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$hasColumnHeader</span> = </span></span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">false</span></span></span><span class="hljs-function" style="margin: 0px; padding: 0px;"><span class="hljs-params" style="margin: 0px; padding: 0px; color: rgb(0, 0, 255);">, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$batchSize</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">100</span>)</span>{</span>
+    
+    <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 默认不包含列头，起始行就为1</span>
+    </span><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$start</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>;
+    
+    <span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">if</span></span>(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$hasColumnHeader</span>){
+        <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 如果包含列头，跳过列头，起始行为2</span>
+        </span><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$start</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">2</span>;
+    }
+    <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 记录循环次数</span>
+    </span><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$loop</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>;
+    <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> = <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&quot;</span></span>;
+    <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 生成insert语句的前半部分</span>
+    <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 形式如这种：insert into table_name(&#39;field1&#39;,&#39;field2&#39;...) values</span>
+    </span><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$insert_statement</span> = CreateInsertStatement(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$tableName</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$columnArray</span>);
+    <span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">for</span></span>(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span> = <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$start</span>; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span> &lt;= <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;sheets[<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>][<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;numRows&#39;</span></span>]; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span>++){ <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 遍历行</span>
+        </span><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$insert_statement</span>;
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;(&quot;</span></span>;
+        <span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">for</span> </span>(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">1</span>; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span> &lt;= <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;sheets[<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>][<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;numCols&#39;</span></span>]; <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span>++){ <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 遍历列</span>
+            </span><span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&#39;&quot;</span></span>.<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$data</span>-&gt;sheets[<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>][<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&#39;cells&#39;</span></span>][<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$i</span>][<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$j</span>].<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&#39;,&quot;</span></span>;
+        }
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> = trimEnd(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span>,<span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;,&quot;</span></span>);
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> .= <span style="margin: 0px; padding: 0px; color: rgb(0, 0, 192);"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;);&quot;</span></span>;
+        
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$loop</span> ++;
+        <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 当loop值等于batchSize时，执行插入操作</span>
+        </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">if</span></span>(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$loop</span> == <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$batchSize</span>){
+            <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$res</span> = mysql_query ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> );
+            <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$loop</span> = <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>;
+            <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(33, 145, 97);">&quot;&quot;</span>;
+        }
+        <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">//echo $sql;</span>
+    </span>}
+    
+    <span style="margin: 0px; padding: 0px; color: rgb(85, 127, 95);"><span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(64, 128, 128); font-family: Menlo, Monaco, Consolas, &quot;Segoe UI&quot;, Tahoma, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;;">// 如果有950条记录，执行了前9个batch，剩余50条也应当执行</span>
+    </span><span style="margin: 0px; padding: 0px; color: rgb(127, 0, 85);"><span class="hljs-keyword" style="margin: 0px; padding: 0px; color: rgb(149, 65, 33);">if</span></span>(<span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$loop</span> != <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(64, 160, 112);">0</span>){
+        <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$res</span> = mysql_query ( <span class="hljs-variable" style="margin: 0px; padding: 0px; color: rgb(0, 128, 128);">$sql</span> );
+    }
+}</pre>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	Books.xls文件的内容如图1：<span class="Apple-converted-space">&nbsp;</span><br style="margin: 0px; padding: 0px;" />
+	【图1】</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/keepfool/201201/201201301423547697.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="307" src="/uploads/allimg/180222/150T02211-0.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; display: inline;" title="image" width="482" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	生成的sql语句如图2：<span class="Apple-converted-space">&nbsp;</span><br style="margin: 0px; padding: 0px;" />
+	【图2】</p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	<a href="http://images.cnblogs.com/cnblogs_com/keepfool/201201/201201301423568452.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="image" border="0" height="237" src="/uploads/allimg/180222/150T01604-1.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; display: inline;" title="image" width="764" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	执行后的结果如图3：<span class="Apple-converted-space">&nbsp;</span><br style="margin: 0px; padding: 0px;" />
+	【图3】<span class="Apple-converted-space">&nbsp;</span><br style="margin: 0px; padding: 0px;" />
+	<a href="http://images.cnblogs.com/cnblogs_com/keepfool/201201/201201301455538916.png" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;"><img alt="SNAGHTML17f0279" border="0" height="478" src="/uploads/allimg/180222/150T03639-2.png" style="margin: 0px; padding: 0px; border-width: 0px; border-style: solid !important; border-color: rgb(238, 238, 238) !important; border-image: initial !important; max-width: 700px; display: inline;" title="SNAGHTML17f0279" width="612" /></a></p>
+<p style="margin: 10px 10px 10px 50px; padding: 0px; color: rgb(47, 79, 79); font-family: &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, &quot;Micrsoft YaHei&quot;, 微软雅黑, &quot;WenQuanYi Micro Hei&quot;, Tahoma, Arial, sans-serif; font-size: 16px;">
+	当然Excel Reader类中提供的方法不止这些，大家可以参考<a href="http://sourceforge.net/projects/phpexcelreader" style="margin: 0px; padding: 0px; outline: none; color: cornflowerblue;">Sourceforge</a>上提供的example，也可以直接去查看或更改源代码获取自己需求的功能。</p>
+
+               
+				<br />
+				<br />
+				<hr/>
+				<!--<div class="info-btn">
+	<div class="btn-wrapper" style=" margin-left:47%;">
+		<div class="btn-code">
+			<img class="icon" src="/templets//grbk/images/xiangqing/download.png" />
+			
+		</div>
+		<div class="btn-view">
+			<img class="icon" src="/templets//grbk/images/xiangqing/eye.png" />
+			<li><a href="" target="_blank">在线演示</a></li>
+		</div>
+	</div>
+</div>-->
+</p>
+</div>
+<div class='info-tab'>
+              <ul>
+                <li>上一篇：<a href='/a/WEBzuopin/JAVA/41.html'>10例糟糕的PHP代码</a> </li>
+                <li>下一篇：<a href='/a/WEBzuopin/JAVA/49.html'>php面向对象精要(1)</a> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='bd-sideHero'>
+         <div class='sidelist-tip tip'><p><i>&#xe62f;</i>类目指引</p></div>
+          <div class='sideHero-prev sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>前端技术</div>
+                      <div class='menu-info'>前端技术收藏文章交流</div>
+                      <a href='http://localhost/a/PSzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/PSzuopin'><img src='/templets//grbk/images/xiangqing/h-1.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'> 趣文收藏 </div>
+                      <div class='menu-info'>坤坤收藏的趣文</div>
+                      <a href='http://localhost/a/ruanjianxiazai' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/ruanjianxiazai' target='_blank'><img src='/templets//grbk/images/xiangqing/h-2.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>后台语言</div>
+                      <div class='menu-info'>后台技术语言文章</div>
+                      <a href='http://localhost/a/WEBzuopin' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/WEBzuopin' target='_blank'><img src='/templets//grbk/images/xiangqing/h-3.png'/></a></div>
+                  </li>
+                  <li>
+                      <div class='menu-flag'>实用软件</div>
+                      <div class='menu-info'>实用软件</div>
+                      <a href='http://localhost/a/tupianshoucang' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/tupianshoucang' target='_blank'><img src='/templets//grbk/images/xiangqing/h-4.png'/></a></div>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class='sideHero-last sideHero-container plug-carousel' data-carousel='effect:scrollX;delay:300;auto:false'>
+            <div class='sideHero-box'>
+              <div class='box-previewer'>
+                <ul class='previewer-menu container'>
+                  <li>
+                      <div class='menu-flag'>程序教程</div>
+                      <div class='menu-info'>各种高级编程教程</div>
+                      <a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'>
+                        <div class='menu-btn'>前往查看</div>
+                      </a>
+                      <div class='menu-feature'><a href='http://localhost/a/gaojichengxujiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-5.png'/></a></div>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>各种设计教程</div>
+                        <div class='menu-info'>各种有意思的设计教程</div>
+                        <a href='http://localhost/a/shejijiaocheng' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/shejijiaocheng' target='_blank'><img src='/templets//grbk/images/xiangqing/h-6.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>UI设计</div>
+                        <div class='menu-info'>UI设计周边文章</div>
+                        <a href='http://localhost/a/wodexuexi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/wodexuexi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-7.png'/></a></div>
+                      </a>
+                  </li>
+                  <li>
+                      <a href=''>
+                        <div class='menu-flag'>公开课</div>
+                        <div class='menu-info'>收藏公开课</div>
+                        <a href='http://localhost/a/rizhi' target='_blank'>
+                          <div class='menu-btn'>前往查看</div>
+                        </a>
+                        <div class='menu-feature'><a href='http://localhost/a/rizhi' target='_blank'><img src='/templets//grbk/images/xiangqing/h-8.png'/></a></div>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class='box-prev contral prev'>&lt</div>
+              <div class='box-next contral next'>&gt</div>
+              <div class='box-tab'>
+                <ul class='tab-list tab'>
+                  <li class='first active'></li><li></li><li></li><li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--PC和WAP自适应版-->
+    <div id="cyEmoji" class='clearfix' role="cylabs" data-use="emoji"></div>
+        <div id="SOHUCS" sid="254">
+            <div id="SOHU_MAIN">
+    <!-- 评论列表  S -->
+            </div>
+        </div>
+  	</div>
+  <div id='mode-choose'>
+    <div class='night-mode mode' style='background-image:url(/templets//grbk/images/xiangqing/night.png)'></div>
+    <div class='day-mode mode active' style='background-image:url(/templets//grbk/images/xiangqing/day.png)'></div>
+  </div>
+<!--footer-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+
+<script src = '/templets//grbk/js/Popup.js' type='text/javascript'></script>
+<script src = '/templets//grbk/js/banner.js' type='text/javascript'></script>
+<script>
+!(function(){
+  //轮播调用
+  var $carousel = $('.plug-carousel');
+  $.each($carousel,function(){
+    var data = $(this).data('carousel'),
+      option = getOption(data);
+    $(this).Carousel($(this),option);
+  });
+
+  function getOption(data){
+    var option = {},
+      op = data.replace('hover','mouseenter').split(';');
+    $.each(op,function(){
+      if(this!=''){
+        var attr = this.split(':');
+        option[attr[0]] = attr[1];
+      };
+    });
+    return option;
+  };
+})();
+</script>
+<script src = '/templets//grbk/js/baidu-share.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8" src="/templets//grbk/js/jquery.js"></script>
+<script>
+ //白夜间模式
+window.onload=function(){
+  var $mode = $('#mode-choose').children(),
+      $colorObj = new Array(),
+      $sohucs = $('#SOHUCS');
+  function kk(){
+    $colorObj.push($('#cyEmoji .cy-wrapper ul li'));
+    $colorObj.push($sohucs.find('.textarea-fw'));
+    $colorObj.push($sohucs.find('.module-cmt-list'));
+  };
+  kk();
+  console.log($colorObj);
+  $.each($mode,function(){
+    $(this).on('click',function(){
+      if($(this).index()){
+        $(this).removeClass('active').prev().addClass('active');
+        $('body').css('background','#fff');
+        addC($colorObj);;
+      }else{
+        $(this).removeClass('active').next().addClass('active');
+        $('body').css('background','#313131');
+        removeC($colorObj);
+      }
+    })
+  });
+  function addC(obj){
+    $.each(obj,function(){
+      $(this).addClass('active');
+    });
+  };
+  function removeC(obj){
+    $.each(obj,function(){
+      $(this).removeClass('active');
+    });
+  };
+};
+</script>
+</body>
+</html>

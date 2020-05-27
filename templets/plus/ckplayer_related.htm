@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="{dede:global.cfg_soft_lang /}" ?>
+<ckplayer>
+	<title>{font color="#FFDD00" face="新宋体"}精彩内容推荐{/font}</title>
+	
+	<area>600,400,0xFFDD00,20</area>
+    
+    <image>120,90</image>
+	
+	<distance>150,175,100</distance>
+    
+    <rep_title>{a href="[url]" target="_blank"}{font color="#FFFFFF" face="新宋体"}[title]{/font}{/a}</rep_title>
+	
+	<style>a{color:#FFFFFF;}a:hover{color:#FF0000;}</style>
+	
+	<size>120,42,3</size>
+    
+    
+  <relatedlist>
+  {dede:arclist row=24 titlelen=32 flag=c,p orderby=pubdate}
+    <related>
+	  <img>[field:litpic/]</img>
+	  <url>[field:arcurl/]</url>
+	  <title>[field:title/]</title>
+    </related>
+  {/dede:arclist}
+  </relatedlist>
+</ckplayer>

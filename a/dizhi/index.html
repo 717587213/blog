@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+		<head>
+        <meta charset="UTF-8">
+  		<meta name="Generator" content="Sublime">
+  		<meta name="Author" content="">
+  		<meta name="Keywords" content="">
+  		<meta name="Description" content="">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  		<meta name="applicable-device"content="pc,mobile"/>
+		<title>地址_我的网站</title>
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="http://api.map.baidu.com/api?v=2.0&ak=A1LU7iHS0avqQwPLAxbhKn0UYSQCuRVH"></script>
+		<script src="/templets//grbk/js/jquery.baiduMap.min.js"></script>
+        <link rel="shortcut icon" href="/templets//grbk/image/heart.ico" />
+        <link href='/templets//grbk/css/header.css' rel='stylesheet'/>
+		<link href='/templets//grbk/css/ico.css' rel='stylesheet'/>
+        <link href='/templets//grbk/css/mobile.css' rel='stylesheet'/>
+          
+<style>
+* { margin: 0; padding: 0; }
+a { text-decoration: none; }
+ul { list-style: none; }
+body,  html { height: 100%; font-family: "微软雅黑"; }
+.box { width: 100%; height: 100%; }
+#container3 { width: 100%; height: 100%; margin-top:1.05rem; }
+.list { width: 20%; height: 100%; background: #eee; }
+.list li { height: 34px; line-height: 34px; padding-left: 20px; }
+.list li.active a { color: red; }
+.title { font-size: 14px; font-weight: bold; color: #cc5522; }
+.content { font-size: 13px; color: #333; margin-top: 6px; }
+.fl { float: left; }
+</style>
+</head>
+
+<body>
+   <!--页头-->
+  <div class='blog-header'>
+    <div class='header-topBar'>
+      <div class='topBar-container'>
+        <div class='topBar-home'><a href='http://localhost'>home</a></div>
+        <div class='topBar-home'><a href='https://github.com/717587213'>Github</a></div>
+        <div class='topBar-login'>
+          <div class='login-pc'>
+            <a href='http://localhost/a/dizhi'><i></i></a>
+          </div>
+          <div class='login-mb clearfix'>
+            <div class='mb-dropDown' data-state='none'>
+              <i></i>
+            </div>
+            <div class='mb-down'>
+              <div class='down-entrance'>
+                <a href='http://localhost/a/dizhi'><i></i>地址</a>
+              </div>
+              <form class='mb-form' name="formsearch" action="/plus/search.php" method='post'>
+              	<input type="hidden" name="mid" value="1" />   
+				<input type="hidden" name="dopost" value="search" />  
+                <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+                <button name='submit'  type='submit'><i></i> 点击搜索</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='header-menu'>
+      <div class='menu-container'>
+        <div class='menu-lt menu'>
+          <a href='http://localhost/a/PSzuopin'>JavaScript</a>
+          <a href='http://localhost/a/WEBzuopin'>VUE</a>
+        </div>
+        <div class='menu-rt menu'>
+          <a href='http://localhost/a/wodexuexi'>React</a>
+          <a href='http://localhost/a/ruanjianxiazai'>Node</a>
+        </div>
+        <div class='menu-logo'></div>
+      </div>
+      <form  name="formsearch" class='dede-form menu-search' action="/plus/advancedsearch.php" method='post'>		<input type="hidden" name="mid" value="1" />   
+		<input type="hidden" name="dopost" value="search" />   
+        <input name="q" type="text" class="search-keyword" id="search-keyword" placeholder='输入搜索内容..'/> 
+        <button name='submit' type='submit'><span><i></i></span></button>
+      </form>
+    </div>
+  </div>
+<div class="box">
+	<div id="container3" class="container fl"></div>
+</div>
+
+<script type="text/javascript">
+			var points = [{
+				id: 1,
+				lng: 109.07,
+				lat: 34.27,
+				title: "本人经常活动地点",
+				content: ["地址：西安市灞桥区", "电话：18740393346"]
+			}, {
+				id: 2,
+				lng: 108.95,
+				lat: 34.27,
+				title: "本人经常活动地点",
+				content: ["地址：西安市新城区", "电话：18740393346"]
+			}];
+
+			var map = new BaiduMap({
+				id: "container3",
+				level: 16, //  选填--地图级别--(默认15)
+				zoom: true, // 选填--是否启用鼠标滚轮缩放功能--(默认false)
+				type: ["地图", "卫星", "三维"], // 选填--显示地图类型--(默认不显示)
+				width: 320, // 选填--信息窗口width--(默认自动调整)
+				height: 70, // 选填--信息窗口height--(默认自动调整)
+				titleClass: "title",
+				contentClass: "content",
+				showPanorama: true, // 是否显示全景控件(默认false)
+				showMarkPanorama: false, // 是否显示标注点全景图(默认false)
+				showLabel: false, // 是否显示文本标注(默认false)
+				mapStyle: "normal", // 默认normal,可选dark,light
+				icon: { // 选填--自定义icon图标
+					url: "images/marker2.png",
+					width: 34,
+					height: 94
+				},
+				centerPoint: { // 中心点经纬度
+					lng: 108.95,
+					lat: 34.27
+				},
+				index: 1, // 开启对应的信息窗口，默认-1不开启
+				animate: true, // 是否开启坠落动画，默认false
+				points: points, // 标注点--id(唯一标识)
+				callback: function(id) {
+					$(".list").find("li").eq(id - 1).addClass("active").siblings().removeClass("active");
+				}
+			});
+
+			var data = map.getPosition();
+			var $li = $(".list").find("li");
+
+			$li.each(function(i) {
+				$(this).data("id", i + 1);
+			}).on("click", function() {
+				map.openInfoWindow($(this).data("id"));
+				$(this).addClass("active").siblings().removeClass("active");
+			}).eq(data.id - 1).addClass("active");
+</script>
+<!--底部-->
+<div class='blog-footer'>
+<img src='/templets//grbk/images/logo3.png'/>
+<p>Copyright &copy; 2002-2017 DEDECMS. 织梦科技 版权所有 <a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a> </p>
+</div>
+
+</body>
+</html>
